@@ -1,5 +1,12 @@
 <template lang="pug">
-    div asd
+v-container(grid-list-md, text-xs-center)
+    v-layout(wrap)
+        v-flex(xs)
+            v-card
+                v-card-title asdasd
+        v-flex(xs)
+            v-card
+                v-card-title dsadsadsa
 </template>
 
 <script>
@@ -7,7 +14,11 @@ export default {
     name: 'Dashboard',
     data () {
         return {
-            msg: 'Welcome to Your Vue.js App'
+            cards: [
+                { title: 'asdasd' },
+                { title: 'asdasd' },
+                { title: 'asdasd' },
+            ]
         }
     }
 }
