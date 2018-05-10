@@ -1,0 +1,68 @@
+// from Vuetify's _variables.styl
+
+$xs: 0px;
+$sm: (600px);
+$md: (960px);
+$lg: (1280px - 16px); // Desktop gets a 16dp reduction
+$xl: (1920px - 16px); // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
+
+@mixin xs-and-down {
+    @media screen and (max-width: $sm - 0.02px) {
+        @content
+    }
+}
+@mixin sm-only {
+    @media screen and (min-width: $sm) and (max-width: $md - 0.02px) {
+        @content
+    }
+}
+@mixin sm-and-up {
+    @media screen and (min-width: $sm) {
+        @content
+    }
+}
+@mixin sm-and-down {
+    @media screen and (max-width: $md - 0.02px) {
+        @content
+    }
+}
+
+@mixin md-only {
+    @media screen and (min-width: $md) and (max-width: $lg - 0.02px) {
+        @content
+    }
+}
+@mixin md-and-up {
+    @media screen and (min-width: $md) {
+        @content
+    }
+}
+@mixin md-and-down {
+    @media screen and (max-width: $lg - 0.02px) {
+        @content
+    }
+}
+
+@mixin lg-only {
+    @media screen and (min-width: $lg) and (max-width: $xl - 0.02px) {
+        @content
+    }
+}
+@mixin lg-and-up {
+    @media screen and (min-width: $lg) {
+        @content
+    }
+}
+@mixin lg-and-down {
+    @media screen and (max-width: $xl - 0.02px) {
+        @content
+    }
+}
+
+@mixin xl-and-up {
+    @media screen and (min-width: $xl) {
+        @content
+    }
+}
+
+
