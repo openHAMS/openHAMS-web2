@@ -8,7 +8,12 @@ Vue.config.productionTip = false
 
 // Vuetify component framework
 import Vuetify from 'vuetify'
-Vue.use(Vuetify);
+import colors from 'vuetify/es5/util/colors'
+Vue.use(Vuetify, {
+    theme: {
+        accent: colors.blue.base
+    }
+});
 
 /* eslint-disable no-new */
 new Vue({
