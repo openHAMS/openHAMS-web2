@@ -1,23 +1,27 @@
 <template lang="pug">
-v-container(grid-list-md, text-xs-center)
+v-container(grid-list-md)
     v-layout(wrap)
-        v-flex(xs)
-            v-card
-                v-card-title asdasd
-        v-flex(xs)
-            v-card
-                v-card-title dsadsadsa
+        template(v-for='card in cards')
+            led-card(        v-if='card.type === "led"',    :title='card.title')
+            sensor-card(v-else-if='card.type === "sensor"', :title='card.title')
 </template>
 
 <script>
+import LedCard from './cards/LedCard.vue';
+import SensorCard from './cards/SensorCard.vue';
+
 export default {
     name: 'Dashboard',
+    components: {
+        LedCard,
+        SensorCard
+    },
     data () {
         return {
             cards: [
-                { title: 'asdasd' },
-                { title: 'asdasd' },
-                { title: 'asdasd' },
+                { type: 'sensor', title: 'Temperature' },
+                { type: 'sensor', title: 'Pressure' },
+                { type: 'led',    title: 'asdasd' },
             ]
         };
     }
