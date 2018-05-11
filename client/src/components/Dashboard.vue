@@ -19,9 +19,9 @@ export default {
                 { title: 'asdasd' },
                 { title: 'asdasd' },
             ]
-        }
+        };
     }
-}
+};
 </script>
 
 <style scoped>
