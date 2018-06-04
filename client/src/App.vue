@@ -18,4 +18,29 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/vuetify/dist/vuetify.css";
+
+.input-group.input-group--slider {
+    &.input-group--prepend-icon .slider {
+        // too much margin between prepended icon and slider (was 40px)
+        margin-left: 20px;
+    }
+}
+
+.theme--dark {
+    &.input-group.input-group--focused {
+        & .input-group__prepend-icon, & .input-group__append-icon {
+            // fixes slider icon black on black background when sliding the slider
+            color: #fff !important;
+        }
+    }
+}
+
+.card__actions {
+    .input-group {
+        // too much padding at the top (was 16px)
+        padding-top: 0;
+        // too close on the left side (was 0px)
+        padding-left: 8px;
+    }
+}
 </style>
