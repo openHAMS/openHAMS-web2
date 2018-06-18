@@ -1,12 +1,12 @@
-'use strict';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import ledcard from './modules/ledcard';
+import dashboard from './modules/dashboard';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
-        ledCard
-    }
+        dashboard
+    },
+    strict: true,
 });
