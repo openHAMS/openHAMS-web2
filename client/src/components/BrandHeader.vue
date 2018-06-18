@@ -33,7 +33,7 @@ export default {
 .branding {
     font-weight: 300;
     letter-spacing: -0.04em !important;
-    user-select: none; 
+    user-select: none;
     @include lg-and-up {
         font-size: 6rem;
     }

@@ -25,18 +25,19 @@ import ledCardModule from '../../../store/modules/cards/ledcard';
 
 const mapFields = (fields) => {
     return fields.reduce((acc, field) => {
-        let get = function () {
-            return this.$store.getters[`${this.namespace}/${field}`];
+        acc[field] = {
+            get () {
+                return this.$store.getters[`${this.namespace}/${field}`];
+            },
+            set (value) {
+                // ie. 'foo' => 'setFoo'
+                const mutation = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
+                this.$store.commit(`${this.namespace}/${mutation}`, value);
+            }
         };
-        let set = function (value) {
-            // ie. 'foo' => 'setFoo'
-            let mutation = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
-            this.$store.commit(`${this.namespace}/${mutation}`, value);
-        };
-        acc[field] = { get, set };
         return acc;
     }, {});
-}
+};
 
 export default {
     name: 'LedCard',
@@ -51,7 +52,7 @@ export default {
         },
     },
     computed: {
-        namespace: function () {
+        namespace () {
             return `dashboard/${this.id}`;
         },
         ...mapState({
@@ -71,7 +72,7 @@ export default {
         ]),
     },
     watch: {
-        selectedColor: function (color) {
+        selectedColor (color) {
             // set css variables to current selected colors
             this.$el.style
                 .setProperty(
@@ -80,9 +81,9 @@ export default {
                 );
         },
     },
-    created: function () {
-        let store = this.$store;
-        let isModuleRegistered = store && store.state && store.state[this.namespace]
+    created () {
+        const store = this.$store;
+        const isModuleRegistered = store && store.state && store.state[this.namespace];
         if (!isModuleRegistered) {
             store.registerModule(this.namespace, ledCardModule);
         }

@@ -25,7 +25,6 @@ export default {
         ...mapGetters('dashboard', ['cards'])
     },
     methods: {
-        
     },
 };
 </script>
