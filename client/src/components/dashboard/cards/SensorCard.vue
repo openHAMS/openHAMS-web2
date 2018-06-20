@@ -5,7 +5,7 @@
                 div(style='background: red; height: 100%; width:100%;')
             v-card-title
                 div
-                    h1.headline {{ title }}
+                    h1.card-title {{ title }}
                     span.body-1 asd
 </template>
 

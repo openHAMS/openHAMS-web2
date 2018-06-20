@@ -29,5 +29,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+* /deep/ .card-title {
+/* vuetify headline class*/
+    font-size: 24px !important;
+    font-weight: 400;
+    line-height: 32px !important;
+    letter-spacing: normal !important;
+/* vuetify headline class end */
+    user-select: none;
+}
 </style>

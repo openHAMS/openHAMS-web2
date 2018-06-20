@@ -3,7 +3,7 @@
         v-card
             v-card-title
                 .fw
-                    .headline {{ title }}
+                    h1.card-title {{ title }}
                     v-radio-group(hide-details, v-model='selectedColorId', :disabled='!enabled')
                         v-radio(
                             v-for='availableColor in availableColors', :key='availableColor.id',
