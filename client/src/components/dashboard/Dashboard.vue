@@ -17,7 +17,7 @@ export default {
     components: {
         draggable,
         LedCard,
-        SensorCard
+        SensorCard,
     },
     data () {
         return {
@@ -28,7 +28,7 @@ export default {
     computed: {
         cards: {
             get () { return this.$store.getters[`${this.namespace}/cards`]; },
-            set () { } // handled by reorderCards method
+            set () { }, // handled by reorderCards method
         },
         draggableOptions () {
             return {
@@ -67,7 +67,7 @@ div.container {
 }
 
 * /deep/ .card-title {
-/* vuetify headline class*/
+/* vuetify headline class */
     font-size: 24px !important;
     font-weight: 400;
     line-height: 32px !important;

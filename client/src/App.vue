@@ -11,8 +11,8 @@ import BrandHeader from './components/BrandHeader.vue';
 export default {
     name: 'App',
     components: {
-        BrandHeader
-    }
+        BrandHeader,
+    },
 };
 </script>
 

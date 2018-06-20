@@ -33,7 +33,7 @@ const mapFields = (fields) => {
                 // ie. 'foo' => 'setFoo'
                 const action = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
                 this.$store.dispatch(`${this.namespace}/${action}`, value);
-            }
+            },
         };
         return acc;
     }, {});

@@ -27,6 +27,7 @@
         "arrow-spacing": "error",
         "curly": "error",
         "block-spacing": "error",
+        "comma-dangle": ["error", "always-multiline"],
         "func-style": [
             "error",
             "declaration",

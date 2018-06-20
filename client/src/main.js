@@ -12,8 +12,8 @@ import Vuetify from 'vuetify';
 import colors from 'vuetify/es5/util/colors';
 Vue.use(Vuetify, {
     theme: {
-        accent: colors.blue.base
-    }
+        accent: colors.blue.base,
+    },
 });
 
 /* eslint-disable no-new */
@@ -22,5 +22,5 @@ new Vue({
     router,
     store,
     components: { App },
-    template: '<App/>'
+    template: '<App/>',
 });
