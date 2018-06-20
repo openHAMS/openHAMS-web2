@@ -1,13 +1,8 @@
 const state = () => ({
-    availableColors: [
-        { id: 0, name: 'red', color: { hue: 0, saturation: 10 } },
-        { id: 1, name: 'green', color: { hue: 90, saturation: 50 } },
-        { id: 2, name: 'blue', color: { hue: 180, saturation: 50 } },
-        { id: 3, name: 'Smaragdine', color: { hue: 240, saturation: 50 } },
-    ],
-    enabled: true,
-    selectedColorId: 0,
-    brightness: 70,
+    availableColors: [],
+    enabled: false,
+    selectedColorId: -1,
+    brightness: -1,
 });
 
 const getters = {
@@ -28,21 +23,47 @@ const getters = {
 };
 
 const mutations = {
+    setAvailableColors (state, value) { state.availableColors = value; },
     setBrightness (state, value) {
-        state.enabled = value !== 0;
+        state.enabled = (value > 0);
         state.brightness = value;
     },
+    setEnabled (state, value) { state.enabled = value; },
     setSelectedColorId (state, value) {
+        const colorIds = state.availableColors.map(color => color.id);
+        if (!colorIds.includes(value)) {
+            throw new Error(`Invalid ColorId. AvailableColors does not contain color with id of '${value}'.`);
+        }
         state.selectedColorId = value;
-    },
-    toggleEnabled (state) {
-        if (state.enabled !== true && state.brightness === 0)
-            state.brightness = 10;
-        state.enabled = !state.enabled;
     },
 };
 
 const actions = {
+    init ({ commit }) {
+        const availableColors = [
+            { id: 0, name: 'red', color: { hue: 0, saturation: 10 } },
+            { id: 1, name: 'green', color: { hue: 90, saturation: 50 } },
+            { id: 2, name: 'blue', color: { hue: 180, saturation: 50 } },
+            { id: 3, name: 'Smaragdine', color: { hue: 240, saturation: 50 } },
+        ];
+        commit('setAvailableColors', availableColors);
+        commit('setSelectedColorId', 0);
+        commit('setEnabled', true);
+        commit('setBrightness', 70);
+    },
+    setBrightness ({ commit }, value) {
+        commit('setBrightness', value);
+    },
+    setSelectedColorId ({ commit }, value) {
+        commit('setSelectedColorId', value);
+    },
+    toggleEnabled ({ commit, state }) {
+        const { brightness, enabled } = state;
+        if (enabled === false && brightness === 0) {
+            commit('setBrightness', 10);
+        }
+        commit('setEnabled', !enabled);
+    },
 };
 
 export default {

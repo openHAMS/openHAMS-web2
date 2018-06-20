@@ -31,8 +31,8 @@ const mapFields = (fields) => {
             },
             set (value) {
                 // ie. 'foo' => 'setFoo'
-                const mutation = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
-                this.$store.commit(`${this.namespace}/${mutation}`, value);
+                const action = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
+                this.$store.dispatch(`${this.namespace}/${action}`, value);
             }
         };
         return acc;
@@ -91,11 +91,11 @@ export default {
             store.unregisterModule(this.namespace);
             store.registerModule(this.namespace, ledCardModule);
         }
-
+        store.dispatch(`${this.namespace}/init`);
     },
     methods: {
         toggleEnabled () {
-            this.$store.commit(`${this.namespace}/toggleEnabled`);
+            this.$store.dispatch(`${this.namespace}/toggleEnabled`);
         },
     },
 };
