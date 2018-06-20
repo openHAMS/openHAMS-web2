@@ -35,6 +35,9 @@ export default {
             };
         },
     },
+    created () {
+        this.$store.dispatch(`${this.namespace}/init`);
+    },
     methods: {
         ...mapActions({
             reorderCards (dispatch, { moved }) {
