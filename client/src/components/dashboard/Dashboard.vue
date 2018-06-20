@@ -8,12 +8,14 @@ v-container(grid-list-md)
 
 <script>
 import { mapGetters } from 'vuex';
+import draggable from 'vuedraggable';
 import LedCard from './cards/LedCard.vue';
 import SensorCard from './cards/SensorCard.vue';
 
 export default {
     name: 'Dashboard',
     components: {
+        draggable,
         LedCard,
         SensorCard
     },
