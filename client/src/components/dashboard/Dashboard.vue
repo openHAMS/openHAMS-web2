@@ -1,14 +1,14 @@
 <template lang="pug">
 v-container(grid-list-md)
-    v-layout(wrap)
+    draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
         template(v-for='card in cards')
             led-card(v-if='card.type === "led"', :id='card.id', :title='card.title')
             sensor-card(v-else-if='card.type === "sensor"', :title='card.title')
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import draggable from 'vuedraggable';
+import { mapActions } from 'vuex';
 import LedCard from './cards/LedCard.vue';
 import SensorCard from './cards/SensorCard.vue';
 
@@ -21,12 +21,26 @@ export default {
     },
     data () {
         return {
+            namespace: 'dashboard',
         };
     },
     computed: {
-        ...mapGetters('dashboard', ['cards'])
+        cards: {
+            get () { return this.$store.getters[`${this.namespace}/cards`]; },
+            set () { } // handled by reorderCards method
+        },
+        draggableOptions () {
+            return {
+                handle: 'h1.card-title',
+            };
+        },
     },
     methods: {
+        ...mapActions({
+            reorderCards (dispatch, { moved }) {
+                dispatch(`${this.namespace}/reorderCards`, moved);
+            },
+        }),
     },
 };
 </script>

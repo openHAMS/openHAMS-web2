@@ -7,18 +7,20 @@ const state = () => ({
 });
 
 const getters = {
-    cards: state => {
-        return state.cards;
-    }
-};
-
-const actions = {
-    getCards () {
-    },
+    cards: state => state.cards,
 };
 
 const mutations = {
-    setCards () {
+    reorderCards (state, { oldIndex, newIndex }) {
+        const { cards } = state;
+        const [ movedCard ] = cards.splice(oldIndex, 1);
+        cards.splice(newIndex, 0, movedCard);
+    },
+};
+
+const actions = {
+    reorderCards ({ commit }, { oldIndex, newIndex }) {
+        commit('reorderCards', { oldIndex, newIndex });
     },
 };
 
@@ -26,6 +28,6 @@ export default {
     namespaced: true,
     state,
     getters,
-    actions,
     mutations,
+    actions,
 };
