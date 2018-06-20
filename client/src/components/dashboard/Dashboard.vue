@@ -22,6 +22,7 @@ export default {
     data () {
         return {
             namespace: 'dashboard',
+            optionsMode: false,
         };
     },
     computed: {
@@ -31,8 +32,18 @@ export default {
         },
         draggableOptions () {
             return {
+                disabled: !this.optionsMode,
                 handle: 'h1.card-title',
             };
+        },
+    },
+    watch: {
+        optionsMode (enabled) {
+            this.$el.style
+                .setProperty(
+                    '--card-title-cursor',
+                    enabled ? 'grab' : 'default'
+                );
         },
     },
     created () {
@@ -50,6 +61,11 @@ export default {
 
 <style lang="scss" scoped>
 
+/* default value for card-title-cursor */
+div.container {
+    --card-title-cursor: default;
+}
+
 * /deep/ .card-title {
 /* vuetify headline class*/
     font-size: 24px !important;
@@ -57,6 +73,7 @@ export default {
     line-height: 32px !important;
     letter-spacing: normal !important;
 /* vuetify headline class end */
+    cursor: var(--card-title-cursor);
     user-select: none;
 }
 </style>
