@@ -32,6 +32,7 @@ export default {
         },
         draggableOptions () {
             return {
+                chosenClass: 'draggable-chosen',
                 disabled: !this.optionsMode,
                 handle: 'h1.card-title',
             };
@@ -75,5 +76,15 @@ div.container {
 /* vuetify headline class end */
     cursor: var(--card-title-cursor);
     user-select: none;
+}
+
+@import "../../assets/elevations.scss";
+
+* /deep/ .card {
+    @include elevationTransition();
+}
+
+.draggable-chosen /deep/ .card {
+    @include elevation(10);
 }
 </style>
