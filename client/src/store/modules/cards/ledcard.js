@@ -39,7 +39,7 @@ const mutations = {
 };
 
 const actions = {
-    init ({ commit }) {
+    $init ({ commit }) {
         const availableColors = [
             { id: 0, name: 'red', color: { hue: 0, saturation: 10 } },
             { id: 1, name: 'green', color: { hue: 90, saturation: 50 } },

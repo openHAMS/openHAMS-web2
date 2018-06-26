@@ -91,7 +91,7 @@ export default {
             store.unregisterModule(this.namespace);
             store.registerModule(this.namespace, ledCardModule);
         }
-        store.dispatch(`${this.namespace}/init`);
+        store.dispatch(`${this.namespace}/$init`);
     },
     methods: {
         toggleEnabled () {

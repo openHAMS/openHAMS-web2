@@ -18,7 +18,7 @@ const mutations = {
 };
 
 const actions = {
-    init ({ commit }) {
+    $init ({ commit }) {
         // TEMPORARY
         const cards = [
             { type: 'sensor', id: 'livingroom/temp', title: 'Temperature' },

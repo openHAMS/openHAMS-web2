@@ -48,7 +48,7 @@ export default {
         },
     },
     created () {
-        this.$store.dispatch(`${this.namespace}/init`);
+        this.$store.dispatch(`${this.namespace}/$init`);
     },
     methods: {
         ...mapActions({
