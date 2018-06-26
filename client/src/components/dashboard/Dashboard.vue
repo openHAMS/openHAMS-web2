@@ -12,8 +12,7 @@
 import draggable from 'vuedraggable';
 import { mapActions } from 'vuex';
 import BrandHeader from './header/BrandHeader.vue';
-import LedCard from './cards/LedCard.vue';
-import SensorCard from './cards/SensorCard.vue';
+import { LedCard, SensorCard } from './cards';
 
 export default {
     name: 'Dashboard',
