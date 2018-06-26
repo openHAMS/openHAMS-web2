@@ -33,6 +33,7 @@ export default {
         draggableOptions () {
             return {
                 chosenClass: 'draggable-chosen',
+                ghostClass: 'draggable-ghost',
                 disabled: !this.optionsMode,
                 handle: 'h1.card-title',
             };
@@ -81,10 +82,16 @@ div.container {
 @import "../../assets/elevations.scss";
 
 * /deep/ .card {
-    @include elevationTransition();
+    will-change: box-shadow, opacity;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),
+                opacity 0.2s cubic-bezier(.25,.8,.50,1);
 }
 
 .draggable-chosen /deep/ .card {
     @include elevation(10);
+}
+
+.draggable-ghost /deep/ .card {
+    opacity: 0.666;
 }
 </style>
