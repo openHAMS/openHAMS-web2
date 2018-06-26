@@ -43,4 +43,11 @@ export default {
         padding-left: 8px;
     }
 }
+
+.justify-center {
+    // does not work most of the times without !important
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
 </style>
