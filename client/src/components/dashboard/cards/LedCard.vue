@@ -22,7 +22,7 @@
 <script>
 import { mapState } from 'vuex';
 import { initVuexModule } from 'Utils/vuexHelpers';
-import ledCardModule from '../../../store/modules/cards/ledcard';
+import ledCardModule from 'Store/modules/cards/ledcard';
 
 const mapFields = (fields) => {
     return fields.reduce((acc, field) => {
