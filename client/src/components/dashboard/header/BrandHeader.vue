@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.brand-container
+    v-flex.brand-container
         h1.branding.accent--text openHAMS
 </template>
 
@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/breakpoints.scss";
+@import "Assets/breakpoints.scss";
 
 .brand-container {
     margin: auto;

@@ -1,19 +1,13 @@
 <template lang="pug">
     v-app(:dark='isDarkTheme')
-        v-content
-            brand-header
-            router-view
+        router-view
 </template>
 
 <script>
-import BrandHeader from './components/BrandHeader.vue';
 import { mapGetters } from 'vuex';
 
 export default {
     name: 'App',
-    components: {
-        BrandHeader,
-    },
     computed: {
         ...mapGetters(['isDarkTheme']),
     },
