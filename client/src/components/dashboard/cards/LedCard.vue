@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/colors.scss";
+@import "Assets/colors.scss";
 
 .fw {
     width: 100%;

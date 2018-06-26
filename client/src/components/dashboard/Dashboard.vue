@@ -79,7 +79,7 @@ div.container {
     user-select: none;
 }
 
-@import "../../assets/elevations.scss";
+@import "Assets/elevations.scss";
 
 * /deep/ .card {
     will-change: box-shadow, opacity;
