@@ -21,6 +21,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { initVuexModule } from 'Utils/vuexHelpers';
 import ledCardModule from '../../../store/modules/cards/ledcard';
 
 const mapFields = (fields) => {
@@ -82,16 +83,7 @@ export default {
         },
     },
     created () {
-        const store = this.$store;
-        const isModuleRegistered = store && store.state && store.state[this.namespace];
-        if (!isModuleRegistered) {
-            store.registerModule(this.namespace, ledCardModule);
-        }
-        else if (process.env.NODE_ENV === 'development') {
-            store.unregisterModule(this.namespace);
-            store.registerModule(this.namespace, ledCardModule);
-        }
-        store.dispatch(`${this.namespace}/$init`);
+        initVuexModule(this.$store, this.namespace, ledCardModule);
     },
     methods: {
         toggleEnabled () {
