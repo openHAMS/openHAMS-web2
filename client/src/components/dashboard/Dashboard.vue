@@ -4,6 +4,8 @@
             main-menu
                 main-menu-item(prepend-icon='brightness_medium', @click='toggleTheme') Night mode
                     v-switch(slot='action', :input-value='theme', true-value='dark', false-value='light')
+                main-menu-item(prepend-icon='widgets', @click='editMode = !editMode') Edit cards
+                    v-switch(slot='action', :input-value='editMode')
         v-container(grid-list-md, :class='{ "edit-mode": editMode }')
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
                 template(v-for='card in cards')
