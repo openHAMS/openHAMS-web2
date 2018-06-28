@@ -1,6 +1,7 @@
 <template lang="pug">
     v-content
         brand-header
+            main-menu
         v-container(grid-list-md, :class='{ "edit-mode": editMode }')
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
                 template(v-for='card in cards')
@@ -11,13 +12,13 @@
 <script>
 import draggable from 'vuedraggable';
 import { mapActions } from 'vuex';
-import BrandHeader from './header/BrandHeader.vue';
 import { LedCard, SensorCard } from './cards';
+import * as HeaderComponents from './header';
 
 export default {
     name: 'Dashboard',
     components: {
-        BrandHeader,
+        ...HeaderComponents,
         draggable,
         LedCard,
         SensorCard,
