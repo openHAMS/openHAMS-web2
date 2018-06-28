@@ -1,7 +1,7 @@
 <template lang="pug">
     v-content
         brand-header
-        v-container(grid-list-md)
+        v-container(grid-list-md, :class='{ "edit-mode": editMode }')
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
                 template(v-for='card in cards')
                     led-card(v-if='card.type === "led"', :parentNamespace='namespace', :id='card.id', :title='card.title')
@@ -76,6 +76,18 @@ div.container {
     --card-title-cursor: default;
 }
 
+.flex {
+    will-change: transform;
+    transition: transform $secondary-transition;
+}
+
+.edit-mode > .layout > .flex {
+    transform: scale(0.98);
+    & /deep/ .card {
+        @include elevation(4)
+    }
+}
+
 * /deep/ .card-title {
 /* vuetify headline class */
     font-size: 24px !important;
@@ -94,7 +106,7 @@ div.container {
 }
 
 .draggable-chosen /deep/ .card {
-    @include elevation(10);
+    @include elevation(16, true)
 }
 
 .draggable-ghost /deep/ .card {
