@@ -2,6 +2,8 @@
     v-content
         brand-header
             main-menu
+                main-menu-item(prepend-icon='brightness_medium', @click='toggleTheme') Night mode
+                    v-switch(slot='action', :input-value='theme', true-value='dark', false-value='light')
         v-container(grid-list-md, :class='{ "edit-mode": editMode }')
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
                 template(v-for='card in cards')
@@ -11,8 +13,8 @@
 
 <script>
 import draggable from 'vuedraggable';
-import { mapActions } from 'vuex';
 import { LedCard, SensorCard } from './cards';
+import { mapActions, mapGetters } from 'vuex';
 import * as HeaderComponents from './header';
 
 export default {
@@ -31,6 +33,7 @@ export default {
     },
     computed: {
         namespace () { return this.id; },
+        ...mapGetters(['theme']),
         cards: {
             get () { return this.$store.getters[`${this.namespace}/cards`]; },
             set () { }, // handled by reorderCards method
@@ -63,6 +66,7 @@ export default {
             reorderCards (dispatch, { moved }) {
                 dispatch(`${this.namespace}/reorderCards`, moved);
             },
+            toggleTheme: dispatch => dispatch('toggleTheme'),
         }),
     },
 };
