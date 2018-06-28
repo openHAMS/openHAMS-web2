@@ -1,4 +1,14 @@
-export function initVuexModule(store, namespace, vuexModule) {
+function normalizeInitVuexModuleParams(fn) {
+    return (...params) => {
+        const [store, namespace, vuexModule] =
+            typeof params[1] === 'string'
+                ? [...params]
+                : [params[0], '', ...params];
+        return fn(store, namespace, vuexModule);
+    };
+}
+
+export const initVuexModule = normalizeInitVuexModuleParams((store, namespace, vuexModule) => {
     const isModuleRegistered = store && store.state && store.state[namespace];
     if (!isModuleRegistered) {
         store.registerModule(namespace, vuexModule);
