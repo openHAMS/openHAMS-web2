@@ -67,6 +67,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "Assets/elevations.scss";
+@import "Assets/transitions.scss";
 
 /* default value for card-title-cursor */
 div.container {
@@ -84,12 +86,10 @@ div.container {
     user-select: none;
 }
 
-@import "Assets/elevations.scss";
-
 * /deep/ .card {
     will-change: box-shadow, opacity;
-    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),
-                opacity 0.2s cubic-bezier(.25,.8,.50,1);
+    transition: box-shadow 0.28s map-get($transitions, fast-out-slow-in), // from Vuetify(v1.0.19)/src/stylus/settings/_elevations.styl
+                opacity $primary-transition;
 }
 
 .draggable-chosen /deep/ .card {
