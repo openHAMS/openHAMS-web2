@@ -44,7 +44,9 @@ export default {
     },
     watch: {
         optionsMode (enabled) {
-            this.$el.style
+            // sets cursor on dragdrop handle to show whether it can be grabbed
+            this.$el.querySelector('.container')
+                .style
                 .setProperty(
                     '--card-title-cursor',
                     enabled ? 'grab' : 'default'
