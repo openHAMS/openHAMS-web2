@@ -1,6 +1,8 @@
 <template lang="pug">
-    v-flex.brand-container
+    v-layout(align-center).brand-container
         h1.branding.accent--text openHAMS
+        v-spacer
+        slot
 </template>
 
 <script>
