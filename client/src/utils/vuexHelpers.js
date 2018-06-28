@@ -8,4 +8,20 @@ export function initVuexModule(store, namespace, vuexModule) {
         store.registerModule(namespace, vuexModule);
     }
     store.dispatch(`${namespace}/$init`);
-}
+});
+
+export const mapFields = (fields) => {
+    return fields.reduce((acc, field) => {
+        acc[field] = {
+            get () {
+                return this.$store.getters[`${this.namespace}/${field}`];
+            },
+            set (value) {
+                // ie. 'foo' => 'setFoo'
+                const action = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
+                this.$store.dispatch(`${this.namespace}/${action}`, value);
+            },
+        };
+        return acc;
+    }, {});
+};

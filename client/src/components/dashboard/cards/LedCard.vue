@@ -21,24 +21,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import { initVuexModule } from 'Utils/vuexHelpers';
+import { initVuexModule, mapFields } from 'Utils/vuexHelpers';
 import ledCardModule from 'Store/modules/cards/ledcard';
-
-const mapFields = (fields) => {
-    return fields.reduce((acc, field) => {
-        acc[field] = {
-            get () {
-                return this.$store.getters[`${this.namespace}/${field}`];
-            },
-            set (value) {
-                // ie. 'foo' => 'setFoo'
-                const action = `set${field.replace(/^\w/, c => c.toUpperCase())}`;
-                this.$store.dispatch(`${this.namespace}/${action}`, value);
-            },
-        };
-        return acc;
-    }, {});
-};
 
 export default {
     name: 'LedCard',
