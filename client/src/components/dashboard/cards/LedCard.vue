@@ -27,6 +27,10 @@ import ledCardModule from 'Store/modules/cards/ledcard';
 export default {
     name: 'LedCard',
     props: {
+        parentNamespace: {
+            type: String,
+            required: true,
+        },
         id: {
             type: String,
             required: true,
@@ -38,7 +42,7 @@ export default {
     },
     computed: {
         namespace () {
-            return `dashboard/${this.id}`;
+            return `${this.parentNamespace}/${this.id}`;
         },
         ...mapState({
             availableColors (state) {

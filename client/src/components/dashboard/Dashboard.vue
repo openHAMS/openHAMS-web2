@@ -4,8 +4,8 @@
         v-container(grid-list-md)
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
                 template(v-for='card in cards')
-                    led-card(v-if='card.type === "led"', :id='card.id', :title='card.title')
-                    sensor-card(v-else-if='card.type === "sensor"', :title='card.title')
+                    led-card(v-if='card.type === "led"', :parentNamespace='namespace', :id='card.id', :title='card.title')
+                    sensor-card(v-else-if='card.type === "sensor"', :parentNamespace='namespace', :id='card.id', :title='card.title')
 </template>
 
 <script>
@@ -24,11 +24,12 @@ export default {
     },
     data () {
         return {
-            namespace: 'dashboard',
             optionsMode: false,
+            id: 'dashboard',
         };
     },
     computed: {
+        namespace () { return this.id; },
         cards: {
             get () { return this.$store.getters[`${this.namespace}/cards`]; },
             set () { }, // handled by reorderCards method

@@ -13,9 +13,22 @@
 export default {
     name: 'SensorCard',
     props: {
+        parentNamespace: {
+            type: String,
+            required: true,
+        },
+        id: {
+            type: String,
+            required: true,
+        },
         title: {
             type: String,
             required: true,
+        },
+    },
+    computed: {
+        namespace () {
+            return `${this.parentNamespace}/${this.id}`;
         },
     },
 };
