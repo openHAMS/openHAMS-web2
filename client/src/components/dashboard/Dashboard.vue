@@ -24,8 +24,8 @@ export default {
     },
     data () {
         return {
-            optionsMode: false,
             id: 'dashboard',
+            editMode: false,
         };
     },
     computed: {
@@ -38,13 +38,13 @@ export default {
             return {
                 chosenClass: 'draggable-chosen',
                 ghostClass: 'draggable-ghost',
-                disabled: !this.optionsMode,
+                disabled: !this.editMode,
                 handle: 'h1.card-title',
             };
         },
     },
     watch: {
-        optionsMode (enabled) {
+        editMode (enabled) {
             // sets cursor on dragdrop handle to show whether it can be grabbed
             this.$el.querySelector('.container')
                 .style
