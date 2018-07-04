@@ -15,17 +15,16 @@
 
 <script>
 import draggable from 'vuedraggable';
-import { LedCard, SensorCard } from './cards';
 import { mapActions, mapGetters } from 'vuex';
 import * as HeaderComponents from './header';
+import * as CardComponents from './cards';
 
 export default {
     name: 'Dashboard',
     components: {
         ...HeaderComponents,
         draggable,
-        LedCard,
-        SensorCard,
+        ...CardComponents,
     },
     data () {
         return {
