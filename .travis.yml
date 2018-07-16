@@ -3,5 +3,8 @@ node_js:
   - "node"
 env:
   - TEST_DIR=client
+before_script:
+  - cd $TEST_DIR && yarn install
 script:
-  - cd $TEST_DIR && yarn install && yarn lint
+  - yarn test
+  - yarn lint
