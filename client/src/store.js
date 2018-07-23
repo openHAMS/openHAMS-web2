@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import dashboard from './modules/dashboard';
-import settings from './modules/settings';
+import dashboard from './components/dashboard/DashboardStoreModule';
+import settings from './components/settings';
 
 Vue.use(Vuex);
 

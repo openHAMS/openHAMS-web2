@@ -1,3 +1,3 @@
-export { default as LedCard } from './LedCard.vue';
-export { default as SensorCard } from './SensorCard.vue';
-export { default as RocketLaunchCard } from './RocketLaunchCard.vue';
+export { default as LedCard } from './led';
+export { default as SensorCard } from './sensor';
+export { default as LaunchCalendarCard } from './launchcalendar';

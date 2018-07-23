@@ -11,7 +11,7 @@
                 template(v-for='card in cards')
                     led-card(v-if='card.type === "led"', :parentNamespace='namespace', :id='card.id', :title='card.title')
                     sensor-card(v-else-if='card.type === "sensor"', :parentNamespace='namespace', :id='card.id', :title='card.title')
-                    rocket-launch-card(v-else-if='card.type === "rocketlaunch"', :parentNamespace='namespace')
+                    launch-calendar-card(v-else-if='card.type === "launch-calendar"', :parentNamespace='namespace')
 </template>
 
 <script>

@@ -30,7 +30,7 @@ import format from 'date-fns/format';
 import pick from 'lodash-es/pick';
 
 export default {
-    name: 'RocketLaunchCard',
+    name: 'LaunchCalendarCard',
     filters: {
         formatDateTime (unixSeconds) {
             const date = new Date(unixSeconds * 1000);
