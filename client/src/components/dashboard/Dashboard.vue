@@ -8,10 +8,11 @@
                     v-switch(slot='action', :input-value='editMode')
         v-container(grid-list-md, :class='{ "edit-mode": editMode }')
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
-                template(v-for='card in cards')
-                    led-card(v-if='card.type === "led"', :parentNamespace='namespace', :id='card.id', :title='card.title')
-                    sensor-card(v-else-if='card.type === "sensor"', :parentNamespace='namespace', :id='card.id', :title='card.title')
-                    launch-calendar-card(v-else-if='card.type === "launch-calendar"', :parentNamespace='namespace')
+                component(
+                    v-for='card in cards', :key='card.id',
+                    :is='`${card.type}-card`',
+                    :parentNamespace='namespace', v-bind='card'
+                )
 </template>
 
 <script>
