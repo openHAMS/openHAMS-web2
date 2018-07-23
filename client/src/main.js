@@ -16,6 +16,10 @@ Vue.use(Vuetify, {
     },
 });
 
+// vue-static
+import VueStatic from 'vue-static';
+Vue.use(VueStatic);
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

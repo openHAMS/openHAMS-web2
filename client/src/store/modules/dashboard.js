@@ -24,6 +24,7 @@ const actions = {
             { type: 'sensor', id: 'livingroom/temp', title: 'Temperature' },
             { type: 'sensor', id: 'livingroom/pres', title: 'Pressure' },
             { type: 'led', id: 'livingroom/led', title: 'asdasd' },
+            { type: 'rocketlaunch' },
         ];
         commit('setCards', cards);
     },
