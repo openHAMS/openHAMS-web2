@@ -34,7 +34,7 @@ export default {
     filters: {
         formatDateTime (unixSeconds) {
             const date = new Date(unixSeconds * 1000);
-            return format(date, 'ddd, MMM DD, HH:MM');
+            return format(date, 'ddd, MMM DD, HH:mm');
         },
         formatDateTimeDistance (unixSeconds) {
             const date = new Date(unixSeconds * 1000);
