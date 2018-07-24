@@ -7,6 +7,10 @@ const getters = {
 };
 
 const mutations = {
+    addCard (state, card) {
+        // TODO: sanitize card fields
+        state.cards.push(card);
+    },
     setCards (state, value) {
         state.cards = value;
     },
@@ -27,6 +31,9 @@ const actions = {
             { type: 'launch-calendar' },
         ];
         commit('setCards', cards);
+    },
+    addCard ({ commit }, card) {
+        commit('addCard', card);
     },
     reorderCards ({ commit }, { oldIndex, newIndex }) {
         commit('reorderCards', { oldIndex, newIndex });
