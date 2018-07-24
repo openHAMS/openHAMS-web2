@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-flex(xs12, sm5, md5, lg4, xl3)
+    v-flex(xs12, sm5, md4, lg3, xl3)
         v-card
             v-card-title
                 h1.card-title Rocket launch calendar
@@ -52,7 +52,7 @@ export default {
             LAUNCH_FIELDS: ['id', 'name', 'netstamp', 'vidURLs', 'rocket', 'missions'],
             headers: [
                 { value: 'name', sortable: false },
-                { value: 'netstamp', sortable: false, width: '100px' },
+                { value: 'netstamp', sortable: false, width: '135px' },
             ],
         };
     },

@@ -86,7 +86,7 @@ div.container {
 
 .edit-mode > .layout > .flex /deep/ .card {
     transform: scale(0.98);
-    @include elevation(4)
+    @include elevation(6)
 }
 
 * /deep/ .card-title {
@@ -107,7 +107,7 @@ div.container {
 }
 
 .draggable-chosen /deep/ .card {
-    @include elevation(16, true)
+    @include elevation(12, true)
 }
 
 .draggable-ghost /deep/ .card {

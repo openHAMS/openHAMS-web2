@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-flex(xs12, sm3, md3, lg3, xl2)
+    v-flex(xs12, sm4, md3, lg2, xl2)
         v-card
             v-card-title
                 .fw
