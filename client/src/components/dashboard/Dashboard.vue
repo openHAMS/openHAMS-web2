@@ -84,16 +84,9 @@ div.container {
     --card-title-cursor: default;
 }
 
-.flex {
-    will-change: transform;
-    transition: transform $secondary-transition;
-}
-
-.edit-mode > .layout > .flex {
+.edit-mode > .layout > .flex /deep/ .card {
     transform: scale(0.98);
-    & /deep/ .card {
-        @include elevation(4)
-    }
+    @include elevation(4)
 }
 
 * /deep/ .card-title {
@@ -108,9 +101,9 @@ div.container {
 }
 
 * /deep/ .card {
-    will-change: box-shadow, opacity;
     transition: box-shadow 0.28s map-get($transitions, fast-out-slow-in), // from Vuetify(v1.0.19)/src/stylus/settings/_elevations.styl
-                opacity $primary-transition;
+                opacity $primary-transition,
+                transform $secondary-transition;
 }
 
 .draggable-chosen /deep/ .card {
