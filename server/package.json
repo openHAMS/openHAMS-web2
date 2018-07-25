@@ -1,0 +1,12 @@
+{
+  "name": "openHAMS-web2-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/openHAMS/openHAMS-web2",
+  "author": "László Székely-Tóth",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
