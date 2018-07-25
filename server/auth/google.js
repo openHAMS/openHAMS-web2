@@ -8,7 +8,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const options = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
+    callbackURL: process.env.GOOGLE_CALLBACK_URL,
 };
 
 function verify(accessToken, refreshToken, profile, done) {
@@ -26,13 +26,13 @@ exports.RouterGenerator = (passport) => {
     const router = express.Router();
     router.get('/google',
         passport.authenticate('google', {
-            scope: ['openid email profile']
+            scope: ['openid email profile'],
         }));
     router.get('/google/callback',
         passport.authenticate('google', {
-            failureRedirect: '/login'
+            failureRedirect: '/login',
         }),
-        function(req, res) {
+        function (req, res) {
             // Authenticated successfully
             res.redirect('/');
         });
