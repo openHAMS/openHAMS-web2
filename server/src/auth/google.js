@@ -32,7 +32,7 @@ exports.RouterGenerator = (passport) => {
         passport.authenticate('google', {
             failureRedirect: '/login',
         }),
-        function (req, res) {
+        (req, res) => {
             // Authenticated successfully
             res.redirect('/');
         });
