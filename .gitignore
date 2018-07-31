@@ -7,6 +7,7 @@ yarn-error.log*
 /client/test/unit/coverage/
 /client/test/e2e/reports/
 selenium-debug.log
+.env
 
 # Editor directories and files
 .idea
