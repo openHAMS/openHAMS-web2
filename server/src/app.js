@@ -1,3 +1,5 @@
+import configMongoose from './config/mongoose';
+const mongoose = configMongoose();
 
 //const express = require('express');
 import express from 'express';
