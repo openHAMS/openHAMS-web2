@@ -1,12 +1,9 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
-
-function resolve (dir) {
-    return path.join(__dirname, '..', dir);
-}
+const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 
 module.exports = {
-    entry: './src/app.js',
+    target: 'node',
+    entry: ['./src/app.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'server-bundle.js',
@@ -16,20 +13,18 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: [resolve('src')],
+                include: [path.resolve(__dirname, 'src')],
             },
             {
-                test: /\.js/,
+                test: /\.js$/,
                 loader: 'eslint-loader',
                 enforce: 'pre',
                 options: {
-                    formatter: require('eslint-friendly-formatter'),
+                    formatter: eslintFriendlyFormatter,
                     emitWarning: true, //dev
                 },
             },
         ],
     },
     context: path.resolve(__dirname),
-    target: 'node',
-    externals: [nodeExternals()],
 };
