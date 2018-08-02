@@ -6,7 +6,8 @@
         "eslint:recommended"
     ],
     "globals": {
-        "process": false
+        "process": false,
+        "__DEV__": false
     },
     "parser": "babel-eslint",
     "parserOptions": {

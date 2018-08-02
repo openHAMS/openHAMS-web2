@@ -8,10 +8,11 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack --mode development"
+    "dev": "webpack --display none --config webpack.dev.config.js"
   },
   "dependencies": {
     "connect-mongo": "^2.0.1",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mongoose": "^5.2.5",
@@ -24,11 +25,17 @@
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "dotenv-webpack": "^1.5.7",
     "eslint": "^5.2.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "node-notifier": "^5.2.1",
+    "start-server-webpack-plugin": "^2.2.5",
     "webpack": "^4.16.2",
     "webpack-cli": "^3.1.0",
+    "webpack-merge": "^4.1.3",
     "webpack-node-externals": "^1.7.2"
   }
 }
