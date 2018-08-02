@@ -1,14 +1,13 @@
 import configMongoose from './config/mongoose';
 const mongoose = configMongoose();
 
-//const express = require('express');
-import express from 'express';
+import configExpress from './config/express';
+const app = configExpress({ mongoose });
 
-const app = express();
 
-app.set('host', '0.0.0.0');
-app.set('port', 8080);
 
-app.listen(app.get('port'), () => {
+import http from 'http';
+const server = http.createServer(app);
+server.listen(app.get('port'), () => {
     console.log('listening');
 });
