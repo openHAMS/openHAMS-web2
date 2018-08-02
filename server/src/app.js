@@ -4,6 +4,8 @@ const mongoose = configMongoose();
 import configExpress from './config/express';
 const app = configExpress({ mongoose });
 
+import configPassport from './config/passport';
+configPassport({ app });
 
 
 import http from 'http';

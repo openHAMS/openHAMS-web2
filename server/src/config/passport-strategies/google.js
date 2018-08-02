@@ -1,7 +1,5 @@
-// enviromental variables from .env file
-require('dotenv').config();
-// passport.js strategy
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+import express from 'express'; // needed for Router
+import { Strategy } from 'passport-google-oauth20';
 
 const options = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -10,17 +8,15 @@ const options = {
 };
 
 function verify(accessToken, refreshToken, profile, done) {
-    if (profile.id !== process.env.ADMIN_ID) {
-        return done(null, false, { message: 'Authentication failed.' });
+    if (profile.id === process.env.ADMIN_ID) {
+        return done(null, profile);
     }
-    return done(null, profile);
+    return done(null, false, { message: 'Authentication failed.' });
 }
 
-exports.Strategy = new GoogleStrategy(options, verify);
+export const GoogleStrategy = new Strategy(options, verify);
 
-
-exports.RouterGenerator = (passport) => {
-    const express = require('express');
+export function GoogleRouterGenerator (passport) {
     const router = express.Router();
     router.get('/google',
         passport.authenticate('google', {
@@ -31,8 +27,8 @@ exports.RouterGenerator = (passport) => {
             failureRedirect: '/login',
         }),
         (req, res) => {
-            // Authenticated successfully
+            // Authentication successful
             res.redirect('/');
         });
     return router;
-};
+}
