@@ -6,5 +6,6 @@ const options = {
 };
 
 export default () => {
-    return mongoose.connect(uri, options);
+    mongoose.connect(uri, options);
+    return mongoose;
 };
