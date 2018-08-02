@@ -13,3 +13,18 @@ const server = http.createServer(app);
 server.listen(app.get('port'), () => {
     console.log('listening');
 });
+
+if (__DEV__) {
+    let currentApp = app;
+    if (module.hot) {
+        module.hot.accept();
+        module.hot.dispose(() => {
+            server.close();
+        });
+        module.hot.accept('./config/express', () => {
+            server.removeListener('request', currentApp);
+            server.on('request', app);
+            currentApp = app;
+        });
+    }
+}
