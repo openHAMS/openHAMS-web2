@@ -1,5 +1,3 @@
-'use strict';
-
 // enviromental variables from .env file
 require('dotenv').config();
 // passport.js strategy

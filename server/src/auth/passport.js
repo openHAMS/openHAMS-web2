@@ -1,5 +1,3 @@
-'use strict';
-
 const passport = require('passport');
 // strategies
 const { Strategy: GoogleStrategy, RouterGenerator: GoogleRouterGenerator } = require('./google');
