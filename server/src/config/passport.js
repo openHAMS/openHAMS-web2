@@ -22,6 +22,6 @@ export default ({ app }) => {
     const GoogleRouter = GoogleRouterGenerator(passport);
     app.use('/auth', GoogleRouter);
     // user routing
-    app.use('/api', userService);
+    app.use('/api', userService());
     return passport;
 };
