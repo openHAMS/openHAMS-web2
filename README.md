@@ -1,12 +1,32 @@
-# openHAMS
+# openHAMS-web2
 
-Roadmap
-- [x] Show live data
-- [x] Show data history on Highstock graph (onConnect)
-- [x] Channel subscribe list separated & everything is calculated from that
-- [x] Proper (flattened) use of Promises (ES6)
-- [x] Database scaling (MEAN(...), GROUP BY time(...))
-- [x] Database scrolling backend (WHERE time > ... AND time < ...)
-- [x] Database scrolling frontend (afterSetExtremes)
-- [x] JSONP endpoint at /jsonp
-- [ ] Bigger graph view
+WIP next-gen dashboard for openHAMS.
+
+## Features
+- Both server and client written in ES6+ with native imports transpiled by Babel.
+- Hot reload for back-end (client hmr WIP)
+
+## Requirements
+
+- Node 9+
+- MongoDB
+- Yarn
+- Google api keys for authentication
+
+### Dependencies
+
+- Passport
+- Webpack 4
+- Vue 2
+- Vuex
+- Babel 6
+- Lodash
+- Express
+- Mongoose
+
+## TODO
+
+- [x] Hot reload for back-end
+- [x] Google OAuth2 signup and login
+- [ ] Replace session-based auth to JWT-based auth
+
