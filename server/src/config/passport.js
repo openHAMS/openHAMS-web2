@@ -1,14 +1,15 @@
 import passport from 'passport';
 import userService from '../services/user-service';
-
 // strategies
-import { GoogleStrategy, GoogleRouterGenerator } from './passport-strategies/google';
+import { GoogleStrategy, GoogleRouterGenerator } from './passport/strategies/google';
+import User from 'Models/User';
 
 function setupUserSerialization() {
     passport.serializeUser((user, done) => {
-        done(null, user);
+        done(null, user.id);
     });
-    passport.deserializeUser((user, done) => {
+    passport.deserializeUser(async (userId, done) => {
+        const user = await User.findById(userId).exec();
         done(null, user);
     });
 }

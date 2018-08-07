@@ -26,5 +26,10 @@ module.exports = {
             },
         ],
     },
+    resolve: {
+        alias: {
+            'Models': path.resolve(__dirname, 'src/models'),
+        },
+    },
     context: path.resolve(__dirname),
 };
