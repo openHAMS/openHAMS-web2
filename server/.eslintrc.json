@@ -16,6 +16,10 @@
     },
     "root": true,
     "rules": {
+        "strict": [
+            "error",
+            "never"
+        ],
         "array-bracket-newline": [
             "error",
             "consistent"
