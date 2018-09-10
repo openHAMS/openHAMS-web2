@@ -9,6 +9,7 @@ Vue.config.productionTip = false;
 
 // Vuetify component framework
 import Vuetify from 'vuetify';
+import 'vuetify.css';
 import colors from 'vuetify/es5/util/colors';
 Vue.use(Vuetify, {
     theme: {

@@ -23,6 +23,13 @@ const baseConfig = {
                 },
             },
             {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                ],
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     'vue-style-loader',
@@ -42,6 +49,7 @@ const baseConfig = {
             '~': path.resolve(__dirname),
             '@': path.resolve(__dirname, 'client/src'),
             'vue$': 'vue/dist/vue.esm.js', // use full ES Vue instead default runtime ES Vue
+            'vuetify.css$': path.resolve(__dirname, 'node_modules/vuetify/dist/vuetify.css'),
             'Assets': path.resolve(__dirname, 'client/src/assets'),
             'Utils': path.resolve(__dirname, 'client/src/utils'),
         },

@@ -15,7 +15,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../node_modules/vuetify/dist/vuetify.css";
 
 .input-group.input-group--slider {
     &.input-group--prepend-icon .slider {
