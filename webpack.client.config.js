@@ -5,6 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 
 const baseConfig = {
     entry: ['./client/src/main.js'],
+    // TODO: devtools source maps
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'client.bundle.js',
@@ -31,6 +32,7 @@ const baseConfig = {
                 },
             },
             {
+                // TODO: css source map
                 test: /\.css$/,
                 use: [
                     'vue-style-loader',
