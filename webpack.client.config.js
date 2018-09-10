@@ -60,15 +60,6 @@ const baseConfig = {
         }),
         new VueLoaderPlugin(),
     ],
-    node: {
-        //__dirname: true,
-        setImmediate: false,
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-        child_process: 'empty',
-    },
 };
 
 
