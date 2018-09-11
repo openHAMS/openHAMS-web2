@@ -11,6 +11,9 @@
     "build:server": "webpack --mode=production --config=webpack.server.config.js",
     "start": "webpack --mode=development --config=webpack.server.config.js"
   },
+  "//": [
+    "'babel-core@^7.0.0-0' needed for jest"
+  ],
   "dependencies": {
     "connect-mongo": "^2.0.1",
     "date-fns": "^1.29.0",
@@ -35,7 +38,9 @@
     "@babel/plugin-transform-strict-mode": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
+    "babel-core": "^7.0.0-0",
     "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
@@ -46,6 +51,7 @@
     "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "node-notifier": "^5.2.1",
     "node-sass": "^4.9.3",
     "pug": "^2.0.3",
