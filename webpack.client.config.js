@@ -4,7 +4,8 @@ const HtmlPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 const baseConfig = {
-    entry: ['./client/src/main.js'],
+    context: path.resolve(__dirname, 'client'),
+    entry: ['./src/main.js'],
     // TODO: devtools source maps
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -74,7 +75,7 @@ const baseConfig = {
     },
     plugins: [
         new HtmlPlugin({
-            template: './client/index.html',
+            template: './index.html',
         }),
         new VueLoaderPlugin(),
     ],
