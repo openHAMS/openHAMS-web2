@@ -1,4 +1,8 @@
-plugins: 
+plugins:
   eslint:
     enabled: true
     channel: "eslint-4"
+  fixme:
+    enabled: true
+  git-legal:
+    enabled: true
