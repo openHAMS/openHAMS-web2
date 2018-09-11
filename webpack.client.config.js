@@ -3,8 +3,14 @@ const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
+const context = path.resolve(__dirname, 'client');
+
+function resolve(paths) {
+    return path.resolve(context, paths);
+}
+
 const baseConfig = {
-    context: path.resolve(__dirname, 'client'),
+    context,
     entry: ['./src/main.js'],
     // TODO: devtools source maps
     output: {
@@ -18,7 +24,7 @@ const baseConfig = {
                 test: /\.(js|vue)$/,
                 loader: 'eslint-loader',
                 include: [
-                    path.resolve(__dirname, './client/src'),
+                    resolve('src'),
                 ],
             },
             {
@@ -29,7 +35,7 @@ const baseConfig = {
                 test: /.js$/,
                 loader: 'babel-loader',
                 options: {
-                    configFile: path.resolve(__dirname, 'client/.babelrc'), // somehow babel cannot find babelrc without this in client cfg...
+                    configFile: resolve('.babelrc'), // somehow babel cannot find babelrc without this in client cfg...
                 },
             },
             {
@@ -66,11 +72,10 @@ const baseConfig = {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             '~': path.resolve(__dirname),
-            '@': path.resolve(__dirname, 'client/src'),
+            '@': resolve('src'),
             'vue$': 'vue/dist/vue.esm.js', // use full ES Vue instead default runtime ES Vue
-            'vuetify.css$': path.resolve(__dirname, 'node_modules/vuetify/dist/vuetify.css'),
-            'Assets': path.resolve(__dirname, 'client/src/assets'),
-            'Utils': path.resolve(__dirname, 'client/src/utils'),
+            'Assets': resolve('src/assets'),
+            'Utils': resolve('src/utils'),
         },
     },
     plugins: [
