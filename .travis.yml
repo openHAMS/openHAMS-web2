@@ -9,7 +9,7 @@ env:
   matrix:
   - TEST_DIR=client
 before_script:
-- cd $TEST_DIR && yarn install
+- yarn install
 script:
-- yarn test
-- yarn lint
+# - yarn test
+# - yarn lint
