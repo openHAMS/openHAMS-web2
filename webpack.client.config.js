@@ -51,6 +51,14 @@ const baseConfig = {
                 test: /\.pug$/,
                 loader: 'pug-plain-loader',
             },
+            {
+                test: /\.(woff2?|ttf|eot|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name]-[hash].[ext]',
+                    outputPath: 'assets/fonts/',
+                },
+            },
         ],
     },
     resolve: {
