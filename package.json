@@ -6,6 +6,7 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
+    "lint": "eslint --ext js,vue .",
     "build:client": "webpack --mode=production --config=webpack.client.config.js",
     "build:server": "webpack --mode=production --config=webpack.server.config.js",
     "start": "webpack --mode=development --config=webpack.server.config.js"
