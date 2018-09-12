@@ -22,5 +22,9 @@ script:
   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info
 after_success:
   # - ./cc-test-reporter after-build -t lcov -p ./ --exit-code $TRAVIS_TEST_RESULT
-  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
-  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json; fi
+jobs:
+  include:
+    - stage: Codeclimate
+      script:
+        - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
+        - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json; fi
