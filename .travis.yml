@@ -8,15 +8,16 @@ addons:
 cache: yarn
 env:
   matrix:
-    - TEST_DIR=client
+    # - TEST_SUITE=client
+    - TEST_SUITE=server
 before_script:
-  - yarn install
+  # - yarn install
   # codeclimate setup
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - yarn test
+  - yarn test:$TEST_SUITE
   - yarn lint
 after_script:
   - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT
