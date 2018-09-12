@@ -5,9 +5,7 @@ addons:
   code_climate:
     repo_token:
       secure: QZgeGsv9vMUWR/Mvs2DiAx9/CxY3fzwA3S7rW8WybmyLIEYpkkCj7JoKxaSIltQSmpGQ0BtKZR77gfVV59tq0hVJesXsLKy9a7VLLR+1ie9CVOsEurtWlIWHX3/uKppJceoEndpmxa/OAmV2hYr/OOiwt6RFkMReC7dCzkUd6+kytqyRTNMa/3zd6hk/QA8lqgGMnc0bEck4s/vqNsjos5ET2OwYfNdw2krPjN2XCJ00yV3TShRZm/Y/OrVAIaHvUu4tDj5sGkCph+Typr1fuABxfCKmKKCWx+HXEs3dYFtNCQuniI+0MqzvreZDCj3rOHytBppeTvIBtHmF3ormUb/e3UdPaQ+9O8kJKycMuAzN6YsMBcLxjPY5xMxzeEpo7+UXDxJgT8gl3j5YINMm4pDPqtJyfgQu4FZSRpRBi76sHjzmoCbv9y9P5JQhy1JNN/MZBjAkGu3nZ3i0agdvOe2iMtA3gEUNICL4PL6BBKIM48S9zsk9F7qfdySHvslXB5ltesm+nNAgLrd38xWb7DdYZ6vZeMkC2Rp7lQJnv7Rg36B7Rn++BtINYlkt/MBVnaoXydE5khFDflmBNwkfDhzsyukaINtu4i7KJeq3EhKbYk9gKm6yMZV/xk+TJI7vv77vBf2M1GDb5bp9MPqZvcclGgX3Y4KsEcINdidd6eI=
-cache:
-  directories:
-    - node_modules
+cache: yarn
 env:
   matrix:
     - TEST_DIR=client
