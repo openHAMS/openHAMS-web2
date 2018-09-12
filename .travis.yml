@@ -8,7 +8,7 @@ addons:
 cache: yarn
 env:
   matrix:
-    # - TEST_SUITE=client
+    - TEST_SUITE=client
     - TEST_SUITE=server
 before_script:
   # - yarn install
@@ -26,5 +26,5 @@ jobs:
   include:
     - stage: Codeclimate
       script:
-        - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 1 -o coverage/codeclimate.total.json
+        - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
         - ./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json
