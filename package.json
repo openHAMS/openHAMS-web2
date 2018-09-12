@@ -7,8 +7,10 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext js,vue .",
-    "test": "yarn test:server",
     "test:server": "jest --config=server/jest.config.js",
+    "test:server:coverage": "yarn test:server --collectCoverage=true",
+    "test": "yarn test:server",
+    "test:coverage": "yarn test:server:coverage",
     "build:client": "webpack --mode=production --config=webpack.client.config.js",
     "build:server": "webpack --mode=production --config=webpack.server.config.js",
     "start": "webpack --mode=development --config=webpack.server.config.js"
