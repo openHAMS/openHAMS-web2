@@ -26,5 +26,5 @@ jobs:
   include:
     - stage: Codeclimate
       script:
-        - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
+        - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 1 -o coverage/codeclimate.total.json
         - ./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json
