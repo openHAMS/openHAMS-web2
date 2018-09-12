@@ -1,1 +1,6 @@
-/dist
+# bundles
+dist/
+
+# test coverage files
+/client/coverage/
+/server/coverage
