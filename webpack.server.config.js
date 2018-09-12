@@ -27,6 +27,10 @@ const baseConfig = {
         ],
     },
     resolve: {
+        extensions: [
+            '.js',
+            '.json',
+        ],
         alias: {
             '~': path.resolve(__dirname),
             'Models': path.resolve(__dirname, './server/src/models'),

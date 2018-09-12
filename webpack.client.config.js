@@ -69,7 +69,11 @@ const baseConfig = {
         ],
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: [
+            '.js',
+            '.vue',
+            '.json',
+        ],
         alias: {
             '~': path.resolve(__dirname),
             '@': resolve('src'),
