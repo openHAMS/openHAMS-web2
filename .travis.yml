@@ -68,7 +68,8 @@ jobs:
     - chmod +x ./cc-test-reporter
     before_script:
     - mkdir coverage
-    - gsutil mv gs://racer01-openhams.appspot.com/coverage/ coverage/
+    - gsutil cp -r gs://racer01-openhams.appspot.com/coverage/ coverage/
     script:
-    - "./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
+    - ls coverage/
+    - "./cc-test-reporter -d sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
     - "./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json"
