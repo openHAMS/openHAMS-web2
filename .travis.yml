@@ -8,7 +8,7 @@ cache:
 env:
   global:
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # disable google cloud sdk prompts
-  - TEMP_CLOUD_STORAGE=staging.racer01-openhams.appspot.com
+  - TEMP_CLOUD_STORAGE=staging.racer01-openhams.appspot.com/$TRAVIS_REPO_SLUG/$TRAVIS_BUILD_ID
   matrix:
   - TEST_SUITE=client
   - TEST_SUITE=server
