@@ -1,10 +1,14 @@
 # openHAMS-web2
 
+[![Build Status](https://travis-ci.com/openHAMS/openHAMS-web2.svg?branch=master)](https://travis-ci.com/openHAMS/openHAMS-web2)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0dfbe3d4485a98184848/test_coverage)](https://codeclimate.com/github/openHAMS/openHAMS-web2/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0dfbe3d4485a98184848/maintainability)](https://codeclimate.com/github/openHAMS/openHAMS-web2/maintainability)
+
 WIP next-gen dashboard for openHAMS.
 
 ## Features
 - Both server and client written in ES6+ with native imports transpiled by Babel.
-- Hot reload for back-end (client hmr WIP)
+- Hot reload for back-end
 
 ## Requirements
 
