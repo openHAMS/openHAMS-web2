@@ -4,8 +4,7 @@ node_js:
 addons:
   code_climate:
     repo_token:
-      secure: QZgeGsv9vMUWR/Mvs2DiAx9/CxY3fzwA3S7rW8WybmyLIEYpkkCj7JoKxaSIltQSmpGQ0BtKZR77gfVV59tq0hVJesXsLKy9a7VLLR+1ie9CVOsEurtWlIWHX3/uKppJceoEndpmxa/OAmV2hYr/OOiwt6RFkMReC7dCzkUd6+kytqyRTNMa/3zd6hk/QA8lqgGMnc0bEck4s/vqNsjos5ET2OwYfNdw2krPjN2XCJ00yV3TShRZm/Y/OrVAIaHvUu4tDj5sGkCph+Typr1fuABxfCKmKKCWx+HXEs3dYFtNCQuniI+0MqzvreZDCj3rOHytBppeTvIBtHmF3ormUb/e3UdPaQ+9O8kJKycMuAzN6YsMBcLxjPY5xMxzeEpo7+UXDxJgT8gl3j5YINMm4pDPqtJyfgQu4FZSRpRBi76sHjzmoCbv9y9P5JQhy1JNN/MZBjAkGu3nZ3i0agdvOe2iMtA3gEUNICL4PL6BBKIM48S9zsk9F7qfdySHvslXB5ltesm+nNAgLrd38xWb7DdYZ6vZeMkC2Rp7lQJnv7Rg36B7Rn++BtINYlkt/MBVnaoXydE5khFDflmBNwkfDhzsyukaINtu4i7KJeq3EhKbYk9gKm6yMZV/xk+TJI7vv77vBf2M1GDb5bp9MPqZvcclGgX3Y4KsEcINdidd6eI=
-cache:
+      secure: "YTkkpOLk+6R0kGaIN+sZgOMll2wagwjA5cjYOlaew5SARfnq4W1HYtFEJKaW/XxV9IljNEwX12Aalj6S94FxjGiSA6Nzbvz/vuSOaOVtuRRzH805xjNv3fEuNPTiuzSgDzhU3Tm6T2lZ3lOV9r/vtqlBu5dR3F3w5tX/ZGsidcdawOPSJxx2Ed96GIvYGOmx02hf92GhG5GROKYknwIW3CnNhGTmNGWPCy4F1gjAzxdeqLf3RrdQxiy0LeCUXvaUMxWb8I6rqJuje1AwsFKbxPrxI8Hk9zwcDEd3KBJoGMIWHJf2plfeepaB7kjyy2hjeAnOmoeKhF1qEvOsqT6VIeD7LUgp7iN/GKr53QuSrK+TB2k0KBmEO/UJTHam/AVG2W08XgyxyA4fI7GSf016uck/p14NT+isc812wvUVr1KOqp2U6FVSxx2RwtD0Yqpai0jNVRhb3d6xqBgJEwtc2JxmOWjZ6Jdq+m5lYoh3+CLSvyTJyVJRSFaVRVfDk00/NwYHVA+jeWc+F54s/wMyJMofD87YikfkpPaLXYdhu6HECb2drfbVWcecOWiASD9XFGO5eB2ssdvE6CkXEZzzIWcThPDjZg7giCeEa9SbdhQqaQsUWE1wrE4326LnDva2nF23Az4axJvk1ilPl8ZJ648GWXPtU0xKdN97fD7UTQY="cache:
 - yarn: true
   directories:
   - $HOME/google-cloud-sdk
@@ -36,7 +35,7 @@ script:
 - yarn test:coverage:$TEST_SUITE
 after_success:
 - "./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
-- gsutil cp -r coverage gs://racer01-openhams.appspot.com
+- gsutil cp -r coverage/ gs://racer01-openhams.appspot.com/
 # deploy:
 #   provider: gcs
 #   access_key_id: GOOGFVHSBSXTKOUI2OXMMMBY
@@ -67,8 +66,7 @@ jobs:
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     before_script:
-    - mkdir coverage
-    - gsutil cp -r gs://racer01-openhams.appspot.com/coverage/ coverage/
+    - gsutil cp -r gs://racer01-openhams.appspot.com/coverage/ /
     script:
     - ls coverage/
     - "./cc-test-reporter -d sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
