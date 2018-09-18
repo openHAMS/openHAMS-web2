@@ -33,41 +33,17 @@ script:
 after_success:
 - "./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
 - gsutil cp -r coverage/ gs://racer01-openhams.appspot.com/
-# deploy:
-#   provider: gcs
-#   access_key_id: GOOGFVHSBSXTKOUI2OXMMMBY
-#   secret_access_key: $GCS_SECRET
-#   bucket: racer01-openhams.appspot.com
-#   skip_cleanup: true
-#   upload-dir: $TEST_SUITE
-#   local-dir: coverage
-#   on:
-#     repo: openHAMS/openHAMS-web2
 jobs:
   include:
-  -
+  - stage: Codeclimate
     language: bash
-    stage: Codeclimate
     env:
     - TEST_SUITE=codeclimate
     - secure: "mQ+UWp7iAE39f2BmF+wA4UPZMUo6JkmhGHN9r4SpmC0JyumLSA1OG43qQLxkr8is0p03QeXtz5Rk2tLLxKIG99rw5MUTM7DuK7IUjY1rc7pYr+ratPYnhr8z9cCB07+bh98nODao2hpBKBWt3UI7OwAhGPbBKhmPGYwWN9BJgkX8ZGgTBIWFR1mOYMtswCBAbgA4dZ6/BT1CQQbgIdRQ9MAk88QbNGDFgemFQRVwPdAQoQh1gdH7UeCbUqK4TxP75FLnMEla0bPxk+9IMNo96E38YyW0+4uuL3p1QaHJdxrcCd5pzmNDUNasIJw97MSgt2qjhF//WTuLCt9yriF8rfI4oAMtjUVwD1C29Hb2AcxFKc5Bknir3EXn4iTEWp0V2ge1nKIw75Vwt1Wm+3r/LNW4G5BMfXasO7Ufob4YFbIoMP7bqXF9iTbL0Dwg5IGktMrKD2vQ7I1MZ0XRltwq1w98x3RsFz1yCAZGEfb1YQ0trkJ+S1VnT80p+3nPaoGfbJlI81KiLBKHxcKTLjGZBYKjQ1Jh0s7fDld9EipxyaFVsl/diUTO/w9+2sFcRt/6wCqdL4xTQwpufLeF3tYBtx9qUUvnWetaeJmQhvSTTlHD43mWaLzdkYFIv6+44Bkz5wwdM4dy0QprpTfnt5IeBzk6loOhMqVakISUQIylLvc="
-    before_install:
-    - if [ ! -d ${HOME}/google-cloud-sdk/bin ]; then
-        rm -rf $HOME/google-cloud-sdk;
-        curl https://sdk.cloud.google.com | bash > /dev/null;
-      fi
-    # This line is critical. We setup the SDK to take precedence in our environment over the old SDK that is already on the machine.
-    - source $HOME/google-cloud-sdk/path.bash.inc
-    # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
-    - openssl aes-256-cbc -K $encrypted_4912ff11cfe7_key -iv $encrypted_4912ff11cfe7_iv -in client-secret.json.enc -out client-secret.json -d
-    # Here we use the decrypted service account credentials to authenticate the command line tool
-    - gcloud auth activate-service-account --key-file client-secret.json
-    # install codeclimate reporter
-    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-    - chmod +x ./cc-test-reporter
     before_script:
     - gsutil cp -r gs://racer01-openhams.appspot.com/coverage/ ./
-    script:
     - ls coverage/
     - "./cc-test-reporter -d sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
     - "./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json"
+    script: skip
+    after_success: skip
