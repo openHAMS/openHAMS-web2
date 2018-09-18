@@ -7,26 +7,14 @@ cache:
   - $HOME/google-cloud-sdk
 env:
   global:
-  # disable google cloud sdk prompts
-  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # disable google cloud sdk prompts
   matrix:
   - TEST_SUITE=client
   - TEST_SUITE=server
 before_install:
-# If the SDK is not already cached, download it and unpack it
-- if [ ! -d ${HOME}/google-cloud-sdk/bin ]; then
-    rm -rf $HOME/google-cloud-sdk;
-    curl https://sdk.cloud.google.com | bash > /dev/null;
-  fi
-# This line is critical. We setup the SDK to take precedence in our environment over the old SDK that is already on the machine.
-- source $HOME/google-cloud-sdk/path.bash.inc
-# Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
-- openssl aes-256-cbc -K $encrypted_4912ff11cfe7_key -iv $encrypted_4912ff11cfe7_iv -in client-secret.json.enc -out client-secret.json -d
-# Here we use the decrypted service account credentials to authenticate the command line tool
-- gcloud auth activate-service-account --key-file client-secret.json
-# install codeclimate reporter
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
+- ./travis-scripts/install-gcloud-sdk.sh
+- ./travis-scripts/login-gcloud-sdk.sh
+- ./travis-scripts/install-cc-reporter.sh
 script:
 - yarn lint:$TEST_SUITE
 - yarn test:coverage:$TEST_SUITE
