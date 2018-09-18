@@ -14,6 +14,10 @@ env:
   - TEST_SUITE=server
 before_install:
 - ./travis-scripts/install-gcloud-sdk.sh
+# This line is critical.
+# We setup the SDK to take precedence in our environment
+#   over the old SDK that is already on the machine.
+- source $HOME/google-cloud-sdk/path.bash.inc
 - ./travis-scripts/login-gcloud-sdk.sh
 - ./travis-scripts/install-cc-reporter.sh
 script:
