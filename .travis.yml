@@ -50,6 +50,7 @@ after_success:
 jobs:
   include:
   - stage: Codeclimate
+    language: minimal
     env:
     - TEST_SUITE=codeclimate
     before_install:
