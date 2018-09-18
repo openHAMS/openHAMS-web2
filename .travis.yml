@@ -1,10 +1,6 @@
 language: node_js
 node_js:
 - node
-addons:
-  code_climate:
-    repo_token:
-    secure: "YTkkpOLk+6R0kGaIN+sZgOMll2wagwjA5cjYOlaew5SARfnq4W1HYtFEJKaW/XxV9IljNEwX12Aalj6S94FxjGiSA6Nzbvz/vuSOaOVtuRRzH805xjNv3fEuNPTiuzSgDzhU3Tm6T2lZ3lOV9r/vtqlBu5dR3F3w5tX/ZGsidcdawOPSJxx2Ed96GIvYGOmx02hf92GhG5GROKYknwIW3CnNhGTmNGWPCy4F1gjAzxdeqLf3RrdQxiy0LeCUXvaUMxWb8I6rqJuje1AwsFKbxPrxI8Hk9zwcDEd3KBJoGMIWHJf2plfeepaB7kjyy2hjeAnOmoeKhF1qEvOsqT6VIeD7LUgp7iN/GKr53QuSrK+TB2k0KBmEO/UJTHam/AVG2W08XgyxyA4fI7GSf016uck/p14NT+isc812wvUVr1KOqp2U6FVSxx2RwtD0Yqpai0jNVRhb3d6xqBgJEwtc2JxmOWjZ6Jdq+m5lYoh3+CLSvyTJyVJRSFaVRVfDk00/NwYHVA+jeWc+F54s/wMyJMofD87YikfkpPaLXYdhu6HECb2drfbVWcecOWiASD9XFGO5eB2ssdvE6CkXEZzzIWcThPDjZg7giCeEa9SbdhQqaQsUWE1wrE4326LnDva2nF23Az4axJvk1ilPl8ZJ648GWXPtU0xKdN97fD7UTQY="
 cache:
 - yarn: true
   directories:
@@ -52,6 +48,7 @@ jobs:
   - stage: Codeclimate
     language: minimal
     env:
+      secure: "mQ+UWp7iAE39f2BmF+wA4UPZMUo6JkmhGHN9r4SpmC0JyumLSA1OG43qQLxkr8is0p03QeXtz5Rk2tLLxKIG99rw5MUTM7DuK7IUjY1rc7pYr+ratPYnhr8z9cCB07+bh98nODao2hpBKBWt3UI7OwAhGPbBKhmPGYwWN9BJgkX8ZGgTBIWFR1mOYMtswCBAbgA4dZ6/BT1CQQbgIdRQ9MAk88QbNGDFgemFQRVwPdAQoQh1gdH7UeCbUqK4TxP75FLnMEla0bPxk+9IMNo96E38YyW0+4uuL3p1QaHJdxrcCd5pzmNDUNasIJw97MSgt2qjhF//WTuLCt9yriF8rfI4oAMtjUVwD1C29Hb2AcxFKc5Bknir3EXn4iTEWp0V2ge1nKIw75Vwt1Wm+3r/LNW4G5BMfXasO7Ufob4YFbIoMP7bqXF9iTbL0Dwg5IGktMrKD2vQ7I1MZ0XRltwq1w98x3RsFz1yCAZGEfb1YQ0trkJ+S1VnT80p+3nPaoGfbJlI81KiLBKHxcKTLjGZBYKjQ1Jh0s7fDld9EipxyaFVsl/diUTO/w9+2sFcRt/6wCqdL4xTQwpufLeF3tYBtx9qUUvnWetaeJmQhvSTTlHD43mWaLzdkYFIv6+44Bkz5wwdM4dy0QprpTfnt5IeBzk6loOhMqVakISUQIylLvc="
     - TEST_SUITE=codeclimate
     before_install:
     - if [ ! -d ${HOME}/google-cloud-sdk/bin ]; then
