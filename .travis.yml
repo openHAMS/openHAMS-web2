@@ -67,7 +67,7 @@ jobs:
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     before_script:
-    - gsutil cp -r gs://racer01-openhams.appspot.com/coverage/ /
+    - gsutil cp -r gs://racer01-openhams.appspot.com/coverage/ ./
     script:
     - ls coverage/
     - "./cc-test-reporter -d sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
