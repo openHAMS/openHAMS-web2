@@ -22,7 +22,7 @@ Vue.use(Vuetify, {
 import VueStatic from 'vue-static';
 Vue.use(VueStatic);
 
-/* eslint-disable no-new */
+/* eslint-disable-next-line no-new */
 new Vue({
     el: '#app',
     router,
