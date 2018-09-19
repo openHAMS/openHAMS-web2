@@ -54,7 +54,7 @@ export default (adapter) => {
         user.profile.name.givenName = user.profile.name.givenName || get(profile, adapter.givenName);
         user.profile.photo = user.profile.photo || get(profile, adapter.photo);
         user.save((err) => {
-            done(err, user);
+            return done(err, user);
         });
     };
 };
