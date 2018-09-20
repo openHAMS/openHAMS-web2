@@ -31,10 +31,7 @@ const baseConfig = {
             '.js',
             '.json',
         ],
-        alias: {
-            '~': path.resolve(__dirname),
-            'Models': path.resolve(__dirname, './server/src/models'),
-        },
+        // alias definitions in closest .babelrc
     },
     target: 'node',
     externals: [

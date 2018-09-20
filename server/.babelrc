@@ -6,5 +6,18 @@
                 "targets": { "node": "current" }
             }
         ]
+    ],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "cwd": "packagejson",
+                "alias": {
+                    "^~/(.+)": "./\\1",
+                    "^@/(.+)": "./server/src/\\1",
+                    "^Models/(.+)": "./server/src/models/\\1"
+                }
+            }
+        ]
     ]
 }

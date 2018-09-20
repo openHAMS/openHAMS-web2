@@ -76,8 +76,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "Assets/elevations.scss";
-@import "Assets/transitions.scss";
+@import "assets/elevations.scss";
+@import "assets/transitions.scss";
 
 /* default value for card-title-cursor */
 div.container {

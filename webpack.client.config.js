@@ -51,7 +51,14 @@ const baseConfig = {
                 use: [
                     'vue-style-loader',
                     'css-loader',
-                    'sass-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: [
+                                resolve('src'),
+                            ],
+                        },
+                    },
                 ],
             },
             {
@@ -74,13 +81,7 @@ const baseConfig = {
             '.vue',
             '.json',
         ],
-        alias: {
-            '~': path.resolve(__dirname),
-            '@': resolve('src'),
-            'vue$': 'vue/dist/vue.esm.js', // use full ES Vue instead default runtime ES Vue
-            'Assets': resolve('src/assets'),
-            'Utils': resolve('src/utils'),
-        },
+        // alias definitions in closest .babelrc
     },
     plugins: [
         new HtmlPlugin({

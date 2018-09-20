@@ -1,4 +1,4 @@
-import configMongoose from '@server/config/mongoose';
+import configMongoose from '@/config/mongoose';
 import mongoose from '../../__mocks__/mongoose.js';
 
 describe('ConfigMongoose', () => {

@@ -14,7 +14,25 @@
         ]
     ],
     "plugins": [
-        "@babel/plugin-transform-runtime"
+        "@babel/plugin-transform-runtime",
+        [
+            "module-resolver",
+            {
+                "cwd": "packagejson",
+                "extensions": [
+                    ".js",
+                    ".json",
+                    ".vue"
+                ],
+                "alias": {
+                    "^~/(.+)": "./\\1",
+                    "^@/(.+)": "./client/src/\\1",
+                    "vue": "vue/dist/vue.esm.js",
+                    "^Utils/(.+)": "./client/src/utils/\\1"
+                }
+            }
+        ]
+
     ],
     "env": {
         "test": {
