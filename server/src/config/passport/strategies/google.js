@@ -1,6 +1,6 @@
 import express from 'express'; // needed for Router
 import { Strategy } from 'passport-google-oauth20';
-import PassportVerifyFactory from '../utilities/PassportVerifyFactory';
+import PassportVerifyFactory from '../utilities/passport-verify-factory';
 
 const options = {
     clientID: process.env.GOOGLE_CLIENT_ID,
