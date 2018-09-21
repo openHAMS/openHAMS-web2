@@ -14,6 +14,14 @@ import { get } from 'lodash';
 //       - If there is, return an error message.
 //       - Else create a new account.
 
+// adapter example
+// const verifyAdapter = {
+//     strategy: 'google',
+//     familyName: 'name.familyName',
+//     givenName: 'name.givenName',
+//     photo: '_json.image.url',
+// };
+
 export default (adapter) => {
     return async (req, accessToken, refreshToken, profile, done) => {
         let existingUser;

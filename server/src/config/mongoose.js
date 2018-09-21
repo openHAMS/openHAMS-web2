@@ -6,6 +6,7 @@ const options = {
 };
 
 export default () => {
+    // TODO: handle errors
     mongoose.connect(uri, options);
     return mongoose;
 };
