@@ -1,5 +1,9 @@
 import configMongoose from '@/config/mongoose';
-import mongoose from '../../__mocks__/mongoose.js';
+// temporary mock (only for this test)
+jest.mock('mongoose', () => ({
+    connect: jest.fn(),
+}));
+import mongoose from 'mongoose';
 
 describe('ConfigMongoose', () => {
     beforeEach(() => {
