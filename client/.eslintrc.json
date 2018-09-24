@@ -14,7 +14,7 @@
     ],
     "rules": {
         "vue/html-indent": [
-            "error",
+            "warn",
             4
         ]
     }
