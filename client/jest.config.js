@@ -9,7 +9,4 @@ module.exports = {
         'vue',
         'json',
     ],
-    moduleNameMapper: {
-        '^@client(.*)$': '<rootDir>/src/$1',
-    },
 };

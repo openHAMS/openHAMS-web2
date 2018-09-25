@@ -1,4 +1,4 @@
-import themeSettings from '@client/components/settings/theme';
+import themeSettings from '@/components/settings/theme';
 
 describe('Theme settings Vuex module', () => {
 
