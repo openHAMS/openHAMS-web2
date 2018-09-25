@@ -10,8 +10,8 @@ function getThemeString(isDarkTheme) {
 }
 
 const getters = {
-    theme: state => getThemeString(state.darkTheme),
     isDarkTheme: state => state.darkTheme,
+    theme: state => getThemeString(state.darkTheme),
 };
 
 const mutations = {
