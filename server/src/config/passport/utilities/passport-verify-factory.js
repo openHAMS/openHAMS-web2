@@ -61,8 +61,11 @@ export default (adapter) => {
         user.profile.name.familyName = user.profile.name.familyName || get(profile, adapter.familyName);
         user.profile.name.givenName = user.profile.name.givenName || get(profile, adapter.givenName);
         user.profile.photo = user.profile.photo || get(profile, adapter.photo);
-        user.save((err) => {
-            return done(err, user);
-        });
+        try {
+            const usr = await user.save();
+            return done(null, usr);
+        } catch (err) {
+            return done(err);
+        }
     };
 };
