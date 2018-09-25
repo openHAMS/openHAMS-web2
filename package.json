@@ -10,17 +10,18 @@
     "lint:server": "eslint --ext js ./server webpack.server.config.js",
     "lint": "yarn lint:client && yarn lint:server",
     "test:client": "jest --config=client/jest.config.js",
-    "test:coverage:client": "yarn test:client --collectCoverage=true",
+    "test:coverage:client": "yarn test:client --coverage",
+    "test:debug:client": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand  --config=client/jest.config.js",
     "test:server": "jest --config=server/jest.config.js",
-    "test:coverage:server": "yarn test:server --collectCoverage=true",
+    "test:coverage:server": "yarn test:server --coverage",
+    "test:debug:server": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand  --config=server/jest.config.js",
     "test": "yarn test:client && yarn test:server",
-    "test:coverage": "yarn test:server:coverage",
     "build:client": "webpack --mode=production --config=webpack.client.config.js",
     "build:server": "webpack --mode=production --config=webpack.server.config.js",
     "start": "webpack --mode=development --config=webpack.server.config.js"
   },
   "//": [
-    "'babel-core@^7.0.0-0' needed for jest"
+    "babel-core@^7.0.0-0 -> needed for jest"
   ],
   "dependencies": {
     "connect-mongo": "^2.0.1",
