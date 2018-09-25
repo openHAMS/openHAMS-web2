@@ -57,7 +57,7 @@ export default {
                 .style
                 .setProperty(
                     '--card-title-cursor',
-                    enabled ? 'grab' : 'default'
+                    enabled ? 'grab' : 'default',
                 );
         },
     },

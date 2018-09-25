@@ -66,7 +66,7 @@ export default {
             this.$el.style
                 .setProperty(
                     '--selected-color',
-                    `hsl(${color.hue}, ${color.saturation}%, ${color.lightness}%)`
+                    `hsl(${color.hue}, ${color.saturation}%, ${color.lightness}%)`,
                 );
         },
     },
