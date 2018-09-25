@@ -6,6 +6,18 @@
         "plugin:jest/recommended"
     ],
     "rules": {
+        "indent": [
+            "warn",
+            4,
+            {
+                "SwitchCase": 1,
+                "ignoredNodes": [
+                    "ArrayExpression",
+                    "CallExpression"
+                ]
+            }
+        ],
+        "prefer-arrow-callback": "error",
         "jest/consistent-test-it": "warn",
         "jest/expect-expect": "error",
         "jest/no-test-prefixes": "warn",
