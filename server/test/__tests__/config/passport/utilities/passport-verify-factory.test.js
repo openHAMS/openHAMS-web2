@@ -152,6 +152,15 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                         done();
                     }
                 });
+
+                it('calls done with error provided by save()', done => {
+                    mockingoose.User.toReturn(new Error('test error'), 'save');
+                    verify(req, 'accessToken', 'refreshToken', testProfileWithId, testcb);
+                    function testcb(err) {
+                        expect(err).toEqual(new Error('test error'));
+                        done();
+                    }
+                });
             });
 
             describe('if user is NOT admin', () => {
