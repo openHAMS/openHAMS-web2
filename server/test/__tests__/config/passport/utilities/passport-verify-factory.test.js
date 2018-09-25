@@ -46,7 +46,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                 mockingoose.User.toReturn(otherUserWithStrategyId, 'findOne');
             });
 
-            test('returns false user', done => {
+            it('calls done with false user', done => {
                 verify(req, 'accessToken', 'refreshToken', { id: 'otherId' }, testcb);
                 function testcb(err, user) {
                     expect(err).toBeFalsy();
@@ -55,7 +55,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                 }
             });
 
-            test('returns error message', done => {
+            it('calls done with error message', done => {
                 verify(req, 'accessToken', 'refreshToken', { id: 'otherId' }, testcb);
                 function testcb(e, u, message) {
                     expect(message).toEqual({
@@ -66,12 +66,12 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
             });
         });
 
-        describe('and ID is not linked to any account', () => {
+        describe.skip('and ID is not linked to any account', () => {
             beforeEach(() => {
                 mockingoose.User.toReturn(null, 'findOne');
             });
 
-            test.skip('links ID with existing account and returns user', done => {
+            it('calls done with user', done => {
                 verify(req, 'accessToken', 'refreshToken', { id: 'testId' }, testcb);
                 function testcb(err, user) {
                     expect(err).toBeFalsy();
@@ -95,7 +95,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                 mockingoose.User.toReturn(testUserWithStrategyId, 'findOne');
             });
 
-            test('returns user from db', done => {
+            it('calls done with user from db', done => {
                 verify(req, 'accessToken', 'refreshToken', { id: 'testId' }, testcb);
                 function testcb(err, user) {
                     expect(err).toBeFalsy();
@@ -125,7 +125,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                     process.env = OLD_ENV;
                 });
 
-                test('returns new user', done => {
+                it('calls done with new user', done => {
                     verify(req, 'accessToken', 'refreshToken', testProfileWithId, testcb);
                     function testcb(err, user) {
                         const expectedUser = {
@@ -142,7 +142,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                     }
                 });
 
-                test('returns user returned by save()', done => {
+                it('calls done with user returned by save()', done => {
                     const userReturnedBySave = { email: 'random@email' };
                     mockingoose.User.toReturn(userReturnedBySave, 'save');
                     verify(req, 'accessToken', 'refreshToken', testProfileWithId, testcb);
@@ -169,7 +169,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                     process.env = OLD_ENV;
                 });
 
-                test('returns false user', done => {
+                it('calls done with false user', done => {
                     verify(req, 'accessToken', 'refreshToken', testProfileWithId, testcb);
                     function testcb(err, user) {
                         expect(err).toBeNull();
@@ -178,7 +178,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                     }
                 });
 
-                test('returns error message', done => {
+                it('calls done with error message', done => {
                     verify(req, 'accessToken', 'refreshToken', testProfileWithId, testcb);
                     function testcb(e, u, message) {
                         expect(message).toEqual({

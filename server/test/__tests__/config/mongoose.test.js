@@ -9,15 +9,15 @@ describe('ConfigMongoose', () => {
     beforeEach(() => {
         mongoose.connect.mockClear();
     });
-    test('calls connect()', () => {
+    it('calls connect()', () => {
         configMongoose();
         expect(mongoose.connect).toHaveBeenCalledTimes(1);
     });
-    test('returns', () => {
+    it('returns', () => {
         const m = configMongoose();
         expect(m).not.toBeUndefined();
     });
-    test('returns mongoose object', () => {
+    it('returns mongoose object', () => {
         const m = configMongoose();
         expect(m).toBe(mongoose);
     });
