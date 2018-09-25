@@ -8,6 +8,6 @@ module.exports = {
         'json',
     ],
     'moduleNameMapper': {
-        '~testdata/(.*)$': '<rootDir>/__testdata__/$1',
+        '~testdata/(.*)$': '<rootDir>/test/__testdata__/$1',
     },
 };
