@@ -22,11 +22,11 @@ export const GoogleStrategy = new Strategy(options, verify);
 
 export function GoogleRouterGenerator (passport) {
     const router = express.Router();
-    router.get('/google',
+    router.get('/',
         passport.authenticate('google', {
             scope: ['openid email profile'],
         }));
-    router.get('/google/callback',
+    router.get('/callback',
         passport.authenticate('google', {
             failureRedirect: '/login',
         }),
