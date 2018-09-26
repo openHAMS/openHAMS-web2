@@ -9,8 +9,8 @@ const mutations = {
         // TODO: sanitize card fields
         state.cards.push(card);
     },
-    setCards (state, value) {
-        state.cards = value;
+    setCards (state, cards) {
+        state.cards = cards;
     },
     reorderCards (state, { oldIndex, newIndex }) {
         const { cards } = state;

@@ -23,18 +23,18 @@ const getters = {
 };
 
 const mutations = {
-    setAvailableColors (state, value) { state.availableColors = value; },
-    setBrightness (state, value) {
-        state.enabled = (value > 0);
-        state.brightness = value;
+    setAvailableColors (state, availableColors) { state.availableColors = availableColors; },
+    setBrightness (state, brightness) {
+        state.enabled = (brightness > 0);
+        state.brightness = brightness;
     },
-    setEnabled (state, value) { state.enabled = value; },
-    setSelectedColorId (state, value) {
+    setEnabled (state, enabled) { state.enabled = enabled; },
+    setSelectedColorId (state, selectedColorId) {
         const colorIds = state.availableColors.map(color => color.id);
-        if (!colorIds.includes(value)) {
-            throw new Error(`Invalid ColorId. AvailableColors does not contain color with id of '${value}'.`);
+        if (!colorIds.includes(selectedColorId)) {
+            throw new Error(`Invalid ColorId. AvailableColors does not contain color with id of '${selectedColorId}'.`);
         }
-        state.selectedColorId = value;
+        state.selectedColorId = selectedColorId;
     },
 };
 
@@ -51,11 +51,11 @@ const actions = {
         commit('setEnabled', true);
         commit('setBrightness', 70);
     },
-    setBrightness ({ commit }, value) {
-        commit('setBrightness', value);
+    setBrightness ({ commit }, brightness) {
+        commit('setBrightness', brightness);
     },
-    setSelectedColorId ({ commit }, value) {
-        commit('setSelectedColorId', value);
+    setSelectedColorId ({ commit }, selectedColorId) {
+        commit('setSelectedColorId', selectedColorId);
     },
     toggleEnabled ({ commit, state }) {
         const { brightness, enabled } = state;

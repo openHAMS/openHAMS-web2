@@ -15,8 +15,8 @@ const getters = {
 };
 
 const mutations = {
-    setTheme (state, value) {
-        state.darkTheme = (value === DARK_THEME);
+    setTheme (state, newTheme) {
+        state.darkTheme = (newTheme === DARK_THEME);
     },
     toggleTheme (state) {
         state.darkTheme = !state.darkTheme;
