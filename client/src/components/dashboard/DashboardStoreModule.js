@@ -2,9 +2,7 @@ const state = () => ({
     cards: [],
 });
 
-const getters = {
-    cards: state => state.cards,
-};
+const getters = {};
 
 const mutations = {
     addCard (state, card) {

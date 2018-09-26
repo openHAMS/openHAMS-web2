@@ -38,7 +38,7 @@ export default {
         namespace () { return this.id; },
         ...mapGetters('settings', ['theme']),
         cards: {
-            get () { return this.$store.getters[`${this.namespace}/cards`]; },
+            get () { return this.$store.state[this.namespace].cards; },
             set () { }, // handled by reorderCards method
         },
         draggableOptions () {
