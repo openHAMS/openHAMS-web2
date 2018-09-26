@@ -13,7 +13,11 @@ const settings = settingModules.reduce((acc, curr) => {
     state: {},
     getters: {},
     mutations: {},
-    actions: {},
+    actions: {
+        $init ({ dispatch }) {
+            dispatch('$initTheme');
+        },
+    },
 });
 
 export default {

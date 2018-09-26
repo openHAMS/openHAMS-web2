@@ -12,6 +12,6 @@ export default new Vuex.Store({
     },
     strict: true,
     plugins: [
-        store => store.dispatch('settings/$initTheme'),
+        store => store.dispatch('settings/$init'),
     ],
 });
