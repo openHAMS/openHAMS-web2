@@ -36,7 +36,7 @@ export default {
     },
     computed: {
         namespace () { return this.id; },
-        ...mapGetters(['theme']),
+        ...mapGetters('settings', ['theme']),
         cards: {
             get () { return this.$store.getters[`${this.namespace}/cards`]; },
             set () { }, // handled by reorderCards method
@@ -69,7 +69,7 @@ export default {
             reorderCards (dispatch, { moved }) {
                 dispatch(`${this.namespace}/reorderCards`, moved);
             },
-            toggleTheme: dispatch => dispatch('toggleTheme'),
+            toggleTheme: dispatch => dispatch('settings/toggleTheme'),
         }),
     },
 };

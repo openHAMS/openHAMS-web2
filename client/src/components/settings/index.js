@@ -17,6 +17,6 @@ const settings = settingModules.reduce((acc, curr) => {
 });
 
 export default {
-    namespaced: false,
+    namespaced: true,
     ...settings,
 };

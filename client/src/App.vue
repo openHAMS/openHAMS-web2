@@ -9,7 +9,7 @@ import { mapGetters } from 'vuex';
 export default {
     name: 'App',
     computed: {
-        ...mapGetters(['isDarkTheme']),
+        ...mapGetters('settings', ['isDarkTheme']),
     },
 };
 </script>
