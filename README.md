@@ -28,9 +28,8 @@ WIP next-gen dashboard for openHAMS.
 - Express
 - Mongoose
 
-## TODO
+## TODOs
 
 - [x] Hot reload for back-end
 - [x] Google OAuth2 signup and login
 - [ ] Replace session-based auth to JWT-based auth
-
