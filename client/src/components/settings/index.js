@@ -1,26 +1,17 @@
 import theme from './theme';
+import profile, { $INIT as INIT_PROFILE } from './profile';
 
-const settingModules = [
-    theme,
-];
-
-const settings = settingModules.reduce((acc, curr) => {
-    Object.keys(acc).forEach(k => {
-        acc[k] = { ...acc[k], ...curr[k] };
-    });
-    return acc;
-}, {
-    state: {},
-    getters: {},
-    mutations: {},
+export default {
+    // TODO: make this non-namespaced
+    namespaced: true,
+    modules: {
+        profile,
+        theme,
+    },
     actions: {
         $init ({ dispatch }) {
             dispatch('$initTheme');
+            dispatch(INIT_PROFILE);
         },
     },
-});
-
-export default {
-    namespaced: true,
-    ...settings,
 };
