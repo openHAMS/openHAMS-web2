@@ -21,7 +21,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { initVuexModule, mapFields } from 'Utils/vuexHelpers';
+import { initVuexModule, mapFields } from '@utils/vuexHelpers';
 import ledStoreModule from './LedStoreModule';
 
 export default {

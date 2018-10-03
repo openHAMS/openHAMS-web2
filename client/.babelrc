@@ -28,7 +28,7 @@
                     "^~/(.+)": "./\\1",
                     "^@/(.+)": "./client/src/\\1",
                     "vue": "vue/dist/vue.esm.js",
-                    "^Utils/(.+)": "./client/src/utils/\\1"
+                    "^@utils/(.+)": "./client/src/utils/\\1"
                 }
             }
         ]
