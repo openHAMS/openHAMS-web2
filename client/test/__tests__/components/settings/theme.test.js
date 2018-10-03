@@ -20,16 +20,16 @@ describe('Theme settings Vuex module', () => {
         const { state } = themeSettings;
 
         describe.each`
-            propName       | propType    | propDefault
-            ${'darkTheme'} | ${Boolean}  | ${false}
-        `('$propName', ({ propName, propType, propDefault }) => {
-            const property = state[propName];
+            propName       | propDefault
+            ${'darkTheme'} | ${false}
+        `('$propName', ({ propName, propDefault }) => {
 
-            it(`has type of "${propType.name}"`, () => {
-                expect(property).toEqual(expect.any(propType));
+            it('exists', () => {
+                expect(state).toHaveProperty(propName);
             });
 
             it(`has default value of "${propDefault}"`, () => {
+                const property = state[propName];
                 expect(property).toEqual(propDefault);
             });
         });
