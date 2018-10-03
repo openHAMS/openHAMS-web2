@@ -1,5 +1,5 @@
-import theme from './theme';
 import profile, { $INIT as INIT_PROFILE } from './profile';
+import theme, { $INIT as INIT_THEME } from './theme';
 
 export default {
     // TODO: make this non-namespaced
@@ -10,8 +10,8 @@ export default {
     },
     actions: {
         $init ({ dispatch }) {
-            dispatch('$initTheme');
             dispatch(INIT_PROFILE);
+            dispatch(INIT_THEME);
         },
     },
 };

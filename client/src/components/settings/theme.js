@@ -5,33 +5,47 @@ const state = {
     darkTheme: false,
 };
 
-function getThemeString(isDarkTheme) {
-    return isDarkTheme ? DARK_THEME : LIGHT_THEME;
-}
-
 const getters = {
-    isDarkTheme: state => state.darkTheme,
-    theme: state => getThemeString(state.darkTheme),
+    theme: state => (state.darkTheme ? DARK_THEME : LIGHT_THEME),
 };
 
+const SET_THEME = 'SET_THEME';
+
 const mutations = {
-    setTheme (state, newTheme) {
+    [SET_THEME] (state, newTheme) {
         state.darkTheme = (newTheme === DARK_THEME);
     },
-    toggleTheme (state) {
-        state.darkTheme = !state.darkTheme;
-    },
+};
+
+export const $INIT = '$INIT';
+const TOGGLE_THEME = 'TOGGLE_THEME';
+export const actionTypes = {
+    TOGGLE_THEME,
 };
 
 const actions = {
-    $initTheme ({ commit }) {
+    [$INIT] ({ commit }) {
         // TODO: get from server
-        commit('setTheme', LIGHT_THEME);
+        commit(SET_THEME, LIGHT_THEME);
     },
+    // TODO: change toggleTheme name
     toggleTheme ({ commit, state }) {
-        const newTheme = getThemeString(!state.darkTheme);
+        const newState = {
+            darkTheme: !state.darkTheme,
+        };
+        const newTheme = getters.theme(newState);
         // TODO: send to server
-        commit('setTheme', newTheme);
+        commit(SET_THEME, newTheme);
+    },
+};
+
+export const __types = {
+    mutations: {
+        SET_THEME,
+    },
+    actions: {
+        $INIT,
+        TOGGLE_THEME,
     },
 };
 

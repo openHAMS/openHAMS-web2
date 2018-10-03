@@ -1,4 +1,8 @@
-import themeSettings from '@/components/settings/theme';
+import themeSettings, { __types } from '@/components/settings/theme';
+const {
+    mutations: mutationTypes,
+    actions: actionTypes,
+} = __types;
 
 describe('Theme settings Vuex module', () => {
 
@@ -12,13 +16,13 @@ describe('Theme settings Vuex module', () => {
         }));
     });
 
-    describe('.state', () => {
+    describe('state', () => {
         const { state } = themeSettings;
 
         describe.each`
             propName       | propType    | propDefault
             ${'darkTheme'} | ${Boolean}  | ${false}
-        `('.$propName', ({ propName, propType, propDefault }) => {
+        `('$propName', ({ propName, propType, propDefault }) => {
             const property = state[propName];
 
             it(`has type of "${propType.name}"`, () => {
@@ -31,20 +35,10 @@ describe('Theme settings Vuex module', () => {
         });
     });
 
-    describe('.getters', () => {
+    describe('getters', () => {
         const { getters } = themeSettings;
 
-        describe('.isDarkTheme', () => {
-            const { isDarkTheme } = getters;
-
-            it.each([false, true])('returns darkTheme', (darkTheme) => {
-                const state = { darkTheme };
-                const result = isDarkTheme(state);
-                expect(result).toEqual(darkTheme);
-            });
-        });
-
-        describe('.theme', () => {
+        describe('theme', () => {
             const { theme } = getters;
 
             it.each`
@@ -59,11 +53,11 @@ describe('Theme settings Vuex module', () => {
         });
     });
 
-    describe('.mutations', () => {
+    describe('mutations', () => {
         const { mutations } = themeSettings;
 
-        describe('.setTheme', () => {
-            const { setTheme } = mutations;
+        describe('SET_THEME', () => {
+            const { [mutationTypes.SET_THEME]: setTheme } = mutations;
 
             it.each`
                 darkTheme | value      | expected
@@ -84,26 +78,13 @@ describe('Theme settings Vuex module', () => {
             });
         });
 
-        describe('.toggleTheme', () => {
-            const { toggleTheme } = mutations;
-
-            it.each`
-                darkTheme | expected
-                ${false}  | ${true}
-                ${true}   | ${false}
-            `('fn($darkTheme): [state.darkTheme] $darkTheme -> $expected', ({ darkTheme, expected }) => {
-                const state = { darkTheme };
-                toggleTheme(state);
-                expect(state).toEqual({ darkTheme: expected });
-            });
-        });
     });
 
-    describe('.actions', () => {
+    describe('actions', () => {
         const { actions } = themeSettings;
 
-        describe('.$initTheme', () => {
-            const { $initTheme } = actions;
+        describe('$INIT', () => {
+            const { [actionTypes.$INIT]: $initTheme } = actions;
             const context = {
                 commit: jest.fn(),
             };
@@ -113,9 +94,9 @@ describe('Theme settings Vuex module', () => {
                 expect(context.commit).toHaveBeenCalledTimes(1);
             });
 
-            it('commits "setTheme" with "light"', () => {
+            it('commits [SET_THEME] with "light"', () => {
                 $initTheme(context);
-                expect(context.commit).toHaveBeenCalledWith('setTheme', 'light');
+                expect(context.commit).toHaveBeenCalledWith(mutationTypes.SET_THEME, 'light');
             });
         });
 
@@ -137,7 +118,7 @@ describe('Theme settings Vuex module', () => {
                 darkTheme | expected
                 ${false}  | ${'dark'}
                 ${true}   | ${'light'}
-            `('commits "setTheme" with $expected', ({ darkTheme, expected }) => {
+            `('commits [SET_THEME] with $expected', ({ darkTheme, expected }) => {
                 const context = {
                     commit: jest.fn(),
                     state: {
@@ -145,7 +126,7 @@ describe('Theme settings Vuex module', () => {
                     },
                 };
                 toggleTheme(context);
-                expect(context.commit).toHaveBeenCalledWith('setTheme', expected);
+                expect(context.commit).toHaveBeenCalledWith(mutationTypes.SET_THEME, expected);
             });
         });
     });
