@@ -2,7 +2,7 @@
     v-menu(bottom, left, nudge-top='8', nudge-right='16').mr-2
         v-avatar.profile(slot='activator', size='40')
             slot(name='avatar')
-                v-icon(dark, color='accent', size='48') account_circle
+                v-icon(dark, color='grey lighten-3', size='48') account_circle
         v-list.pt-0
             slot(name='top')
                 v-list-tile(avatar)

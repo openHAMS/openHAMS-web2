@@ -1,8 +1,9 @@
 const state = () => ({
     cards: [],
+    editMode: false,
 });
 
-const getters = {};
+// TODO: vuex const mutation & action names
 
 const mutations = {
     addCard (state, card) {
@@ -16,6 +17,9 @@ const mutations = {
         const { cards } = state;
         const [ movedCard ] = cards.splice(oldIndex, 1);
         cards.splice(newIndex, 0, movedCard);
+    },
+    setEditMode (state, editMode) {
+        state.editMode = editMode;
     },
 };
 
@@ -41,7 +45,6 @@ const actions = {
 export default {
     namespaced: true,
     state,
-    getters,
     mutations,
     actions,
 };

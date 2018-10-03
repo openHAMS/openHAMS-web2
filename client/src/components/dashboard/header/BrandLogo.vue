@@ -1,36 +1,15 @@
 <template lang="pug">
-    v-layout(align-center).brand-container
-        h1.branding.accent--text openHAMS
-        v-spacer
-        slot
+    h1.branding.accent--text openHAMS
 </template>
 
 <script>
 export default {
-    name: 'Header',
+    name: 'BrandLogo',
 };
 </script>
 
 <style lang="scss" scoped>
 @import "Assets/breakpoints.scss";
-
-.brand-container {
-    margin: auto;
-    padding: 16px;
-    width: 100%;
-    @include sm-only {
-        padding-left: 24px;
-    }
-    @include md-only {
-        max-width: 900px;
-    }
-    @include lg-only {
-        max-width: 1185px;
-    }
-    @include xl-and-up {
-        max-width: 1785px;
-    }
-}
 
 .branding {
     font-weight: 300;

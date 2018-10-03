@@ -1,11 +1,9 @@
 <template lang="pug">
     v-content
-        brand-header
-            main-menu
-                main-menu-item(prepend-icon='brightness_medium', @click='toggleTheme') Night mode
-                    v-switch(slot='action', :input-value='theme', true-value='dark', false-value='light')
-                main-menu-item(prepend-icon='widgets', @click='editMode = !editMode') Edit cards
-                    v-switch(slot='action', :input-value='editMode')
+        v-layout(align-center).header-container
+            brand-logo
+            v-spacer
+            dashboard-menu(:parentNamespace='namespace')
         v-container(grid-list-md, :class='{ "edit-mode": editMode }')
             draggable(v-model='cards', :options='draggableOptions', @change='reorderCards', element='v-layout').wrap
                 component(
@@ -17,26 +15,31 @@
 
 <script>
 import draggable from 'vuedraggable';
-import { mapActions, mapGetters } from 'vuex';
-import * as HeaderComponents from './header';
+import { mapActions, mapState } from 'vuex';
+import DashboardMenu from './header/DashboardMenu';
+import { BrandLogo } from './header';
 import * as CardComponents from './cards';
 
 export default {
     name: 'Dashboard',
     components: {
-        ...HeaderComponents,
+        DashboardMenu,
+        BrandLogo,
         draggable,
         ...CardComponents,
     },
     data () {
         return {
             id: 'dashboard',
-            editMode: false,
         };
     },
     computed: {
         namespace () { return this.id; },
-        ...mapGetters('settings', ['theme']),
+        ...mapState({
+            editMode (state) {
+                return state[this.namespace].editMode;
+            },
+        }),
         cards: {
             get () { return this.$store.state[this.namespace].cards; },
             set () { }, // handled by reorderCards method
@@ -69,15 +72,34 @@ export default {
             reorderCards (dispatch, { moved }) {
                 dispatch(`${this.namespace}/reorderCards`, moved);
             },
-            toggleTheme: dispatch => dispatch('settings/toggleTheme'),
         }),
     },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "Assets/breakpoints.scss";
 @import "assets/elevations.scss";
 @import "assets/transitions.scss";
+
+/* header */
+.header-container {
+    margin: auto;
+    padding: 16px;
+    width: 100%;
+    @include sm-only {
+        padding-left: 24px;
+    }
+    @include md-only {
+        max-width: 900px;
+    }
+    @include lg-only {
+        max-width: 1185px;
+    }
+    @include xl-and-up {
+        max-width: 1785px;
+    }
+}
 
 /* default value for card-title-cursor */
 div.container {
