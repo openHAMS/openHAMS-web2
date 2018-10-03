@@ -16,6 +16,10 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { MainMenu, MainMenuItem } from './mainmenu';
+import { actionTypes as themeActionTypes } from '@settings/theme';
+const {
+    TOGGLE_THEME,
+} = themeActionTypes;
 
 export default {
     name: 'DashboardMenu',
@@ -38,7 +42,7 @@ export default {
     },
     methods: {
         ...mapActions({
-            toggleTheme: dispatch => dispatch('settings/toggleTheme'),
+            toggleTheme: dispatch => dispatch(`settings/${TOGGLE_THEME}`),
         }),
     },
 };

@@ -28,8 +28,7 @@ const actions = {
         // TODO: get from server
         commit(SET_THEME, LIGHT_THEME);
     },
-    // TODO: change toggleTheme name
-    toggleTheme ({ commit, state }) {
+    [TOGGLE_THEME] ({ commit, state }) {
         const newState = {
             darkTheme: !state.darkTheme,
         };

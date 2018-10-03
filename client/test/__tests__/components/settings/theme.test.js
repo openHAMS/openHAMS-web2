@@ -101,7 +101,7 @@ describe('Theme settings Vuex module', () => {
         });
 
         describe('.toggleTheme', () => {
-            const { toggleTheme } = actions;
+            const { [actionTypes.TOGGLE_THEME]: toggleTheme } = actions;
 
             it('calls commit exactly once', () => {
                 const context = {
