@@ -15,7 +15,7 @@ const getters = {
     ),
 };
 
-const LOGGED_IN = 'LOGIN_SUCCESS';
+const LOGGED_IN = 'LOGGED_IN';
 const NOT_LOGGED_IN = 'NOT_LOGGED_IN';
 const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
