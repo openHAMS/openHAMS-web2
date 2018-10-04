@@ -17,7 +17,6 @@ describe('Theme settings Vuex module', () => {
     });
 
     describe('state', () => {
-        const { state } = themeSettings;
 
         describe.each`
             propName       | propDefault
@@ -25,21 +24,20 @@ describe('Theme settings Vuex module', () => {
         `('$propName', ({ propName, propDefault }) => {
 
             it('exists', () => {
-                expect(state).toHaveProperty(propName);
+                expect(themeSettings.state).toHaveProperty(propName);
             });
 
             it(`has default value of "${propDefault}"`, () => {
-                const property = state[propName];
-                expect(property).toEqual(propDefault);
+                const property = themeSettings.state[propName];
+                expect(property).toBe(propDefault);
             });
         });
     });
 
     describe('getters', () => {
-        const { getters } = themeSettings;
 
-        describe('theme', () => {
-            const { theme } = getters;
+        describe('.theme', () => {
+            const { theme } = themeSettings.getters;
 
             it.each`
                 darkTheme | expected
@@ -48,43 +46,45 @@ describe('Theme settings Vuex module', () => {
             `('returns $expected if darkTheme is $darkTheme', ({ darkTheme, expected }) => {
                 const state = { darkTheme };
                 const result = theme(state);
-                expect(result).toEqual(expected);
+                expect(result).toBe(expected);
             });
         });
     });
 
     describe('mutations', () => {
-        const { mutations } = themeSettings;
 
-        describe('SET_THEME', () => {
-            const { [mutationTypes.SET_THEME]: setTheme } = mutations;
+        describe('[SET_THEME]', () => {
+            const { [mutationTypes.SET_THEME]: setTheme } = themeSettings.mutations;
 
-            it.each`
-                darkTheme | value      | expected
-                ${false}  | ${'light'} | ${false}
-                ${false}  | ${'dark'}  | ${true}
-                ${true}   | ${'light'} | ${false}
-                ${true}   | ${'dark'}  | ${true}
-            `('fn($value) | [state.darkTheme]: $darkTheme -> $expected', ({ darkTheme, value, expected }) => {
-                const state = { darkTheme };
-                setTheme(state, value);
-                expect(state).toEqual({ darkTheme: expected });
+            describe.each`
+                value      | expected
+                ${'light'} | ${false}
+                ${'dark'}  | ${true}
+            `('value of $value sets [darkTheme] to "$expected"', ({ value, expected }) => {
+                it.each`
+                    darkTheme
+                    ${'false'}
+                    ${'true'}
+                `('if [darkTheme] is $darkTheme', ({ darkTheme }) => {
+                    const state = { darkTheme };
+                    setTheme(state, value);
+                    expect(state).toMatchObject({ darkTheme: expected });
+                });
             });
 
-            it('falls back to light theme', () => {
+            it('falls back to "light" theme', () => {
                 const state = { darkTheme: true };
-                setTheme(state, 'ranom value');
-                expect(state).toEqual({ darkTheme: false });
+                setTheme(state, 'random value');
+                expect(state).toMatchObject({ darkTheme: false });
             });
         });
 
     });
 
     describe('actions', () => {
-        const { actions } = themeSettings;
 
-        describe('$INIT', () => {
-            const { [actionTypes.$INIT]: $initTheme } = actions;
+        describe('[$INIT]', () => {
+            const { [actionTypes.$INIT]: $initTheme } = themeSettings.actions;
             const context = {
                 commit: jest.fn(),
             };
@@ -100,8 +100,8 @@ describe('Theme settings Vuex module', () => {
             });
         });
 
-        describe('.toggleTheme', () => {
-            const { [actionTypes.TOGGLE_THEME]: toggleTheme } = actions;
+        describe('[TOGGLE_THEME]', () => {
+            const { [actionTypes.TOGGLE_THEME]: toggleTheme } = themeSettings.actions;
 
             it('calls commit exactly once', () => {
                 const context = {
