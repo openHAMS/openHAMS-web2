@@ -43,9 +43,12 @@ const actions = {
     async [$INIT] ({ commit }) {
         const response = await fetch('/api/user');
         if (!response.ok) {
-            response.status === 401
-                ? commit(NOT_LOGGED_IN)
-                : commit(LOGIN_FAILURE);
+            if (response.status === 401) {
+                commit(NOT_LOGGED_IN);
+            }
+            else {
+                commit(LOGIN_FAILURE);
+            }
             return;
         }
         const profileData = await response.json();

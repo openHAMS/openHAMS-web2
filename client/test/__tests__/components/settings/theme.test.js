@@ -85,17 +85,13 @@ describe('Theme settings Vuex module', () => {
 
         describe('[$INIT]', () => {
             const { [actionTypes.$INIT]: $initTheme } = themeSettings.actions;
-            const context = {
-                commit: jest.fn(),
-            };
-
-            it('calls commit exactly once', () => {
-                $initTheme(context);
-                expect(context.commit).toHaveBeenCalledTimes(1);
-            });
 
             it('commits [SET_THEME] with "light"', () => {
+                const context = {
+                    commit: jest.fn(),
+                };
                 $initTheme(context);
+                expect(context.commit).toHaveBeenCalledTimes(1);
                 expect(context.commit).toHaveBeenCalledWith(mutationTypes.SET_THEME, 'light');
             });
         });
