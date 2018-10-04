@@ -21,7 +21,6 @@ before_install:
 - ./travis-scripts/login-gcloud-sdk.sh
 - ./travis-scripts/install-cc-reporter.sh
 script:
-- yarn lint:$TEST_SUITE
 - yarn test:coverage:$TEST_SUITE
 after_success:
 - "./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
