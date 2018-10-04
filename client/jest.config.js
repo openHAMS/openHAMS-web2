@@ -9,4 +9,7 @@ module.exports = {
         'vue',
         'json',
     ],
+    setupFiles: [
+        '<rootDir>/test/jestSetupFetchMock.js',
+    ],
 };
