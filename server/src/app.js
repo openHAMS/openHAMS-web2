@@ -1,31 +1,44 @@
-import configMongoose from './config/mongoose';
-const mongoose = configMongoose();
-
+// import configMongoose from './config/mongoose';
 import configExpress from './config/express';
-const app = configExpress({ mongoose });
-
 import configPassport from './config/passport';
-configPassport({ app });
-
 import configClientHmr from './config/client-hmr';
-configClientHmr({ app });
-
-
 import http from 'http';
-const server = http.createServer(app);
-server.listen(app.get('port'), () => {
-    console.log('listening');
-});
+import mongoose from 'mongoose';
 
-let currentApp = app;
-if (module.hot) {
-    module.hot.accept();
-    module.hot.dispose(() => {
-        server.close();
+
+let server;
+const uri = 'mongodb://localhost:27017/openhams';
+const options = {
+    useNewUrlParser: true,
+};
+
+mongoose.connect(uri, options)
+    .catch(err => {
+        console.error(err);
+        throw err;
+    })
+    .then(mongoose => configExpress({ mongoose }))
+    .then(app => {
+        configPassport({ app });
+        configClientHmr({ app });
+        return app;
+    })
+    .then(app => {
+        server = http.createServer(app);
+        server.listen(app.get('port'), () => {
+            console.log('listening');
+        });
+
+        let currentApp = app;
+        if (module.hot) {
+            module.hot.accept();
+            module.hot.dispose(() => {
+                server.close();
+            });
+            module.hot.accept('./config/express', () => {
+                server.removeListener('request', currentApp);
+                server.on('request', app);
+                currentApp = app;
+            });
+        }
     });
-    module.hot.accept('./config/express', () => {
-        server.removeListener('request', currentApp);
-        server.on('request', app);
-        currentApp = app;
-    });
-}
