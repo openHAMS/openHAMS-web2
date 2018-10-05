@@ -1,7 +1,11 @@
 import configMongoose from '@/config/mongoose';
 // temporary mock (only for this test)
 jest.mock('mongoose', () => ({
-    connect: jest.fn(),
+    /* eslint-disable-next-line require-await */
+    connect: jest.fn(async function () {
+        // return mongoose as a promise
+        return this;
+    }),
 }));
 import mongoose from 'mongoose';
 
@@ -17,8 +21,8 @@ describe('ConfigMongoose', () => {
         const m = configMongoose();
         expect(m).not.toBeUndefined();
     });
-    it('returns mongoose object', () => {
-        const m = configMongoose();
+    it('returns mongoose object', async () => {
+        const m = await configMongoose();
         expect(m).toBe(mongoose);
     });
 });
