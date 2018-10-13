@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-app(:dark='theme === "dark"')
+    v-app(:dark='darkTheme')
         router-view
 </template>
 
@@ -9,7 +9,7 @@ import { mapGetters } from 'vuex';
 export default {
     name: 'App',
     computed: {
-        ...mapGetters('settings', ['theme']),
+        ...mapGetters(['darkTheme']),
     },
 };
 </script>
