@@ -4,7 +4,7 @@ const state = {
 };
 
 const getters = {
-    profile: (_s, _g, rootState) => (
+    profile: (state, _g, rootState) => (
         rootState.settings.isLoggedIn
             ? ({
                 name: state.name,
