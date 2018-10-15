@@ -36,30 +36,28 @@ describe('Theme settings Vuex module', () => {
 
     describe('getters', () => {
 
-        describe('.theme', () => {
-            const { theme } = themeSettings.getters;
-
+        describe('.darkTheme', () => {
             it.each`
-                darkTheme | expected
-                ${false}  | ${'light'}
-                ${true}   | ${'dark'}
-            `('returns $expected if darkTheme is $darkTheme', ({ darkTheme, expected }) => {
+                darkTheme
+                ${false}
+                ${true}
+            `('returns $darkTheme if darkTheme is $darkTheme', ({ darkTheme }) => {
                 const state = { darkTheme };
-                const result = theme(state);
-                expect(result).toBe(expected);
+                const result = themeSettings.getters.darkTheme(state);
+                expect(result).toBe(darkTheme);
             });
         });
     });
 
     describe('mutations', () => {
 
-        describe('[SET_THEME]', () => {
-            const { [mutationTypes.SET_THEME]: setTheme } = themeSettings.mutations;
+        describe('[SET_DARK_THEME]', () => {
+            const { [mutationTypes.SET_DARK_THEME]: setDarkTheme } = themeSettings.mutations;
 
             describe.each`
                 value      | expected
-                ${'light'} | ${false}
-                ${'dark'}  | ${true}
+                ${false} | ${false}
+                ${true}  | ${true}
             `('value of $value sets [darkTheme] to "$expected"', ({ value, expected }) => {
                 it.each`
                     darkTheme
@@ -67,14 +65,14 @@ describe('Theme settings Vuex module', () => {
                     ${'true'}
                 `('if [darkTheme] is $darkTheme', ({ darkTheme }) => {
                     const state = { darkTheme };
-                    setTheme(state, value);
+                    setDarkTheme(state, value);
                     expect(state).toMatchObject({ darkTheme: expected });
                 });
             });
 
             it('falls back to "light" theme', () => {
                 const state = { darkTheme: true };
-                setTheme(state, 'random value');
+                setDarkTheme(state, 'random value');
                 expect(state).toMatchObject({ darkTheme: false });
             });
         });
@@ -82,19 +80,6 @@ describe('Theme settings Vuex module', () => {
     });
 
     describe('actions', () => {
-
-        describe('[$INIT]', () => {
-            const { [actionTypes.$INIT]: $initTheme } = themeSettings.actions;
-
-            it('commits [SET_THEME] with "light"', () => {
-                const context = {
-                    commit: jest.fn(),
-                };
-                $initTheme(context);
-                expect(context.commit).toHaveBeenCalledTimes(1);
-                expect(context.commit).toHaveBeenCalledWith(mutationTypes.SET_THEME, 'light');
-            });
-        });
 
         describe('[TOGGLE_THEME]', () => {
             const { [actionTypes.TOGGLE_THEME]: toggleTheme } = themeSettings.actions;
@@ -112,9 +97,9 @@ describe('Theme settings Vuex module', () => {
 
             it.each`
                 darkTheme | expected
-                ${false}  | ${'dark'}
-                ${true}   | ${'light'}
-            `('commits [SET_THEME] with $expected', ({ darkTheme, expected }) => {
+                ${false}  | ${true}
+                ${true}   | ${false}
+            `('commits [SET_DARK_THEME] with $expected', ({ darkTheme, expected }) => {
                 const context = {
                     commit: jest.fn(),
                     state: {
@@ -122,7 +107,7 @@ describe('Theme settings Vuex module', () => {
                     },
                 };
                 toggleTheme(context);
-                expect(context.commit).toHaveBeenCalledWith(mutationTypes.SET_THEME, expected);
+                expect(context.commit).toHaveBeenCalledWith(mutationTypes.SET_DARK_THEME, expected);
             });
         });
     });
