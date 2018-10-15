@@ -10,7 +10,7 @@ export const SET_DARK_THEME = 'SET_DARK_THEME';
 
 const mutations = {
     [SET_DARK_THEME] (state, darkTheme) {
-        state.darkTheme = darkTheme;
+        state.darkTheme = (darkTheme === true); // fallback to false
     },
 };
 
