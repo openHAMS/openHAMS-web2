@@ -1,11 +1,9 @@
 import profileSettings, { __types } from '@/components/settings/profile';
 const {
     mutations: mutationTypes,
-    actions: actionTypes,
 } = __types;
 
 describe('Profile settings Vuex module', () => {
-
     it('returns vuex module object', () => {
         const ps = profileSettings;
         expect(ps).toEqual(expect.objectContaining({
@@ -16,14 +14,11 @@ describe('Profile settings Vuex module', () => {
     });
 
     describe('getters', () => {
-
         describe('.profile', () => {
-            const { profile } = profileSettings.getters;
             const state = {
                 name: 'any name',
                 photoUrl: 'any url',
             };
-
             it.each`
                 isLoggedIn
                 ${false}
@@ -34,7 +29,7 @@ describe('Profile settings Vuex module', () => {
                         isLoggedIn,
                     },
                 };
-                const result = profile(state, {/* getters */}, rootState);
+                const result = profileSettings.getters.profile(state, {/* getters */}, rootState);
                 expect(result).toBe(isLoggedIn);
             });
 
@@ -44,7 +39,7 @@ describe('Profile settings Vuex module', () => {
                         isLoggedIn: true,
                     },
                 };
-                const result = profile(state, {/* getters */}, rootState);
+                const result = profileSettings.getters.profile(state, {/* getters */}, rootState);
                 const expected = {
                     name: expect.any(String),
                     photoUrl: expect.any(String),
@@ -55,7 +50,6 @@ describe('Profile settings Vuex module', () => {
     });
 
     describe('mutations', () => {
-
         describe('[SET_PROFILE_AUTHENTICATED]', () => {
             const { [mutationTypes.SET_PROFILE_AUTHENTICATED]: setProfileAuthenticated } = profileSettings.mutations;
 

@@ -1,4 +1,5 @@
 const state = () => ({
+    // fn instead obj to ensure it is reusable
     cards: [],
     editMode: false,
 });

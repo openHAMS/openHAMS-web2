@@ -5,7 +5,6 @@ const {
 } = __types;
 
 describe('Theme settings Vuex module', () => {
-
     it('returns vuex module object', () => {
         const ts = themeSettings;
         expect(ts).toEqual(expect.objectContaining({
@@ -17,12 +16,10 @@ describe('Theme settings Vuex module', () => {
     });
 
     describe('state', () => {
-
         describe.each`
             propName       | propDefault
             ${'darkTheme'} | ${false}
         `('$propName', ({ propName, propDefault }) => {
-
             it('exists', () => {
                 expect(themeSettings.state).toHaveProperty(propName);
             });
@@ -35,7 +32,6 @@ describe('Theme settings Vuex module', () => {
     });
 
     describe('getters', () => {
-
         describe('.darkTheme', () => {
             it.each`
                 darkTheme
@@ -50,7 +46,6 @@ describe('Theme settings Vuex module', () => {
     });
 
     describe('mutations', () => {
-
         describe('[SET_DARK_THEME]', () => {
             const { [mutationTypes.SET_DARK_THEME]: setDarkTheme } = themeSettings.mutations;
 
@@ -80,7 +75,6 @@ describe('Theme settings Vuex module', () => {
     });
 
     describe('actions', () => {
-
         describe('[TOGGLE_THEME]', () => {
             const { [actionTypes.TOGGLE_THEME]: toggleTheme } = themeSettings.actions;
 
