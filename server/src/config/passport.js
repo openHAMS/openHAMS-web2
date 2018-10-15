@@ -1,5 +1,4 @@
 import passport from 'passport';
-import userService from '../services/user-service';
 // strategies
 import { GoogleStrategy, GoogleRouterGenerator } from './passport/strategies/google';
 import User from 'Models/User';
@@ -22,7 +21,5 @@ export default ({ app }) => {
     passport.use(GoogleStrategy);
     const GoogleRouter = GoogleRouterGenerator(passport);
     app.use('/auth/google', GoogleRouter);
-    // user routing
-    app.use('/api', userService());
     return passport;
 };
