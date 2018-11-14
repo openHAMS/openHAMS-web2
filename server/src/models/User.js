@@ -24,4 +24,11 @@ const userSchema = new mongoose.Schema({
     },
 });
 
+userSchema.methods.toApiObject = function () {
+    return {
+        profile: this.profile,
+        settings: this.settings,
+    };
+};
+
 export default mongoose.model('User', userSchema);
