@@ -12,13 +12,16 @@
     "test:client": "jest --config=client/jest.config.js",
     "test:coverage:client": "yarn test:client --coverage",
     "test:debug:client": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand  --config=client/jest.config.js",
+    "test:watch:client": "yarn test:client --verbose --watchAll",
     "test:server": "jest --config=server/jest.config.js",
     "test:coverage:server": "yarn test:server --coverage",
     "test:debug:server": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand  --config=server/jest.config.js",
+    "test:watch:server": "yarn test:server --verbose --watchAll",
     "test": "yarn test:client && yarn test:server",
     "build:client": "webpack --mode=production --config=webpack.client.config.js",
     "build:server": "webpack --mode=production --config=webpack.server.config.js",
-    "start": "webpack --mode=development --config=webpack.server.config.js"
+    "start": "webpack --mode=development --config=webpack.server.config.js",
+    "start:prod:dotenv": "node -r dotenv/config ./dist/server.bundle.js"
   },
   "//": [
     "babel-core@^7.0.0-0 -> needed for jest"
