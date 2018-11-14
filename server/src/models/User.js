@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -23,6 +24,17 @@ const userSchema = new mongoose.Schema({
         darkMode: Boolean,
     },
 });
+
+userSchema.methods.getJwt = function () {
+    const payload = {};
+    const secret = process.env.JWT_SECRET;
+    const options = {
+        expiresIn: '2 weeks',
+        notBefore: Date.now(),
+        subject: this._id.toString(),
+    };
+    return jwt.sign(payload, secret, options);
+};
 
 userSchema.methods.toApiObject = function () {
     return {
