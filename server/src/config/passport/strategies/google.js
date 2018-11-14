@@ -20,19 +20,19 @@ const verify = PassportVerifyFactory(verifyAdapter);
 
 export const GoogleStrategy = new Strategy(options, verify);
 
-export function GoogleRouterGenerator (passport) {
-    const router = express.Router();
-    router.get('/',
-        passport.authenticate('google', {
-            scope: ['openid email profile'],
-        }));
-    router.get('/callback',
-        passport.authenticate('google', {
-            failureRedirect: '/login',
-        }),
-        (req, res) => {
-            // Authentication successful
-            res.redirect('/');
-        });
-    return router;
-}
+import passport from 'passport';
+
+const GoogleRouter = express.Router();
+GoogleRouter.get('/',
+    passport.authenticate('google', {
+        scope: ['openid email profile'],
+    }));
+GoogleRouter.get('/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/login',
+    }),
+    (req, res) => {
+        // Authentication successful
+        res.redirect('/');
+    });
+export { GoogleRouter };

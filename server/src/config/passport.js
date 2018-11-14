@@ -1,6 +1,6 @@
 import passport from 'passport';
 // strategies
-import { GoogleStrategy, GoogleRouterGenerator } from './passport/strategies/google';
+import { GoogleStrategy, GoogleRouter } from './passport/strategies/google';
 import User from 'Models/User';
 
 function setupUserSerialization() {
@@ -19,7 +19,6 @@ export default ({ app }) => {
     app.use(passport.session());
     // google auth
     passport.use(GoogleStrategy);
-    const GoogleRouter = GoogleRouterGenerator(passport);
     app.use('/auth/google', GoogleRouter);
-    return passport;
+    // NOTE: passport is singleton, so every require/import returns the _same_ passport instance
 };
