@@ -30,7 +30,7 @@ userSchema.methods.getJwt = function () {
     const secret = process.env.JWT_SECRET;
     const options = {
         expiresIn: '2 weeks',
-        notBefore: Date.now(),
+        notBefore: '0s',
         subject: this._id.toString(),
     };
     return jwt.sign(payload, secret, options);
