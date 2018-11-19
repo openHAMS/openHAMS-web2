@@ -8,36 +8,50 @@ import theme, {
 
 const state = {
     error: null,
+    isLoading: null,
     isLoggedIn: null,
 };
 
+const SET_PENDING = 'SET_PENDING';
 const SET_LOGGED_IN = 'SET_LOGGED_IN';
 const SET_NOT_LOGGED_IN = 'SET_NOT_LOGGED_IN';
 const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
 
 const mutations = {
+    [SET_PENDING] (state) {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+    },
     [SET_LOGGED_IN] (state) {
+        state.isLoading = false;
         state.isLoggedIn = true;
     },
     [SET_NOT_LOGGED_IN] (state) {
+        state.isLoading = false;
         state.isLoggedIn = false;
     },
     [SET_LOGIN_ERROR] (state, err) {
+        state.isLoading = false;
         state.isLoggedIn = null;
         state.error = err;
     },
 };
 
 export const CHECK_AUTH = 'CHECK_AUTH';
+const USER_PENDING = 'USER_PENDING';
 const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 const USER_UNAUTHENTICATED = 'USER_UNAUTHENTICATED';
 const USER_AUTH_ERROR = 'USER_AUTH_ERROR';
 
 const actions = {
-    [USER_AUTHENTICATED] ({ commit }, user) {
+    [USER_PENDING] ({ commit }, { profile: cachedProfile }) {
+        commit(SET_PENDING);
+        commit(SET_PROFILE, cachedProfile);
+    },
+    [USER_AUTHENTICATED] ({ commit }, { profile: userProfile, settings: userSettings }) {
         commit(SET_LOGGED_IN);
-        commit(SET_DARK_THEME, user.settings.darkTheme);
         commit(SET_PROFILE, userProfile);
+        commit(SET_DARK_THEME, userSettings.darkTheme);
     },
     [USER_UNAUTHENTICATED] ({ commit }) {
         commit(SET_NOT_LOGGED_IN);
