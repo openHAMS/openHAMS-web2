@@ -50,8 +50,8 @@ describe('Profile settings Vuex module', () => {
     });
 
     describe('mutations', () => {
-        describe('[SET_PROFILE_AUTHENTICATED]', () => {
-            const { [mutationTypes.SET_PROFILE_AUTHENTICATED]: setProfileAuthenticated } = profileSettings.mutations;
+        describe('[SET_PROFILE]', () => {
+            const { [mutationTypes.SET_PROFILE]: setProfileAuthenticated } = profileSettings.mutations;
 
             it.each`
                 profilePropName | profilePropValue   | statePropName | expectedType
@@ -70,8 +70,8 @@ describe('Profile settings Vuex module', () => {
             });
         });
 
-        describe('[SET_PROFILE_UNAUTHENTICATED]', () => {
-            const { [mutationTypes.SET_PROFILE_UNAUTHENTICATED]: setProfileUnauthenticated } = profileSettings.mutations;
+        describe('[CLEAR_PROFILE]', () => {
+            const { [mutationTypes.CLEAR_PROFILE]: setProfileUnauthenticated } = profileSettings.mutations;
 
             it.each`
                 profilePropName | statePropName

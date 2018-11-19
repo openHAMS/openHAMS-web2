@@ -1,6 +1,6 @@
 import profile, {
-    SET_PROFILE_AUTHENTICATED,
-    SET_PROFILE_UNAUTHENTICATED,
+    SET_PROFILE,
+    CLEAR_PROFILE,
 } from './profile';
 import theme, {
     SET_DARK_THEME,
@@ -36,15 +36,15 @@ const USER_AUTH_ERROR = 'USER_AUTH_ERROR';
 const actions = {
     [USER_AUTHENTICATED] ({ commit }, user) {
         commit(SET_LOGGED_IN);
-        commit(SET_PROFILE_AUTHENTICATED, user.profile);
         commit(SET_DARK_THEME, user.settings.darkTheme);
+        commit(SET_PROFILE, userProfile);
     },
     [USER_UNAUTHENTICATED] ({ commit }) {
         commit(SET_NOT_LOGGED_IN);
-        commit(SET_PROFILE_UNAUTHENTICATED);
+        commit(CLEAR_PROFILE);
     },
     [USER_AUTH_ERROR] ({ commit }) {
-        commit(SET_PROFILE_UNAUTHENTICATED);
+        commit(CLEAR_PROFILE);
     },
     async [CHECK_AUTH] ({ dispatch }) {
         const response = await fetch('/api/user');

@@ -14,15 +14,15 @@ const getters = {
     ),
 };
 
-export const SET_PROFILE_AUTHENTICATED = 'SET_PROFILE_AUTHENTICATED';
-export const SET_PROFILE_UNAUTHENTICATED = 'SET_PROFILE_UNAUTHENTICATED';
+export const SET_PROFILE = 'SET_PROFILE';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
 const mutations = {
-    [SET_PROFILE_AUTHENTICATED] (state, { name, photo }) {
+    [SET_PROFILE] (state, { name, photo }) {
         state.name = name;
         state.photoUrl = photo;
     },
-    [SET_PROFILE_UNAUTHENTICATED] (state) {
+    [CLEAR_PROFILE] (state) {
         state.name = null;
         state.photoUrl = null;
     },
@@ -30,8 +30,8 @@ const mutations = {
 
 export const __types = {
     mutations: {
-        SET_PROFILE_AUTHENTICATED,
-        SET_PROFILE_UNAUTHENTICATED,
+        SET_PROFILE,
+        CLEAR_PROFILE,
     },
 };
 
