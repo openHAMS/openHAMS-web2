@@ -41,7 +41,9 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.getJwt = function () {
-    const payload = {};
+    const payload = {
+        profile: this.profile,
+    };
     const secret = process.env.JWT_SECRET;
     const options = {
         expiresIn: '2 weeks',
