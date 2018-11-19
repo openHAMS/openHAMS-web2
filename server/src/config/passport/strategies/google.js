@@ -30,9 +30,12 @@ GoogleRouter.get('/',
 GoogleRouter.get('/callback',
     passport.authenticate('google', {
         failureRedirect: '/login',
+        session: false,
     }),
     (req, res) => {
         // Authentication successful
+        // set jwt cookie
+        res.cookie('jwt', req.user.getJwt());
         res.redirect('/');
     });
 export { GoogleRouter };

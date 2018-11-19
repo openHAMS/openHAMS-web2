@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import http from 'http';
-import configExpressSession from './config/express-session';
 import configPassport from './config/passport';
 import configClientHmr from './config/client-hmr';
 
@@ -16,7 +15,6 @@ mongoose.connect(mongodbUri, { useNewUrlParser: true })
 const app = express();
 app.set('host', '0.0.0.0');
 app.set('port', 8080);
-configExpressSession({ app, mongoose });
 configPassport({ app });
 if (process.env.NODE_ENV === 'development') {
     configClientHmr({ app });
