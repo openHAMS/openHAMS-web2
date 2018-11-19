@@ -1,3 +1,7 @@
+import { userApi } from '../../api';
+import jwt, {
+    LOAD_JWT,
+} from './jwt.js';
 import profile, {
     SET_PROFILE,
     CLEAR_PROFILE,
@@ -60,8 +64,15 @@ const actions = {
     [USER_AUTH_ERROR] ({ commit }) {
         commit(CLEAR_PROFILE);
     },
-    async [CHECK_AUTH] ({ dispatch }) {
-        const response = await fetch('/api/user');
+    async [CHECK_AUTH] ({ dispatch, getters }) {
+        await dispatch(LOAD_JWT);
+        const { jwtPayload } = getters;
+        if (!jwtPayload) {
+            dispatch(USER_UNAUTHENTICATED);
+            return;
+        }
+        dispatch(USER_PENDING, jwtPayload);
+        const response = await userApi.fetchUser();
         if (!response.ok) {
             if (response.status === 401) {
                 dispatch(USER_UNAUTHENTICATED);
@@ -79,6 +90,7 @@ const actions = {
 export default {
     namespaced: false,
     modules: {
+        jwt,
         profile,
         theme,
     },

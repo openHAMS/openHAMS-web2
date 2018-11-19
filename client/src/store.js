@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { storeApiPlugin } from './api';
 import dashboard from './components/dashboard/DashboardStoreModule';
 import settings, { CHECK_AUTH } from './components/settings';
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     },
     strict: true,
     plugins: [
+        storeApiPlugin,
         store => store.dispatch(CHECK_AUTH),
     ],
 });
