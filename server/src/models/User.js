@@ -4,24 +4,39 @@ import jwt from 'jsonwebtoken';
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
+        lowercase: true,
+        trim: true,
+        match: /\S+@\S+\.\S+/,
+        required: true,
+        index: true,
         unique: true,
     },
     // external IDs
     tokens: Array,
     google: {
         type: String,
+        index: true,
         sparse: true,
     },
     // personal data
     profile: {
         name: {
-            familyName: String,
-            givenName: String,
+            familyName: {
+                type: String,
+                trim: true,
+            },
+            givenName: {
+                type: String,
+                trim: true,
+            },
         },
         photo: String,
     },
     settings: {
-        darkMode: Boolean,
+        darkTheme: {
+            type: Boolean,
+            default: false,
+        },
     },
 });
 
