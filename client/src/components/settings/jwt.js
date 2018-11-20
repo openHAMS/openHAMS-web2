@@ -56,6 +56,21 @@ const actions = {
     },
 };
 
+export const __types = {
+    constants: {
+        JWT_COOKIE,
+        JWT_LOCALSTORAGE,
+    },
+    mutations: {
+        CLEAR_JWT,
+        SET_JWT,
+    },
+    actions: {
+        CLEAR_JWT,
+        LOAD_JWT,
+    },
+};
+
 export default {
     state,
     getters,
