@@ -72,6 +72,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "jest-express": "^1.9.0",
     "jest-fetch-mock": "^1.6.6",
     "jest-localstorage-mock": "^2.3.0",
     "mockingoose": "^2.10.1",
