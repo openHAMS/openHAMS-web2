@@ -51,7 +51,7 @@ describe('Profile settings Vuex module', () => {
 
     describe('mutations', () => {
         describe('[SET_PROFILE]', () => {
-            const { [mutationTypes.SET_PROFILE]: setProfileAuthenticated } = profileSettings.mutations;
+            const { [mutationTypes.SET_PROFILE]: setProfile } = profileSettings.mutations;
 
             it.each`
                 profilePropName | profilePropValue   | statePropName | expectedType
@@ -62,7 +62,7 @@ describe('Profile settings Vuex module', () => {
                 const profile = {
                     [profilePropName]: profilePropValue,
                 };
-                setProfileAuthenticated(state, profile);
+                setProfile(state, profile);
                 const expected = {
                     [statePropName]: expect.any(expectedType),
                 };
@@ -71,7 +71,7 @@ describe('Profile settings Vuex module', () => {
         });
 
         describe('[CLEAR_PROFILE]', () => {
-            const { [mutationTypes.CLEAR_PROFILE]: setProfileUnauthenticated } = profileSettings.mutations;
+            const { [mutationTypes.CLEAR_PROFILE]: clearProfile } = profileSettings.mutations;
 
             it.each`
                 profilePropName | statePropName
@@ -82,7 +82,7 @@ describe('Profile settings Vuex module', () => {
                 const profile = {
                     [profilePropName]: 'any value',
                 };
-                setProfileUnauthenticated(state, profile);
+                clearProfile(state, profile);
                 const expected = { [statePropName]: null };
                 expect(state).toMatchObject(expected);
             });
