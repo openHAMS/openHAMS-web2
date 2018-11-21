@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
     rootDir: path.resolve(__dirname),
+    clearMocks: true,
     coverageReporters: ['lcov'],
     moduleFileExtensions: [
         'js',
@@ -10,6 +11,7 @@ module.exports = {
         'json',
     ],
     setupFiles: [
-        '<rootDir>/test/jestSetupFetchMock.js',
+        '<rootDir>/test/jest-fetch-mock.js',
+        '<rootDir>/test/jest-localstorage-mock.js',
     ],
 };
