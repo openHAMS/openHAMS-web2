@@ -9,7 +9,9 @@
         "plugin:import/warnings"
     ],
     "parser": "babel-eslint",
-    "parserOptions": {},
+    "parserOptions": {
+        "ecmaVersion": 10
+    },
     "rules": {
         "array-bracket-newline": ["warn", "consistent"],
         "arrow-spacing": "warn",
