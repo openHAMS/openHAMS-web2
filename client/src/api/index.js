@@ -8,7 +8,7 @@ const http = {
 
 export function storeApiPlugin (store) {
     store.watch(
-        state => state.settings.jwt.value,
+        state => state.settings.jwt.token,
         jwt => {
             // set proper auth header on jwt state change, else remove it
             if (jwt) {
