@@ -3,7 +3,7 @@ plugins:
     enabled: true
 #    channel: "eslint-5"
      # temporary downgrade to eslint-4 while unsupported plugin issue isnt fixed https://github.com/codeclimate/codeclimate-eslint/issues/430
-     channel: "eslint-4"
+    channel: "eslint-4"
   fixme:
     enabled: true
   git-legal:
