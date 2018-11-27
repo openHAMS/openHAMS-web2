@@ -5,6 +5,8 @@ cache:
 - yarn: true
   directories:
   - $HOME/google-cloud-sdk
+
+dist: xenial
 env:
   global:
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # disable google cloud sdk prompts
@@ -12,6 +14,7 @@ env:
   matrix:
   - TEST_SUITE=client
   - TEST_SUITE=server
+
 before_install:
 - ./travis-scripts/install-gcloud-sdk.sh
 # This line is critical.
@@ -25,13 +28,16 @@ script:
 after_success:
 - "./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
 - gsutil cp -r coverage/ gs://$TEMP_CLOUD_STORAGE/
+
 jobs:
   include:
   - stage: Codeclimate
     language: bash
+
     env:
     - TEST_SUITE=codeclimate
     - secure: "mQ+UWp7iAE39f2BmF+wA4UPZMUo6JkmhGHN9r4SpmC0JyumLSA1OG43qQLxkr8is0p03QeXtz5Rk2tLLxKIG99rw5MUTM7DuK7IUjY1rc7pYr+ratPYnhr8z9cCB07+bh98nODao2hpBKBWt3UI7OwAhGPbBKhmPGYwWN9BJgkX8ZGgTBIWFR1mOYMtswCBAbgA4dZ6/BT1CQQbgIdRQ9MAk88QbNGDFgemFQRVwPdAQoQh1gdH7UeCbUqK4TxP75FLnMEla0bPxk+9IMNo96E38YyW0+4uuL3p1QaHJdxrcCd5pzmNDUNasIJw97MSgt2qjhF//WTuLCt9yriF8rfI4oAMtjUVwD1C29Hb2AcxFKc5Bknir3EXn4iTEWp0V2ge1nKIw75Vwt1Wm+3r/LNW4G5BMfXasO7Ufob4YFbIoMP7bqXF9iTbL0Dwg5IGktMrKD2vQ7I1MZ0XRltwq1w98x3RsFz1yCAZGEfb1YQ0trkJ+S1VnT80p+3nPaoGfbJlI81KiLBKHxcKTLjGZBYKjQ1Jh0s7fDld9EipxyaFVsl/diUTO/w9+2sFcRt/6wCqdL4xTQwpufLeF3tYBtx9qUUvnWetaeJmQhvSTTlHD43mWaLzdkYFIv6+44Bkz5wwdM4dy0QprpTfnt5IeBzk6loOhMqVakISUQIylLvc="
+
     before_script:
     - gsutil mv gs://$TEMP_CLOUD_STORAGE/coverage/ ./
     - "./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
