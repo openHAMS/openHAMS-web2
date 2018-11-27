@@ -1,14 +1,36 @@
 import { userApi } from '../../api';
-import jwt, {
-    LOAD_JWT,
-} from './jwt.js';
-import profile, {
+// jwt module
+import jwt, { actionTypes as jwtActionTypes } from './jwt';
+const { LOAD_JWT } = jwtActionTypes;
+// profile module
+import profile, { mutationTypes as profileMutationTypes } from './profile';
+const {
     SET_PROFILE,
     CLEAR_PROFILE,
-} from './profile';
-import theme, {
+} = profileMutationTypes;
+// theme module
+import theme, { mutationTypes as themeMutationTypes } from './theme';
+const {
     SET_DARK_THEME,
-} from './theme';
+} = themeMutationTypes;
+
+
+// types
+export const mutationTypes = {
+    SET_PENDING: 'SET_PENDING',
+    SET_LOGGED_IN: 'SET_LOGGED_IN',
+    SET_NOT_LOGGED_IN: 'SET_NOT_LOGGED_IN',
+    SET_LOGIN_ERROR: 'SET_LOGIN_ERROR',
+};
+
+export const actionTypes = {
+    CHECK_AUTH: 'CHECK_AUTH',
+    USER_PENDING: 'USER_PENDING',
+    USER_AUTHENTICATED: 'USER_AUTHENTICATED',
+    USER_UNAUTHENTICATED: 'USER_UNAUTHENTICATED',
+    USER_AUTH_ERROR: 'USER_AUTH_ERROR',
+};
+
 
 const state = {
     error: null,
@@ -16,11 +38,12 @@ const state = {
     isLoggedIn: null,
 };
 
-const SET_PENDING = 'SET_PENDING';
-const SET_LOGGED_IN = 'SET_LOGGED_IN';
-const SET_NOT_LOGGED_IN = 'SET_NOT_LOGGED_IN';
-const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
-
+const {
+    SET_PENDING,
+    SET_LOGGED_IN,
+    SET_NOT_LOGGED_IN,
+    SET_LOGIN_ERROR,
+} = mutationTypes;
 const mutations = {
     [SET_PENDING] (state) {
         state.isLoading = true;
@@ -41,12 +64,13 @@ const mutations = {
     },
 };
 
-export const CHECK_AUTH = 'CHECK_AUTH';
-const USER_PENDING = 'USER_PENDING';
-const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
-const USER_UNAUTHENTICATED = 'USER_UNAUTHENTICATED';
-const USER_AUTH_ERROR = 'USER_AUTH_ERROR';
-
+const {
+    CHECK_AUTH,
+    USER_PENDING,
+    USER_AUTHENTICATED,
+    USER_UNAUTHENTICATED,
+    USER_AUTH_ERROR,
+} = actionTypes;
 const actions = {
     [USER_PENDING] ({ commit }, { profile: cachedProfile }) {
         commit(SET_PENDING);

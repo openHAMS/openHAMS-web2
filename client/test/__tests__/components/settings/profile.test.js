@@ -1,7 +1,6 @@
-import profileSettings, { __types } from '@/components/settings/profile';
-const {
-    mutations: mutationTypes,
-} = __types;
+import profileSettings, {
+    mutationTypes,
+} from '@/components/settings/profile';
 
 describe('Profile settings Vuex module', () => {
     it('returns vuex module object', () => {

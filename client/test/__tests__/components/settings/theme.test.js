@@ -1,8 +1,7 @@
-import themeSettings, { __types } from '@/components/settings/theme';
-const {
-    mutations: mutationTypes,
-    actions: actionTypes,
-} = __types;
+import themeSettings, {
+    mutationTypes,
+    actionTypes,
+} from '@/components/settings/theme';
 
 describe('Theme settings Vuex module', () => {
     it('returns vuex module object', () => {

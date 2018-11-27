@@ -1,29 +1,51 @@
+// types
+export const mutationTypes = {
+    ADD_CARD: 'ADD_CARD',
+    SET_CARDS: 'SET_CARDS',
+    REORDER_CARDS: 'REORDER_CARDS',
+    SET_EDIT_MODE: 'SET_EDIT_MODE',
+};
+
+export const actionTypes = {
+    ADD_CARD: 'ADD_CARD',
+    REORDER_CARDS: 'REORDER_CARDS',
+    SET_EDIT_MODE: 'SET_EDIT_MODE',
+};
+
+
 const state = () => ({
     // fn instead obj to ensure it is reusable
     cards: [],
     editMode: false,
 });
 
-// TODO: vuex const mutation & action names
-
+const {
+    ADD_CARD: M_ADD_CARD,
+    SET_CARDS,
+    REORDER_CARDS: M_REORDER_CARDS,
+    SET_EDIT_MODE: M_SET_EDIT_MODE,
+} = mutationTypes;
 const mutations = {
-    addCard (state, card) {
+    [M_ADD_CARD] (state, card) {
         // TODO: sanitize card fields
         state.cards.push(card);
     },
-    setCards (state, cards) {
+    [SET_CARDS] (state, cards) {
         state.cards = cards;
     },
-    reorderCards (state, { oldIndex, newIndex }) {
+    [M_REORDER_CARDS] (state, { oldIndex, newIndex }) {
         const { cards } = state;
         const [ movedCard ] = cards.splice(oldIndex, 1);
         cards.splice(newIndex, 0, movedCard);
     },
-    setEditMode (state, editMode) {
+    [M_SET_EDIT_MODE] (state, editMode) {
         state.editMode = editMode;
     },
 };
 
+const {
+    SET_EDIT_MODE: A_SET_EDIT_MODE,
+} = actionTypes;
 const actions = {
     $init ({ commit }) {
         // TEMPORARY
@@ -33,13 +55,16 @@ const actions = {
             { type: 'led', id: 'livingroom/led', title: 'asdasd' },
             { type: 'launch-calendar' },
         ];
-        commit('setCards', cards);
+        commit(SET_CARDS, cards);
     },
     addCard ({ commit }, card) {
-        commit('addCard', card);
+        commit(M_ADD_CARD, card);
     },
     reorderCards ({ commit }, { oldIndex, newIndex }) {
-        commit('reorderCards', { oldIndex, newIndex });
+        commit(M_REORDER_CARDS, { oldIndex, newIndex });
+    },
+    [A_SET_EDIT_MODE] ({ commit }, editMode) {
+        commit(M_SET_EDIT_MODE, editMode);
     },
 };
 

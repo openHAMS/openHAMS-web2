@@ -1,8 +1,28 @@
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
-const JWT_COOKIE = 'jwt';
-const JWT_LOCALSTORAGE = 'token';
+
+// types
+export const constants = {
+    JWT_COOKIE: 'jwt',
+    JWT_LOCALSTORAGE: 'token',
+};
+
+export const mutationTypes = {
+    CLEAR_JWT: 'CLEAR_JWT',
+    SET_JWT: 'SET_JWT',
+};
+
+export const actionTypes = {
+    CLEAR_JWT: 'CLEAR_JWT',
+    LOAD_JWT: 'LOAD_JWT',
+};
+
+
+const {
+    JWT_COOKIE,
+    JWT_LOCALSTORAGE,
+} = constants;
 
 const state = {
     token: null,
@@ -15,11 +35,12 @@ const getters = {
     },
 };
 
-const CLEAR_JWT = 'CLEAR_JWT';
-const SET_JWT = 'SET_JWT';
-
+const {
+    CLEAR_JWT: M_CLEAR_JWT,
+    SET_JWT,
+} = mutationTypes;
 const mutations = {
-    [CLEAR_JWT] (state) {
+    [M_CLEAR_JWT] (state) {
         state.token = null;
         localStorage.removeItem(JWT_LOCALSTORAGE);
     },
@@ -29,12 +50,13 @@ const mutations = {
     },
 };
 
-export { CLEAR_JWT };
-export const LOAD_JWT = 'LOAD_JWT';
-
+const {
+    CLEAR_JWT: A_CLEAR_JWT,
+    LOAD_JWT,
+} = actionTypes;
 const actions = {
-    [CLEAR_JWT] ({ commit }) {
-        commit(CLEAR_JWT);
+    [A_CLEAR_JWT] ({ commit }) {
+        commit(M_CLEAR_JWT);
     },
     [LOAD_JWT] ({ commit }) {
         let jwt;
@@ -52,22 +74,7 @@ const actions = {
             return;
         }
         // if all unset then doesn't have jwt
-        commit(CLEAR_JWT);
-    },
-};
-
-export const __types = {
-    constants: {
-        JWT_COOKIE,
-        JWT_LOCALSTORAGE,
-    },
-    mutations: {
-        CLEAR_JWT,
-        SET_JWT,
-    },
-    actions: {
-        CLEAR_JWT,
-        LOAD_JWT,
+        commit(M_CLEAR_JWT);
     },
 };
 

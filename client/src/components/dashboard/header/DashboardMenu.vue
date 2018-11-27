@@ -16,6 +16,10 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { MainMenu, MainMenuItem } from './mainmenu';
+import { actionTypes as dashboardActionTypes } from '../DashboardStoreModule.js';
+const {
+    SET_EDIT_MODE,
+} = dashboardActionTypes;
 import { actionTypes as themeActionTypes } from '@settings/theme';
 const {
     TOGGLE_THEME,
@@ -37,10 +41,11 @@ export default {
         ...mapGetters(['darkTheme', 'profile']),
         editMode: {
             get () { return this.$store.state[this.parentNamespace].editMode; },
-            set (value) { this.$store.commit(`${this.parentNamespace}/setEditMode`, value); },
+            set (value) { this.$store.commit(this.ns(SET_EDIT_MODE), value); },
         },
     },
     methods: {
+        ns: function (type) { return `${this.parentNamespace}/${type}`; },
         ...mapActions({
             toggleTheme: dispatch => dispatch(TOGGLE_THEME),
         }),
