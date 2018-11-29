@@ -2,9 +2,17 @@ import settings, {
     actionTypes,
     mutationTypes,
 } from '@/components/settings/index';
-import jwt from '@/components/settings/jwt';
+import jwt, { actionTypes as jwtActionTypes } from '@/components/settings/jwt';
 import profile, { mutationTypes as profileMutationTypes } from '@/components/settings/profile';
 import theme, { mutationTypes as themeMutationTypes } from '@/components/settings/theme';
+
+jest.mock('@/api', () => ({
+    __esmodule: true, // babel var to use named exports
+    userApi: {
+        fetchUser: jest.fn(),
+    },
+}));
+import { userApi } from '@/api';
 
 describe('Main settings Vuex module', () => {
     it('returns vuex module', () => {
@@ -113,10 +121,13 @@ describe('Main settings Vuex module', () => {
     });
 
     describe('actions', () => {
-        const context = {
-            commit: jest.fn(),
-            dispatch: jest.fn(),
-        };
+        let context;
+        beforeEach(() => {
+            context = {
+                commit: jest.fn(),
+                dispatch: jest.fn(),
+            };
+        });
 
         describe('[USER_PENDING]', () => {
             const { [actionTypes.USER_PENDING]: userPending } = settings.actions;
@@ -205,6 +216,39 @@ describe('Main settings Vuex module', () => {
             it('commits [profile.CLEAR_PROFILE]', () => {
                 userAuthError(context);
                 expect(context.commit).toHaveBeenCalledWith(profileMutationTypes.CLEAR_PROFILE);
+            });
+        });
+
+        describe('[CHECK_AUTH]', () => {
+            const { [actionTypes.CHECK_AUTH]: checkAuth } = settings.actions;
+            beforeEach(() => {
+                context = {
+                    ...context,
+                    getters: {
+                        jwtPayload: null,
+                    },
+                };
+            });
+
+            it('dispatches [jwt.LOAD_AUTH]', async () => {
+                await checkAuth(context);
+                expect(context.dispatch).toHaveBeenCalledWith(jwtActionTypes.LOAD_JWT);
+            });
+
+            it('dispatches [USER_UNAUTHENTICATED] if no valid payload returned by getters.jwtPayload', async () => {
+                await checkAuth(context);
+                expect(context.dispatch).toHaveBeenCalledTimes(2);
+                expect(context.dispatch).toHaveBeenCalledWith(actionTypes.USER_UNAUTHENTICATED);
+            });
+
+            it('dispatches [USER_PENDING] with jwt payload if payload is valid', async () => {
+                // TODO: change mock clear from depending on "Once"
+                const user = new Object();
+                userApi.fetchUser.mockImplementationOnce(() => user);
+                const jwtPayload = new Object();
+                context.getters.jwtPayload = jwtPayload;
+                await checkAuth(context);
+                expect(context.dispatch).toHaveBeenCalledWith(actionTypes.USER_PENDING, jwtPayload);
             });
         });
     });
