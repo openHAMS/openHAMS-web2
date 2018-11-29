@@ -11,7 +11,7 @@ module.exports = {
         'json',
     ],
     setupFiles: [
+        'jest-localstorage-mock',
         '<rootDir>/test/jest-fetch-mock.js',
-        '<rootDir>/test/jest-localstorage-mock.js',
     ],
 };
