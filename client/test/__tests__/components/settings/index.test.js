@@ -219,7 +219,7 @@ describe('Main settings Vuex module', () => {
             });
         });
 
-        describe('[CHECK_AUTH]', () => {
+        describe('[CHECK_AUTH] flows', () => {
             const { [actionTypes.CHECK_AUTH]: checkAuth } = settings.actions;
             beforeEach(() => {
                 context = {
@@ -230,25 +230,62 @@ describe('Main settings Vuex module', () => {
                 };
             });
 
-            it('dispatches [jwt.LOAD_AUTH]', async () => {
+            it('no valid jwt payload', async () => {
+                context.getters.jwtPayload = null;
                 await checkAuth(context);
-                expect(context.dispatch).toHaveBeenCalledWith(jwtActionTypes.LOAD_JWT);
+                const dispatches = context.dispatch.mock.calls[Symbol.iterator]();
+                expect(dispatches.next().value).toEqual([jwtActionTypes.LOAD_JWT]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_UNAUTHENTICATED]);
+                expect(dispatches.next().done).toEqual(true);
             });
 
-            it('dispatches [USER_UNAUTHENTICATED] if no valid payload returned by getters.jwtPayload', async () => {
-                await checkAuth(context);
-                expect(context.dispatch).toHaveBeenCalledTimes(2);
-                expect(context.dispatch).toHaveBeenCalledWith(actionTypes.USER_UNAUTHENTICATED);
-            });
-
-            it('dispatches [USER_PENDING] with jwt payload if payload is valid', async () => {
-                // TODO: change mock clear from depending on "Once"
-                const user = new Object();
-                userApi.fetchUser.mockImplementationOnce(() => user);
+            it('valid jwt, fetch status 401', async () => {
                 const jwtPayload = new Object();
                 context.getters.jwtPayload = jwtPayload;
+                const fetchResponse = {
+                    ok: false,
+                    status: 401,
+                };
+                userApi.fetchUser.mockImplementationOnce(() => fetchResponse);
                 await checkAuth(context);
-                expect(context.dispatch).toHaveBeenCalledWith(actionTypes.USER_PENDING, jwtPayload);
+                const dispatches = context.dispatch.mock.calls[Symbol.iterator]();
+                expect(dispatches.next().value).toEqual([jwtActionTypes.LOAD_JWT]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_PENDING, jwtPayload]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_UNAUTHENTICATED]);
+                expect(dispatches.next().done).toEqual(true);
+            });
+
+            it('valid jwt, fetch status non-401 error', async () => {
+                const jwtPayload = new Object();
+                context.getters.jwtPayload = jwtPayload;
+                const fetchResponse = {
+                    ok: false,
+                    status: 500,
+                };
+                userApi.fetchUser.mockImplementationOnce(() => fetchResponse);
+                await checkAuth(context);
+                const dispatches = context.dispatch.mock.calls[Symbol.iterator]();
+                expect(dispatches.next().value).toEqual([jwtActionTypes.LOAD_JWT]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_PENDING, jwtPayload]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_AUTH_ERROR]);
+                expect(dispatches.next().done).toEqual(true);
+            });
+
+            it('valid jwt, valid fetch', async () => {
+                const jwtPayload = new Object();
+                context.getters.jwtPayload = jwtPayload;
+                const fetchedUser = new Object();
+                const fetchResponse = {
+                    ok: true,
+                    json: () => fetchedUser,
+                };
+                userApi.fetchUser.mockImplementationOnce(() => fetchResponse);
+                await checkAuth(context);
+                const dispatches = context.dispatch.mock.calls[Symbol.iterator]();
+                expect(dispatches.next().value).toEqual([jwtActionTypes.LOAD_JWT]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_PENDING, jwtPayload]);
+                expect(dispatches.next().value).toEqual([actionTypes.USER_AUTHENTICATED, fetchedUser]);
+                expect(dispatches.next().done).toEqual(true);
             });
         });
     });
