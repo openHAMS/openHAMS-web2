@@ -1,6 +1,6 @@
 import profileSettings, {
     mutationTypes,
-} from '@/components/settings/profile';
+} from '@settings/profile';
 
 describe('Profile settings Vuex module', () => {
     it('returns vuex module object', () => {

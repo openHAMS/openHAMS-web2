@@ -2,7 +2,7 @@ import jwtSettings, {
     constants as jsConsts,
     mutationTypes,
     actionTypes,
-} from '@/components/settings/jwt';
+} from '@settings/jwt';
 
 jest.mock('js-cookie', () => ({
     get: jest.fn(),

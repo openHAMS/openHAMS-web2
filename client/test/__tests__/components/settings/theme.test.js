@@ -1,7 +1,7 @@
 import themeSettings, {
     mutationTypes,
     actionTypes,
-} from '@/components/settings/theme';
+} from '@settings/theme';
 
 describe('Theme settings Vuex module', () => {
     it('returns vuex module object', () => {

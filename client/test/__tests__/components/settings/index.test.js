@@ -1,10 +1,10 @@
 import settings, {
     actionTypes,
     mutationTypes,
-} from '@/components/settings/index';
-import jwt, { actionTypes as jwtActionTypes } from '@/components/settings/jwt';
-import profile, { mutationTypes as profileMutationTypes } from '@/components/settings/profile';
-import theme, { mutationTypes as themeMutationTypes } from '@/components/settings/theme';
+} from '@settings/index';
+import jwt, { actionTypes as jwtActionTypes } from '@settings/jwt';
+import profile, { mutationTypes as profileMutationTypes } from '@settings/profile';
+import theme, { mutationTypes as themeMutationTypes } from '@settings/theme';
 
 jest.mock('@/api', () => ({
     __esmodule: true, // babel var to use named exports
