@@ -1,7 +1,10 @@
 import { userApi } from '../../api';
 // jwt module
 import jwt, { actionTypes as jwtActionTypes } from './jwt';
-const { LOAD_JWT } = jwtActionTypes;
+const {
+    CLEAR_JWT,
+    LOAD_JWT,
+} = jwtActionTypes;
 // profile module
 import profile, { mutationTypes as profileMutationTypes } from './profile';
 const {
@@ -99,6 +102,7 @@ const actions = {
         const response = await userApi.fetchUser();
         if (!response.ok) {
             if (response.status === 401) {
+                dispatch(CLEAR_JWT);
                 dispatch(USER_UNAUTHENTICATED);
             }
             else {

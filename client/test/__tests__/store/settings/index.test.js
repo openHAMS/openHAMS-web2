@@ -251,6 +251,7 @@ describe('Main settings Vuex module', () => {
                 const dispatches = context.dispatch.mock.calls[Symbol.iterator]();
                 expect(dispatches.next().value).toEqual([jwtActionTypes.LOAD_JWT]);
                 expect(dispatches.next().value).toEqual([actionTypes.USER_PENDING, jwtPayload]);
+                expect(dispatches.next().value).toEqual([jwtActionTypes.CLEAR_JWT]);
                 expect(dispatches.next().value).toEqual([actionTypes.USER_UNAUTHENTICATED]);
                 expect(dispatches.next().done).toEqual(true);
             });
