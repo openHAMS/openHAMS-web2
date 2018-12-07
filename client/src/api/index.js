@@ -1,9 +1,11 @@
-const tokenHeader = {
+import merge from 'lodash-es/merge';
+
+const authOpts = {
     headers: {},
 };
 const http = {
-    authGet: (input, init = {}) => fetch(input, { ...init, ...tokenHeader }),
-    get: (input, init = {}) => fetch(input, { ...init }),
+    authGet: (input, init = {}) => fetch(input, merge(init, authOpts)),
+    get: (input, init = {}) => fetch(input, init),
 };
 
 export function storeApiPlugin (store) {
@@ -12,9 +14,9 @@ export function storeApiPlugin (store) {
         jwt => {
             // set proper auth header on jwt state change, else remove it
             if (jwt) {
-                tokenHeader.headers['Authorization'] = `Bearer ${jwt}`;
+                authOpts.headers['Authorization'] = `Bearer ${jwt}`;
             } else {
-                delete tokenHeader.headers['Authorization'];
+                delete authOpts.headers['Authorization'];
             }
         },
     );
