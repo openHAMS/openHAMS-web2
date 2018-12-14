@@ -41,42 +41,6 @@ describe('User api route', () => {
         expect(userRouter).toBe(express.Router());
     });
 
-    describe('auth middlewares', () => {
-        const middlewares = flatten(router.use.mock.calls);
-
-        describe('first middleware', () => {
-            it('is passport jwt authenticate middleware', () => {
-                expect(passport.authenticate).toHaveBeenCalled();
-                expect(middlewares[0]).toBe(authenticateObject);
-            });
-            it('has been called with "jwt" strategy, with session disabled', () => {
-                expect(passport.authenticate).toHaveBeenCalledWith('jwt', { session: false });
-            });
-        });
-
-        describe('second middleware', () => {
-            const mw = middlewares[1];
-
-            it('calls next if req.user exists (user is authenticated)', () => {
-                const req = new Request('/');
-                req.user = {};
-                const res = {};
-                const next = jest.fn();
-                mw(req, res, next);
-                expect(next).toHaveBeenCalledTimes(1);
-            });
-
-            it('calls res.sendStatus() with 401 if req.user not exists (user not authenticated)', () => {
-                const req = new Request('/');
-                const res = new Response();
-                const next = jest.fn();
-                mw(req, res, next);
-                expect(next).toHaveBeenCalledTimes(0);
-                expect(res.sendStatus).toHaveBeenCalledTimes(1);
-            });
-        });
-    });
-
     describe('GET /', () => {
         it('exists', () => {
             expect(routeMap.get).toHaveProperty('/', expect.any(Function));
