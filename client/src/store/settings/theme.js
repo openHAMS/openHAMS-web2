@@ -1,3 +1,4 @@
+import { settingsApi } from '@/api';
 //types
 export const mutationTypes = {
     SET_DARK_THEME: 'SET_DARK_THEME',
@@ -30,8 +31,9 @@ const {
 } = actionTypes;
 const actions = {
     [TOGGLE_THEME] ({ commit, state }) {
-        // TODO: send to server
-        commit(SET_DARK_THEME, !state.darkTheme);
+        const newDarkTheme = !state.darkTheme;
+        settingsApi.postDarkTheme(newDarkTheme);
+        commit(SET_DARK_THEME, newDarkTheme);
     },
 };
 

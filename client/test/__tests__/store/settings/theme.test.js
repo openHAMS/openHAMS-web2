@@ -3,6 +3,14 @@ import themeSettings, {
     actionTypes,
 } from '@settings/theme';
 
+jest.mock('@/api', () => ({
+    __esmodule: true, // babel var to use named exports
+    settingsApi: {
+        postDarkTheme: jest.fn(),
+    },
+}));
+import { settingsApi } from '@/api';
+
 describe('Theme settings Vuex module', () => {
     it('returns vuex module object', () => {
         const ts = themeSettings;
@@ -76,6 +84,22 @@ describe('Theme settings Vuex module', () => {
     describe('actions', () => {
         describe('[TOGGLE_THEME]', () => {
             const { [actionTypes.TOGGLE_THEME]: toggleTheme } = themeSettings.actions;
+
+            it.each`
+                darkTheme | expected
+                ${false}  | ${true}
+                ${true}   | ${false}
+            `('calls [settingsApi.postDarkTheme] with new darkTheme', ({ darkTheme, expected }) => {
+                const context = {
+                    commit: jest.fn(),
+                    state: {
+                        darkTheme,
+                    },
+                };
+                toggleTheme(context);
+                expect(settingsApi.postDarkTheme).toHaveBeenCalledTimes(1);
+                expect(settingsApi.postDarkTheme).toHaveBeenCalledWith(expected);
+            });
 
             it('calls commit exactly once', () => {
                 const context = {
