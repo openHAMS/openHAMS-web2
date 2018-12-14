@@ -1,4 +1,4 @@
-import { userApi } from '../../api';
+import { userApi } from '@/api';
 // jwt module
 import jwt, { actionTypes as jwtActionTypes } from './jwt';
 const {

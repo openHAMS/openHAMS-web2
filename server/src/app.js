@@ -15,6 +15,7 @@ mongoose.connect(mongodbUri, { useNewUrlParser: true })
 const app = express();
 app.set('host', '0.0.0.0');
 app.set('port', 8080);
+
 configPassport({ app });
 if (process.env.NODE_ENV === 'development') {
     configClientHmr({ app });

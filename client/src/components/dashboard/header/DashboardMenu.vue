@@ -45,7 +45,7 @@ export default {
         },
     },
     methods: {
-        ns: function (type) { return `${this.parentNamespace}/${type}`; },
+        ns (type) { return `${this.parentNamespace}/${type}`; },
         ...mapActions({
             toggleTheme: dispatch => dispatch(TOGGLE_THEME),
         }),

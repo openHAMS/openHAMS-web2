@@ -22,5 +22,5 @@ export function storeApiPlugin (store) {
     );
 }
 
-import UserApi from './userApi.js';
+import UserApi from './userApi';
 export const userApi = UserApi(http);

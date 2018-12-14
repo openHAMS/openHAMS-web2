@@ -7,10 +7,8 @@ const options = {
 };
 
 const verify = (jwtPayload, done) => {
-    console.log(jwtPayload);
     return User.findById(jwtPayload.sub)
         .then(user => {
-            console.log(user);
             done(null, user);
         });
 };
