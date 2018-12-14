@@ -41,6 +41,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^4.0.0",
+    "type-is": "^1.6.16",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vue-static": "^0.0.4",
