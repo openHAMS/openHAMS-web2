@@ -4,5 +4,3 @@ plugins:
     channel: "eslint-5"
   fixme:
     enabled: true
-  git-legal:
-    enabled: true
