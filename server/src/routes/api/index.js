@@ -2,14 +2,14 @@ import express from 'express';
 import passport from 'passport';
 
 const router = express.Router();
-const auth = [
+export const auth = [
     passport.authenticate('jwt', { session: false }),
     (req, res, next) => {
         if (req.user) {
             next();
         }
         else {
-            res.sendStatus(401);
+            res.status(401).send();
         }
     },
 ];

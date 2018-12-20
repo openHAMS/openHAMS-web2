@@ -7,7 +7,7 @@ module.exports = {
         'js',
         'json',
     ],
-    'moduleNameMapper': {
+    moduleNameMapper: {
         '~testdata/(.*)$': '<rootDir>/test/__testdata__/$1',
     },
 };
