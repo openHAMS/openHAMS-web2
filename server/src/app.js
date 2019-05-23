@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import express from 'express';
 import http from 'http';
 import configPassport from './config/passport';
-import configClientHmr from './config/client-hmr';
 
 const mongodbUri = 'mongodb://localhost:27017/openhams';
 
@@ -17,9 +16,6 @@ app.set('host', '0.0.0.0');
 app.set('port', 8080);
 
 configPassport({ app });
-if (process.env.NODE_ENV === 'development') {
-    configClientHmr({ app });
-}
 
 import routes from './routes';
 app.use('/', routes);
