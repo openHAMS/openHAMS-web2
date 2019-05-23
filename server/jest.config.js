@@ -10,4 +10,5 @@ module.exports = {
     moduleNameMapper: {
         '~testdata/(.*)$': '<rootDir>/test/__testdata__/$1',
     },
+    testEnvironment: 'node',
 };

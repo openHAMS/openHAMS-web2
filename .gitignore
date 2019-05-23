@@ -1,6 +1,3 @@
-# bundles
-dist/
-
 # editor files
 .vscode
 
@@ -12,6 +9,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
+
+
+# bundles
+dist/
 
 # test coverage files
 /client/coverage/

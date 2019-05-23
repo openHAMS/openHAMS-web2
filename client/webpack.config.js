@@ -1,9 +1,10 @@
 const merge = require('webpack-merge');
 const path = require('path');
+const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
-const context = path.resolve(__dirname, 'client');
+const context = path.resolve(__dirname);
 
 function resolve(paths) {
     return path.resolve(context, paths);
@@ -12,15 +13,14 @@ function resolve(paths) {
 const baseConfig = {
     context,
     entry: ['./src/main.js'],
-    // TODO: devtools source maps
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'client.bundle.js',
     },
     module: {
-        rules: [
+        rules: [ // NOTE TO SELF: loader runs backwards (right to left, bottom to top)
             {
-                enforce: 'pre',
+                enforce: 'pre', // needed for eslint
                 test: /\.(js|vue)$/,
                 loader: 'eslint-loader',
                 include: [
@@ -39,24 +39,28 @@ const baseConfig = {
                 },
             },
             {
-                // TODO: css source map
-                test: /\.css$/,
+                test: /\.s?css$/,
+                //exclude: ['/node_modules'],
                 use: [
-                    'vue-style-loader',
-                    'css-loader',
-                ],
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader',
+                    {
+                        loader: 'vue-style-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },
                     {
                         loader: 'sass-loader',
                         options: {
                             includePaths: [
-                                resolve('src'),
+                                resolve('src'), // fails to build without this, idk why
                             ],
+                            sourceMap: true,
                         },
                     },
                 ],
@@ -72,8 +76,7 @@ const baseConfig = {
                     name: '[name]-[hash].[ext]',
                     outputPath: 'assets/fonts/',
                 },
-            },
-        ],
+            }],
     },
     resolve: {
         extensions: [
@@ -84,6 +87,7 @@ const baseConfig = {
         // alias definitions in closest .babelrc
     },
     plugins: [
+        new CleanPlugin(),
         new HtmlPlugin({
             template: './index.html',
         }),
@@ -96,20 +100,46 @@ const baseConfig = {
 // development configuration
 //
 const webpack = require('webpack');
-const webpackHotMiddleware = 'webpack-hot-middleware/client';
+//const webpackHotMiddleware = 'webpack-hot-middleware/client';
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const notifier = require('node-notifier');
 const devConfig = merge.smart(baseConfig, {
     mode: 'development',
-    entry: [
-        webpackHotMiddleware, // include webpack middleware to enable client-side hot reload
-    ],
+    //entry: [
+    //    webpackHotMiddleware, // include webpack middleware to enable client-side hot reload
+    //],
     output: {
         publicPath: '/',
     },
     optimization: {
         noEmitOnErrors: true, // don't bundle on error
     },
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: resolve('./dist'),
+        hot: true,
+        port: 3000,
+        proxy: {
+            '/api': 'http://localhost:8080',
+            '/auth': 'http://localhost:8080',
+        },
+        quiet: true, // disabled for friendly-errors-webpack-plugin
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(), // enables client-side hot reload
+        new FriendlyErrorsPlugin({
+            onErrors: (severity, errors) => { // windows notifications on-error
+                if (severity !== 'error') {
+                    return;
+                }
+                const error = errors[0];
+                notifier.notify({
+                    title: 'Webpack error',
+                    message: `${severity}${error.name}`,
+                    subtitle: error.file || '',
+                });
+            },
+        }),
     ],
 });
 
@@ -117,8 +147,12 @@ const devConfig = merge.smart(baseConfig, {
 //
 // production configuration
 //
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const prodConfig = merge.smart(baseConfig, {
     mode: 'production',
+    plugins: [
+        new BundleAnalyzerPlugin(),
+    ],
 });
 
 
