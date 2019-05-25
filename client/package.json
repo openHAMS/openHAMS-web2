@@ -6,11 +6,11 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext=js,vue ./",
-    "test": "jest --config=jest.config.js",
-    "test:coverage": "yarn test --coverage",
+    "lint": "eslint --ignore-path=../.eslintignore --ext=js,vue ./",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:debug": "node --inspect-brk=./node_modules/jest/bin/jest.js --runInBand --config=jest.config.js",
-    "test:watch": "yarn test --verbose --watchAll",
+    "test:watch": "jest --verbose --watchAll",
     "build": "webpack --mode=production --config=webpack.config.js",
     "start": "webpack-dev-server --mode=development"
   },

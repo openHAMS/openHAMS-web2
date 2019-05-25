@@ -6,13 +6,14 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
-    "lint": "eslint --ignore-path=../.eslintignore --ext=js --ignore ./",
-    "test": "jest --config=jest.config.js",
-    "test:coverage": "yarn test --coverage",
-    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand  --config=jest.config.js",
-    "test:watch": "yarn test --verbose --watchAll",
+    "lint": "eslint --ignore-path=../.eslintignore --ext=js ./",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:debug": "node --inspect-brk=./node_modules/jest/bin/jest.js --runInBand --config=jest.config.js",
+    "test:watch": "jest --verbose --watchAll",
     "build": "webpack --mode=production --config=webpack.config.js",
-    "start": "webpack --mode=development --config=webpack.config.js"
+    "start": "webpack --mode=development --config=webpack.config.js",
+    "start:prod:dotenv": "node -r dotenv/config ./dist/server.bundle.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

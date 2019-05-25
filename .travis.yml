@@ -16,17 +16,17 @@ env:
   - TEST_SUITE=server
 
 before_install:
-- ./travis-scripts/install-gcloud-sdk.sh
+- ./.travis-scripts/install-gcloud-sdk.sh
 # This line is critical.
 # We setup the SDK to take precedence in our environment
 #   over the old SDK that is already on the machine.
 - source $HOME/google-cloud-sdk/path.bash.inc
-- ./travis-scripts/login-gcloud-sdk.sh
-- ./travis-scripts/install-cc-reporter.sh
+- ./.travis-scripts/login-gcloud-sdk.sh
+- ./.travis-scripts/install-cc-reporter.sh
 script:
-- yarn test:coverage:$TEST_SUITE
+- cd $TEST_SUITE && yarn test:coverage
 after_success:
-- "./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
+- "../cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
 - gsutil cp -r coverage/ gs://$TEMP_CLOUD_STORAGE/
 
 jobs:
