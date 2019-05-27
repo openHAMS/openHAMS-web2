@@ -14,8 +14,8 @@
                 "cwd": "packagejson",
                 "alias": {
                     "^~/(.+)": "./\\1",
-                    "^@/(.+)": "./server/src/\\1",
-                    "^Models/(.+)": "./server/src/models/\\1"
+                    "^@/(.+)": "./src/\\1",
+                    "^Models/(.+)": "./src/models/\\1"
                 }
             }
         ]

@@ -2,5 +2,7 @@
 dist/
 
 # test coverage files
-/client/coverage/
-/server/coverage
+*/coverage/
+
+# webpack config files
+**/webpack*.config.js

@@ -1,9 +1,10 @@
 const merge = require('webpack-merge');
 const path = require('path');
+const CleanPlugin = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const baseConfig = {
-    entry: ['./server/src/app.js'],
+    entry: ['./src/app.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'server.bundle.js',
@@ -11,13 +12,13 @@ const baseConfig = {
     module: {
         rules: [
             {
-                enforce: 'pre',
-                test: /\.js$/,
-                loader: 'eslint-loader',
-                exclude: /node_modules/,
-                options: {
-                    emitWarning: true, // emit warnings instead errors
-                },
+               enforce: 'pre',
+               test: /\.js$/,
+               loader: 'eslint-loader',
+               exclude: /node_modules/,
+               options: {
+                   emitWarning: true, // emit warnings instead errors
+               },
             },
             {
                 test: /\.js$/,
@@ -37,6 +38,9 @@ const baseConfig = {
     externals: [
         nodeExternals(), // exclude node_modules from bundle
     ],
+    plugins: [
+        new CleanPlugin(),
+    ],
 };
 
 
@@ -44,34 +48,30 @@ const baseConfig = {
 // development configuration
 //
 const webpack = require('webpack');
-const CleanPlugin = require('clean-webpack-plugin');
 const DotenvPlugin = require('dotenv-webpack');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const StartServerPlugin = require('start-server-webpack-plugin');
-const webpackHotPoll = 'webpack/hot/poll?1000';
+//const webpackHotPoll = 'webpack/hot/poll?1000';
 const devConfig = merge.smartStrategy({ externals: 'replace' })(baseConfig, {
     mode: 'development',
-    entry: [
-        webpackHotPoll, // include webpack hot reload to enable server-side hot reload
-    ],
+    //entry: [
+    //    webpackHotPoll, // include webpack hot reload to enable server-side hot reload
+    //],
     //output: {
     //    hotUpdateChunkFilename: 'server-hot/[id].[hash].hot-update.js', // set hot reload chunks' path to 'hot' dir; filename remains default
     //    hotUpdateMainFilename: 'server-hot/[hash].hot-update.json', // set hot reload main file's path to 'hot' dir; filename remains default
     //},
-    externals: [
-        nodeExternals({
-            whitelist: [
-                webpackHotPoll, // bundle webpack polling to enable server-side hot reload
-            ],
-        }),
-    ],
+    //externals: [
+    //    nodeExternals({
+    //        whitelist: [
+    //            webpackHotPoll, // bundle webpack polling to enable server-side hot reload
+    //        ],
+    //    }),
+    //],
     optimization: {
         noEmitOnErrors: true, // don't bundle on error
     },
     plugins: [
-        new CleanPlugin(['dist'], {
-            beforeEmit: false, // clean before StartServerPlugin
-        }),
         new DotenvPlugin(), // bundle environment variables from .env
         new FriendlyErrorsPlugin(),
         new StartServerPlugin({
@@ -89,11 +89,11 @@ const devConfig = merge.smartStrategy({ externals: 'replace' })(baseConfig, {
 //
 // production configuration
 //
-//const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const prodConfig = merge.smart(baseConfig, {
     mode: 'production',
     plugins: [
-        //new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin(),
     ],
     node: {
         __dirname: false, // changes __dirname to the folder of the running js; the default behavior in nodejs

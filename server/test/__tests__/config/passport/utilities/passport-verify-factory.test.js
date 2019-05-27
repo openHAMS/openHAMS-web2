@@ -117,7 +117,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                     id: 'testId',
                 };
                 beforeEach(() => {
-                    jest.resetModules();
+                    //jest.resetModules();
                     process.env = { ...OLD_ENV, ADMIN_ID: 'testId' };
                     delete process.env.NODE_ENV;
                 });
@@ -170,7 +170,7 @@ describe.each(strategies)('PassportVerifyFactory', strategy => {
                     id: 'testId',
                 };
                 beforeEach(() => {
-                    jest.resetModules();
+                    //jest.resetModules();
                     process.env = { ...OLD_ENV, ADMIN_ID: 'otherId' };
                     delete process.env.NODE_ENV;
                 });

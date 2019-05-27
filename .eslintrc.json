@@ -5,7 +5,7 @@
     },
     "extends": [
         "eslint:recommended",
-        // "plugin:eslint-comments/recommended",
+        "plugin:eslint-comments/recommended",
         "plugin:import/warnings"
     ],
     "parser": "babel-eslint",
