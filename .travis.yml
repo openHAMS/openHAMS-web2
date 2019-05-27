@@ -12,7 +12,7 @@ env:
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # disable google cloud sdk prompts
   - GOOGLE_CLOUD_SDK=$HOME/google-cloud-sdk
   - TEMP_CLOUD_STORAGE=staging.racer01-openhams.appspot.com/$TRAVIS_REPO_SLUG/$TRAVIS_BUILD_ID
-  - TEST-REPORTER=$HOME/cc-test-reporter
+  - TEST_REPORTER=$HOME/cc-test-reporter
   - TRAVIS_SCRIPTS=$TRAVIS_BUILD_DIR/.travis-scripts
   matrix:
   - TEST_SUITE=client
@@ -30,7 +30,7 @@ install:
 script:
 - yarn test:coverage
 after_success:
-- $TEST-REPORTER format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json coverage/lcov.info
+- $TEST_REPORTER format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json coverage/lcov.info
 - gsutil cp -r coverage/ gs://$TEMP_CLOUD_STORAGE/
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
 
     before_script:
     - gsutil mv gs://$TEMP_CLOUD_STORAGE/coverage/ ./
-    - $TEST-REPORTER sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
-    - $TEST-REPORTER upload-coverage -i coverage/codeclimate.total.json
+    - $TEST_REPORTER sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
+    - $TEST_REPORTER upload-coverage -i coverage/codeclimate.total.json
     script: skip
     after_success: skip
