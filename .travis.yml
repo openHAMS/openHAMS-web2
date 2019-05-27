@@ -10,23 +10,27 @@ dist: xenial
 env:
   global:
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # disable google cloud sdk prompts
+  - GOOGLE_CLOUD_SDK=$HOME/google-cloud-sdk
   - TEMP_CLOUD_STORAGE=staging.racer01-openhams.appspot.com/$TRAVIS_REPO_SLUG/$TRAVIS_BUILD_ID
+  - TEST-REPORTER=$HOME/cc-test-reporter
+  - TRAVIS_SCRIPTS=$TRAVIS_BUILD_DIR/.travis-scripts
   matrix:
   - TEST_SUITE=client
   - TEST_SUITE=server
 
 before_install:
-- ./.travis-scripts/install-gcloud-sdk.sh
-# This line is critical.
-# We setup the SDK to take precedence in our environment
-#   over the old SDK that is already on the machine.
-- source $HOME/google-cloud-sdk/path.bash.inc
-- ./.travis-scripts/login-gcloud-sdk.sh
-- ./.travis-scripts/install-cc-reporter.sh
+- cd $TEST_SUITE
+install:
+- $TRAVIS_SCRIPTS/install-gcloud-sdk.sh
+# CRITICAL: setup the SDK to take precedence over the old SDK that is already on the machine.
+- source $GOOGLE_CLOUD_SDK/path.bash.inc
+- $TRAVIS_SCRIPTS/login-gcloud-sdk.sh
+- $TRAVIS_SCRIPTS/install-cc-reporter.sh
+- yarn install
 script:
-- cd $TEST_SUITE && yarn test:coverage
+- yarn test:coverage
 after_success:
-- "../cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json $TEST_SUITE/coverage/lcov.info"
+- $TEST-REPORTER format-coverage -t lcov -o coverage/codeclimate.$TEST_SUITE.json coverage/lcov.info
 - gsutil cp -r coverage/ gs://$TEMP_CLOUD_STORAGE/
 
 jobs:
@@ -40,7 +44,7 @@ jobs:
 
     before_script:
     - gsutil mv gs://$TEMP_CLOUD_STORAGE/coverage/ ./
-    - "./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json"
-    - "./cc-test-reporter upload-coverage -i coverage/codeclimate.total.json"
+    - $TEST-REPORTER sum-coverage coverage/codeclimate.*.json -p 2 -o coverage/codeclimate.total.json
+    - $TEST-REPORTER upload-coverage -i coverage/codeclimate.total.json
     script: skip
     after_success: skip
