@@ -3,7 +3,7 @@ jest.mock('express', () => ({
     ...require('jest-express'),
     Router: jest.fn(),
 }));
-import express from 'express';
+const express = require('express');
 // create single Router mock instance
 const router = require('jest-express').Router();
 // setup user methods
@@ -15,7 +15,7 @@ express.Router.mockImplementation(() => router);
 
 // use require to ensure synchronous (immediate) load
 const {
-    default: userRouter,
+    router: userRouter,
     getUser,
 } = require('@/routes/api/user');
 

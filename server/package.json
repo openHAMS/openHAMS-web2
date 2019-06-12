@@ -11,9 +11,7 @@
     "test:coverage": "jest --coverage",
     "test:debug": "node --inspect-brk=./node_modules/jest/bin/jest.js --runInBand --config=jest.config.js",
     "test:watch": "jest --verbose --watchAll",
-    "build": "webpack --mode=production --config=webpack.config.js",
-    "start": "webpack --mode=development --config=webpack.config.js",
-    "start:prod:dotenv": "node -r dotenv/config ./dist/server.bundle.js"
+    "start": "node -r dotenv/config ./src/app.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -28,28 +26,11 @@
     "type-is": "^1.6.18"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.8.0",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "clean-webpack-plugin": "^2.0.2",
-    "dotenv-webpack": "^1.7.0",
     "eslint": "^5.16.0",
-    "eslint-loader": "^2.1.2",
     "eslint-plugin-eslint-comments": "^3.1.1",
-    "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jest": "^22.6.3",
-    "friendly-errors-webpack-plugin": "^1.7.0",
     "jest": "^24.8.0",
     "jest-express": "^1.10.1",
-    "mockingoose": "^2.13.0",
-    "start-server-webpack-plugin": "^2.2.5",
-    "webpack": "^4.31.0",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.2",
-    "webpack-merge": "^4.2.1",
-    "webpack-node-externals": "^1.7.2"
+    "mockingoose": "^2.13.0"
   }
 }

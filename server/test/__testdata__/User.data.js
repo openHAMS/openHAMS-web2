@@ -1,4 +1,4 @@
-export const testUser = {
+exports.testUser = {
     email: 'test@email.url',
     profile: {
         name: {
@@ -9,7 +9,7 @@ export const testUser = {
     },
 };
 
-export const otherUser = {
+exports.otherUser = {
     email: 'other@email.url',
     profile: {
         name: {

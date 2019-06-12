@@ -3,7 +3,7 @@ jest.mock('express', () => ({
     ...require('jest-express'),
     Router: jest.fn(),
 }));
-import express from 'express';
+const express = require('express');
 // create single Router mock instance
 const router = require('jest-express').Router();
 // set mock to return always the same router instance
@@ -13,18 +13,18 @@ express.Router.mockImplementation(() => router);
 jest.mock('passport', () => ({
     authenticate: jest.fn(),
 }));
-import passport from 'passport';
+const passport = require('passport');
 const authenticateObject = new Object();
 passport.authenticate.mockImplementation(() => authenticateObject);
 
 // setup api mocks
 // settings
-jest.mock('@/routes/api/settings', () => jest.fn());
-import settingsApi from '@/routes/api/settings';
+jest.mock('@/routes/api/settings', () => ({ router: jest.fn() }));
+const settingsApi = require('@/routes/api/settings').router;
 settingsApi.mockImplementation(() => new Object());
 // user
-jest.mock('@/routes/api/user', () => jest.fn());
-import userApi from '@/routes/api/user';
+jest.mock('@/routes/api/user', () => ({ router: jest.fn() }));
+const userApi = require('@/routes/api/user').router;
 userApi.mockImplementation(() => new Object());
 
 // use require to ensure synchronous (immediate) load

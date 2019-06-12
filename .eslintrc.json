@@ -5,10 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:eslint-comments/recommended",
-        "plugin:import/warnings"
+        "plugin:eslint-comments/recommended"
     ],
-    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 10
     },

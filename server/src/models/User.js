@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -60,4 +60,4 @@ userSchema.methods.toApiObject = function () {
     };
 };
 
-export default mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

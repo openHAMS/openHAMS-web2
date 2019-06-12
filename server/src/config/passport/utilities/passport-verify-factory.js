@@ -1,5 +1,5 @@
-import User from 'Models/User';
-import { get } from 'lodash';
+const User = require('../../../models/User');
+const { get } = require('lodash');
 
 // OAuth Strategy Overview (from https://github.com/sahat/hackathon-starter/)
 //
@@ -22,7 +22,7 @@ import { get } from 'lodash';
 //     photo: '_json.image.url',
 // };
 
-export default (adapter) => {
+module.exports = (adapter) => {
     return async (req, accessToken, refreshToken, profile, done) => {
         let existingUser;
         try {

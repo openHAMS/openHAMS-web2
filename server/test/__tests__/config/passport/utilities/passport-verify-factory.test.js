@@ -1,11 +1,11 @@
-import mockingoose from 'mockingoose';
-import passportVerifyFactory from '@/config/passport/utilities/passport-verify-factory';
+const mockingoose = require('mockingoose').default;
+const passportVerifyFactory = require('@/config/passport/utilities/passport-verify-factory');
 
 const jsonClean = o => JSON.parse(JSON.stringify(o));
 const strategies = ['google'];
 
-import { testUser, otherUser } from '~testdata/User.data';
-import { testProfile } from '~testdata/PassportProfile.data';
+const { testUser, otherUser } = require('~testdata/User.data');
+const { testProfile } = require('~testdata/PassportProfile.data');
 
 describe.each(strategies)('PassportVerifyFactory', strategy => {
     let verify = null;

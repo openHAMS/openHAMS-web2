@@ -1,4 +1,4 @@
-export const testProfile = {
+exports.testProfile = {
     emails: [{ value: 'test@email.url' }],
     testname: {
         family: 'testFam',

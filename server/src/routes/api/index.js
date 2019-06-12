@@ -1,8 +1,8 @@
-import express from 'express';
-import passport from 'passport';
+const express = require('express');
+const passport = require('passport');
 
 const router = express.Router();
-export const auth = [
+const auth = exports.auth = [
     passport.authenticate('jwt', { session: false }),
     (req, res, next) => {
         if (req.user) {
@@ -15,10 +15,10 @@ export const auth = [
 ];
 
 
-import user from './user';
+const user = require('./user').router;
 router.use('/user', auth, user);
 
-import settingsRouter from './settings';
+const settingsRouter = require('./settings').router;
 router.use('/settings', auth, settingsRouter);
 
-export default router;
+exports.router = router;

@@ -1,5 +1,5 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import User from 'Models/User';
+const { ExtractJwt, Strategy } = require('passport-jwt');
+const User = require('../../../models/User');
 
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -13,4 +13,4 @@ const verify = (jwtPayload, done) => {
         });
 };
 
-export const JwtStrategy = new Strategy(options, verify);
+exports.JwtStrategy = new Strategy(options, verify);

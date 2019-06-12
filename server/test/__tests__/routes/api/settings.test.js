@@ -3,7 +3,7 @@ jest.mock('express', () => ({
     ...require('jest-express'),
     Router: jest.fn(),
 }));
-import express from 'express';
+const express = require('express');
 // create single Router mock instance
 const router = require('jest-express').Router();
 // set mock to return always the same router instance

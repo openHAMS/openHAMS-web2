@@ -8,7 +8,8 @@ module.exports = {
         'json',
     ],
     moduleNameMapper: {
-        '~testdata/(.*)$': '<rootDir>/test/__testdata__/$1',
+        '@/(.+)$': '<rootDir>/src/$1',
+        '~testdata/(.+)$': '<rootDir>/test/__testdata__/$1',
     },
     testEnvironment: 'node',
 };

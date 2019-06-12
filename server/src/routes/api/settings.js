@@ -1,9 +1,9 @@
-import express from 'express';
-import typeis from 'type-is';
-import bodyParser from 'body-parser';
+const express = require('express');
+const typeis = require('type-is');
+const bodyParser = require('body-parser');
 
 const router = express.Router();
-export const jsonParser = [
+const jsonParser = exports.jsonParser = [
     (req, res, next) => {
         if (typeis(req, ['application/json'])) {
             next();
@@ -16,7 +16,7 @@ export const jsonParser = [
 ];
 
 
-export const setDarkTheme = async (req, res) => {
+const setDarkTheme = exports.setDarkTheme = async (req, res) => {
     const data = req.body;
     if (!data.hasOwnProperty('darkTheme') || typeof data.darkTheme !== 'boolean') {
         res.status(422).send();
@@ -32,4 +32,4 @@ export const setDarkTheme = async (req, res) => {
 };
 router.post('/darktheme', jsonParser, setDarkTheme);
 
-export default router;
+exports.router = router;

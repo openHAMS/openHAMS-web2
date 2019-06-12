@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import express from 'express';
-import http from 'http';
-import configPassport from './config/passport';
+const mongoose = require('mongoose');
+const express = require('express');
+const http = require('http');
+const configPassport = require('./config/passport');
 
 const mongodbUri = 'mongodb://localhost:27017/openhams';
 
@@ -17,7 +17,7 @@ app.set('port', 8080);
 
 configPassport({ app });
 
-import routes from './routes';
+const routes = require('./routes');
 app.use('/', routes);
 
 
@@ -25,18 +25,3 @@ const server = http.createServer(app);
 server.listen(app.get('port'), () => {
     console.log('listening');
 });
-
-if (process.env.NODE_ENV === 'development') {
-    // BUG: client "cannot get /" after server hmr
-    if (module.hot) {
-        module.hot.accept();
-        module.hot.dispose(() => {
-            server.close();
-        });
-        // module.hot.accept('./config/express', () => {
-        //     server.removeListener('request', currentApp);
-        //     server.on('request', app);
-        //     currentApp = app;
-        // });
-    }
-}

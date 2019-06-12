@@ -1,8 +1,8 @@
-# bundles
-dist/
+# client bundle
+/client/dist/
+
+# client webpack config file
+/client/webpack*.config.js
 
 # test coverage files
 */coverage/
-
-# webpack config files
-**/webpack*.config.js

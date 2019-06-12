@@ -11,8 +11,8 @@ yarn-error.log*
 .env
 
 
-# bundles
-dist/
+# client bundle
+/client/dist/
 
 # test coverage files
 /client/coverage/

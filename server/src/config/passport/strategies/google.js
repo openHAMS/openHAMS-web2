@@ -1,6 +1,6 @@
-import express from 'express'; // needed for Router
-import { Strategy } from 'passport-google-oauth20';
-import PassportVerifyFactory from '../utilities/passport-verify-factory';
+const express = require('express'); // needed for Router
+const { Strategy } = require('passport-google-oauth20');
+const PassportVerifyFactory = require('../utilities/passport-verify-factory');
 
 const options = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -18,9 +18,9 @@ const verifyAdapter = {
 
 const verify = PassportVerifyFactory(verifyAdapter);
 
-export const GoogleStrategy = new Strategy(options, verify);
+exports.GoogleStrategy = new Strategy(options, verify);
 
-import passport from 'passport';
+const passport = require('passport');
 
 const GoogleRouter = express.Router();
 GoogleRouter.get('/',
@@ -38,4 +38,4 @@ GoogleRouter.get('/callback',
         res.cookie('jwt', req.user.getJwt());
         res.redirect('/');
     });
-export { GoogleRouter };
+exports.GoogleRouter = GoogleRouter;

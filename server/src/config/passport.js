@@ -1,9 +1,9 @@
-import passport from 'passport';
+const passport = require('passport');
 // strategies
-import { GoogleStrategy, GoogleRouter } from './passport/strategies/google';
-import { JwtStrategy } from './passport/strategies/jwt';
+const { GoogleStrategy, GoogleRouter } = require('./passport/strategies/google');
+const { JwtStrategy } = require('./passport/strategies/jwt');
 
-export default ({ app }) => {
+module.exports = ({ app }) => {
     // google auth
     passport.use(GoogleStrategy);
     app.use('/auth/google', GoogleRouter);
