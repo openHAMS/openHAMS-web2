@@ -57,8 +57,9 @@ const baseConfig = {
                     {
                         loader: 'sass-loader',
                         options: {
+                            implementation: require('sass'),
                             includePaths: [
-                                resolve('src'), // fails to build without this, idk why
+                                resolve('src'), // needed to resolve via @import
                             ],
                             sourceMap: true,
                         },

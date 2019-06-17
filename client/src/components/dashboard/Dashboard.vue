@@ -78,9 +78,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "Assets/breakpoints.scss";
-@import "assets/elevations.scss";
-@import "assets/transitions.scss";
+@import "assets/breakpoints";
+@import "assets/elevations";
+@import "assets/transitions";
 
 /* header */
 .header-container {
@@ -106,12 +106,12 @@ div.container {
     --card-title-cursor: default;
 }
 
-.edit-mode > .layout > .flex /deep/ .card {
+.edit-mode > .layout > .flex ::v-deep .card {
     transform: scale(0.98);
     @include elevation(6)
 }
 
-* /deep/ .card-title {
+* ::v-deep .card-title {
 /* vuetify headline class */
     font-size: 24px !important;
     font-weight: 400;
@@ -122,17 +122,17 @@ div.container {
     user-select: none;
 }
 
-* /deep/ .card {
+* ::v-deep .card {
     transition: box-shadow 0.28s map-get($transitions, fast-out-slow-in), // from Vuetify(v1.0.19)/src/stylus/settings/_elevations.styl
                 opacity $primary-transition,
                 transform $secondary-transition;
 }
 
-.draggable-chosen /deep/ .card {
+.draggable-chosen ::v-deep .card {
     @include elevation(12, true)
 }
 
-.draggable-ghost /deep/ .card {
+.draggable-ghost ::v-deep .card {
     opacity: 0.666;
 }
 </style>

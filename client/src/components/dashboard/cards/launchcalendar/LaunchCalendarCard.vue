@@ -69,6 +69,7 @@ export default {
             if (this.loading) {
                 return 'Loading...';
             }
+            return '';
         },
     },
     watch: {
@@ -124,7 +125,7 @@ export default {
 $spacer: 4px;
 
 table.datatable {
-    /deep/ & > thead > tr > th,
+    ::v-deep & > thead > tr > th,
     & > tbody > tr > td {
         padding-left: 2 * $spacer;
         padding-right: 2 * $spacer;
@@ -138,7 +139,7 @@ table.datatable {
         }
     }
 
-    /deep/ & > thead {
+    ::v-deep & > thead {
         & > tr:not(.datatable__progress) {
             height: 2px;
         }

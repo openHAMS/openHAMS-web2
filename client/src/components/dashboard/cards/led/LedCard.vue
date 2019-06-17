@@ -82,14 +82,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "Assets/colors.scss";
+@import "assets/colors";
 
 .fw {
     width: 100%;
 }
 
-// /deep/ fixes scoped class usage inside components
-* /deep/ .selected-color {
+// ::v-deep fixes scoped class usage inside components
+* ::v-deep .selected-color {
     & {
         background-color: var(--selected-color) !important;
         border-color: var(--selected-color) !important;

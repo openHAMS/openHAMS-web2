@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "Assets/breakpoints.scss";
+@import 'assets/breakpoints';
 
 .branding {
     font-weight: 300;
