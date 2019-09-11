@@ -45,12 +45,7 @@
         "key-spacing": ["warn"],
         "keyword-spacing": "warn",
         "linebreak-style": ["error", "unix"],
-        "no-confusing-arrow": [
-            "error",
-            {
-                "allowParens": true
-            }
-        ],
+        "no-confusing-arrow": ["error"],
         "no-lonely-if": "error",
         "no-multi-assign": "error",
         "no-multi-spaces": "warn",
